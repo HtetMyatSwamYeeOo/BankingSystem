@@ -293,7 +293,7 @@ table tr th { color: #2e3b46;
 
 .login-img3-body{
 
-  background: url('../Image/bg.jpg') no-repeat center center fixed; 
+  background: url('../Image/bg1.png') no-repeat center center fixed; 
 
   -webkit-background-size: cover;
 
@@ -308,15 +308,19 @@ table tr th { color: #2e3b46;
 
 
 .login-form {
-
     max-width: 350px;
-   
     margin: 180px auto 0;
-
-    background: #E9E9E9;   
+    background: #E9E9E9;
     /*background-color: transparent;*/
-    
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 50px rgba(0,0,0,0.4);
+}
 
+.copy-right {
+    max-width: 850px;
+    margin: 180px auto 0;
+    background-color: transparent;
 }
 
 .login-img-body .login-form{

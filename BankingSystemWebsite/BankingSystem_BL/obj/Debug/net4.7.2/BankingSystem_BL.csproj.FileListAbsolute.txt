@@ -11,3 +11,16 @@ C:\HtetMyat\Brand_New_Day_Development\BankingSystemWebsite\BankingSystem_BL\obj\
 C:\HtetMyat\Brand_New_Day_Development\BankingSystemWebsite\BankingSystem_BL\obj\Debug\net4.7.2\BankingSystem_BL.csproj.CopyComplete
 C:\HtetMyat\Brand_New_Day_Development\BankingSystemWebsite\BankingSystem_BL\obj\Debug\net4.7.2\BankingSystem_BL.dll
 C:\HtetMyat\Brand_New_Day_Development\BankingSystemWebsite\BankingSystem_BL\obj\Debug\net4.7.2\BankingSystem_BL.pdb
+C:\HtetMyatGitHubDevelopment\BankingSystem\BankingSystemWebsite\BankingSystem_BL\bin\Debug\net4.7.2\BankingSystem_BL.dll
+C:\HtetMyatGitHubDevelopment\BankingSystem\BankingSystemWebsite\BankingSystem_BL\bin\Debug\net4.7.2\BankingSystem_BL.pdb
+C:\HtetMyatGitHubDevelopment\BankingSystem\BankingSystemWebsite\BankingSystem_BL\bin\Debug\net4.7.2\BankingSystem_Common.dll
+C:\HtetMyatGitHubDevelopment\BankingSystem\BankingSystemWebsite\BankingSystem_BL\bin\Debug\net4.7.2\BankingSystem_DA.dll
+C:\HtetMyatGitHubDevelopment\BankingSystem\BankingSystemWebsite\BankingSystem_BL\bin\Debug\net4.7.2\BankingSystem_Common.pdb
+C:\HtetMyatGitHubDevelopment\BankingSystem\BankingSystemWebsite\BankingSystem_BL\bin\Debug\net4.7.2\BankingSystem_DA.pdb
+C:\HtetMyatGitHubDevelopment\BankingSystem\BankingSystemWebsite\BankingSystem_BL\obj\Debug\net4.7.2\BankingSystem_BL.csprojAssemblyReference.cache
+C:\HtetMyatGitHubDevelopment\BankingSystem\BankingSystemWebsite\BankingSystem_BL\obj\Debug\net4.7.2\BankingSystem_BL.AssemblyInfoInputs.cache
+C:\HtetMyatGitHubDevelopment\BankingSystem\BankingSystemWebsite\BankingSystem_BL\obj\Debug\net4.7.2\BankingSystem_BL.AssemblyInfo.cs
+C:\HtetMyatGitHubDevelopment\BankingSystem\BankingSystemWebsite\BankingSystem_BL\obj\Debug\net4.7.2\BankingSystem_BL.csproj.CoreCompileInputs.cache
+C:\HtetMyatGitHubDevelopment\BankingSystem\BankingSystemWebsite\BankingSystem_BL\obj\Debug\net4.7.2\BankingSystem_BL.csproj.CopyComplete
+C:\HtetMyatGitHubDevelopment\BankingSystem\BankingSystemWebsite\BankingSystem_BL\obj\Debug\net4.7.2\BankingSystem_BL.dll
+C:\HtetMyatGitHubDevelopment\BankingSystem\BankingSystemWebsite\BankingSystem_BL\obj\Debug\net4.7.2\BankingSystem_BL.pdb

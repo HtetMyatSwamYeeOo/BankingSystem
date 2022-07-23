@@ -8,4 +8,8 @@
     <ProjectReference Include="..\BankingSystem_Common\BankingSystem_Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+
 </Project>
