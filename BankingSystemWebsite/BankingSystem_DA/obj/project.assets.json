@@ -1,0 +1,84 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETFramework,Version=v4.7.2": {
+      "BankingSystem_Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.7.2",
+        "compile": {
+          "bin/placeholder/BankingSystem_Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BankingSystem_Common.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "BankingSystem_Common/1.0.0": {
+      "type": "project",
+      "path": "../BankingSystem_Common/BankingSystem_Common.csproj",
+      "msbuildProject": "../BankingSystem_Common/BankingSystem_Common.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETFramework,Version=v4.7.2": [
+      "BankingSystem_Common >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\htetm\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\HtetMyat\\Brand_New_Day_Development\\BankingSystemWebsite\\BankingSystem_DA\\BankingSystem_DA.csproj",
+      "projectName": "BankingSystem_DA",
+      "projectPath": "C:\\HtetMyat\\Brand_New_Day_Development\\BankingSystemWebsite\\BankingSystem_DA\\BankingSystem_DA.csproj",
+      "packagesPath": "C:\\Users\\htetm\\.nuget\\packages\\",
+      "outputPath": "C:\\HtetMyat\\Brand_New_Day_Development\\BankingSystemWebsite\\BankingSystem_DA\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\htetm\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net472"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net472": {
+          "targetAlias": "net4.7.2",
+          "projectReferences": {
+            "C:\\HtetMyat\\Brand_New_Day_Development\\BankingSystemWebsite\\BankingSystem_Common\\BankingSystem_Common.csproj": {
+              "projectPath": "C:\\HtetMyat\\Brand_New_Day_Development\\BankingSystemWebsite\\BankingSystem_Common\\BankingSystem_Common.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net472": {
+        "targetAlias": "net4.7.2",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

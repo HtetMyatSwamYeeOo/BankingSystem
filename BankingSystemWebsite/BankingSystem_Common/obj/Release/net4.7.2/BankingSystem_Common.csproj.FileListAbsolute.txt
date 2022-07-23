@@ -1,0 +1,8 @@
+C:\HtetMyat\Brand_New_Day_Development\BankingSystemWebsite\BankingSystem_Common\bin\Release\net4.7.2\BankingSystem_Common.dll
+C:\HtetMyat\Brand_New_Day_Development\BankingSystemWebsite\BankingSystem_Common\bin\Release\net4.7.2\BankingSystem_Common.pdb
+C:\HtetMyat\Brand_New_Day_Development\BankingSystemWebsite\BankingSystem_Common\obj\Release\net4.7.2\BankingSystem_Common.csprojAssemblyReference.cache
+C:\HtetMyat\Brand_New_Day_Development\BankingSystemWebsite\BankingSystem_Common\obj\Release\net4.7.2\BankingSystem_Common.AssemblyInfoInputs.cache
+C:\HtetMyat\Brand_New_Day_Development\BankingSystemWebsite\BankingSystem_Common\obj\Release\net4.7.2\BankingSystem_Common.AssemblyInfo.cs
+C:\HtetMyat\Brand_New_Day_Development\BankingSystemWebsite\BankingSystem_Common\obj\Release\net4.7.2\BankingSystem_Common.csproj.CoreCompileInputs.cache
+C:\HtetMyat\Brand_New_Day_Development\BankingSystemWebsite\BankingSystem_Common\obj\Release\net4.7.2\BankingSystem_Common.dll
+C:\HtetMyat\Brand_New_Day_Development\BankingSystemWebsite\BankingSystem_Common\obj\Release\net4.7.2\BankingSystem_Common.pdb

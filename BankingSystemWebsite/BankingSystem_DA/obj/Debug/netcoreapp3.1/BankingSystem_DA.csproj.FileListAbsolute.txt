@@ -1,0 +1,12 @@
+C:\HtetMyat\Brand_New_Day_Development\BankingSystemWebsite\BankingSystem_DA\bin\Debug\netcoreapp3.1\BankingSystem_DA.deps.json
+C:\HtetMyat\Brand_New_Day_Development\BankingSystemWebsite\BankingSystem_DA\bin\Debug\netcoreapp3.1\BankingSystem_DA.dll
+C:\HtetMyat\Brand_New_Day_Development\BankingSystemWebsite\BankingSystem_DA\bin\Debug\netcoreapp3.1\BankingSystem_DA.pdb
+C:\HtetMyat\Brand_New_Day_Development\BankingSystemWebsite\BankingSystem_DA\bin\Debug\netcoreapp3.1\BankingSystem_Common.dll
+C:\HtetMyat\Brand_New_Day_Development\BankingSystemWebsite\BankingSystem_DA\bin\Debug\netcoreapp3.1\BankingSystem_Common.pdb
+C:\HtetMyat\Brand_New_Day_Development\BankingSystemWebsite\BankingSystem_DA\obj\Debug\netcoreapp3.1\BankingSystem_DA.csprojAssemblyReference.cache
+C:\HtetMyat\Brand_New_Day_Development\BankingSystemWebsite\BankingSystem_DA\obj\Debug\netcoreapp3.1\BankingSystem_DA.AssemblyInfoInputs.cache
+C:\HtetMyat\Brand_New_Day_Development\BankingSystemWebsite\BankingSystem_DA\obj\Debug\netcoreapp3.1\BankingSystem_DA.AssemblyInfo.cs
+C:\HtetMyat\Brand_New_Day_Development\BankingSystemWebsite\BankingSystem_DA\obj\Debug\netcoreapp3.1\BankingSystem_DA.csproj.CoreCompileInputs.cache
+C:\HtetMyat\Brand_New_Day_Development\BankingSystemWebsite\BankingSystem_DA\obj\Debug\netcoreapp3.1\BankingSystem_DA.csproj.CopyComplete
+C:\HtetMyat\Brand_New_Day_Development\BankingSystemWebsite\BankingSystem_DA\obj\Debug\netcoreapp3.1\BankingSystem_DA.dll
+C:\HtetMyat\Brand_New_Day_Development\BankingSystemWebsite\BankingSystem_DA\obj\Debug\netcoreapp3.1\BankingSystem_DA.pdb

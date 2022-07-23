@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "BankingSystem_DA/1.0.0": {
+        "dependencies": {
+          "BankingSystem_Common": "1.0.0"
+        },
+        "runtime": {
+          "BankingSystem_DA.dll": {}
+        }
+      },
+      "BankingSystem_Common/1.0.0": {
+        "runtime": {
+          "BankingSystem_Common.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "BankingSystem_DA/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "BankingSystem_Common/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
