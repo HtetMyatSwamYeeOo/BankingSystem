@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\HtetMyat\\Brand_New_Day_Development\\BankingSystemWebsite\\BankingSystem_DA\\BankingSystem_DA.csproj": {}
+    "C:\\HtetMyatGitHubDevelopment\\BankingSystem\\BankingSystemWebsite\\BankingSystem_DA\\BankingSystem_DA.csproj": {}
   },
   "projects": {
-    "C:\\HtetMyat\\Brand_New_Day_Development\\BankingSystemWebsite\\BankingSystem_Common\\BankingSystem_Common.csproj": {
+    "C:\\HtetMyatGitHubDevelopment\\BankingSystem\\BankingSystemWebsite\\BankingSystem_Common\\BankingSystem_Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\HtetMyat\\Brand_New_Day_Development\\BankingSystemWebsite\\BankingSystem_Common\\BankingSystem_Common.csproj",
+        "projectUniqueName": "C:\\HtetMyatGitHubDevelopment\\BankingSystem\\BankingSystemWebsite\\BankingSystem_Common\\BankingSystem_Common.csproj",
         "projectName": "BankingSystem_Common",
-        "projectPath": "C:\\HtetMyat\\Brand_New_Day_Development\\BankingSystemWebsite\\BankingSystem_Common\\BankingSystem_Common.csproj",
+        "projectPath": "C:\\HtetMyatGitHubDevelopment\\BankingSystem\\BankingSystemWebsite\\BankingSystem_Common\\BankingSystem_Common.csproj",
         "packagesPath": "C:\\Users\\htetm\\.nuget\\packages\\",
-        "outputPath": "C:\\HtetMyat\\Brand_New_Day_Development\\BankingSystemWebsite\\BankingSystem_Common\\obj\\",
+        "outputPath": "C:\\HtetMyatGitHubDevelopment\\BankingSystem\\BankingSystemWebsite\\BankingSystem_Common\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -50,14 +50,14 @@
         }
       }
     },
-    "C:\\HtetMyat\\Brand_New_Day_Development\\BankingSystemWebsite\\BankingSystem_DA\\BankingSystem_DA.csproj": {
+    "C:\\HtetMyatGitHubDevelopment\\BankingSystem\\BankingSystemWebsite\\BankingSystem_DA\\BankingSystem_DA.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\HtetMyat\\Brand_New_Day_Development\\BankingSystemWebsite\\BankingSystem_DA\\BankingSystem_DA.csproj",
+        "projectUniqueName": "C:\\HtetMyatGitHubDevelopment\\BankingSystem\\BankingSystemWebsite\\BankingSystem_DA\\BankingSystem_DA.csproj",
         "projectName": "BankingSystem_DA",
-        "projectPath": "C:\\HtetMyat\\Brand_New_Day_Development\\BankingSystemWebsite\\BankingSystem_DA\\BankingSystem_DA.csproj",
+        "projectPath": "C:\\HtetMyatGitHubDevelopment\\BankingSystem\\BankingSystemWebsite\\BankingSystem_DA\\BankingSystem_DA.csproj",
         "packagesPath": "C:\\Users\\htetm\\.nuget\\packages\\",
-        "outputPath": "C:\\HtetMyat\\Brand_New_Day_Development\\BankingSystemWebsite\\BankingSystem_DA\\obj\\",
+        "outputPath": "C:\\HtetMyatGitHubDevelopment\\BankingSystem\\BankingSystemWebsite\\BankingSystem_DA\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -81,8 +81,8 @@
           "net472": {
             "targetAlias": "net4.7.2",
             "projectReferences": {
-              "C:\\HtetMyat\\Brand_New_Day_Development\\BankingSystemWebsite\\BankingSystem_Common\\BankingSystem_Common.csproj": {
-                "projectPath": "C:\\HtetMyat\\Brand_New_Day_Development\\BankingSystemWebsite\\BankingSystem_Common\\BankingSystem_Common.csproj"
+              "C:\\HtetMyatGitHubDevelopment\\BankingSystem\\BankingSystemWebsite\\BankingSystem_Common\\BankingSystem_Common.csproj": {
+                "projectPath": "C:\\HtetMyatGitHubDevelopment\\BankingSystem\\BankingSystemWebsite\\BankingSystem_Common\\BankingSystem_Common.csproj"
               }
             }
           }
