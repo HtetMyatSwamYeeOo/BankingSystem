@@ -120,12 +120,20 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BankAccount\BankAccountController.cs" />
+    <Compile Include="Controllers\BankAccount\EditBankAccountController.cs" />
+    <Compile Include="Controllers\BankAccount\NewBankAccountController.cs" />
     <Compile Include="Controllers\Dashboard\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Shared\_newBankAccountLayoutController.cs" />
+    <Compile Include="Controllers\Shared\_TableLayoutController.cs" />
     <Compile Include="Controllers\UserAccount\LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BankAccount\BankAccountObject.cs" />
+    <Compile Include="Models\BankAccount\NewBankAccountObject.cs" />
+    <Compile Include="Models\Error\ErrorObject.cs" />
     <Compile Include="Models\User\UserObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -182,6 +190,7 @@
     <Content Include="Image\arrow white.png" />
     <Content Include="Image\arrow-up.png" />
     <Content Include="Image\avatar_2x.png" />
+    <Content Include="Image\bank.png" />
     <Content Include="Image\bg.jpg" />
     <Content Include="Image\bg1.png" />
     <Content Include="Image\bill.png" />
@@ -269,9 +278,13 @@
     <Content Include="Views\Dashboard\dashboard.cshtml" />
     <Content Include="Views\Shared\_navLayout.cshtml" />
     <Content Include="Views\Login\login.cshtml" />
+    <Content Include="Views\BankAccount\BankAccount.cshtml" />
+    <Content Include="Views\NewBankAccount\NewBankAccount.cshtml" />
+    <Content Include="Views\Shared\_newBankAccountLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\_newBankAccountLayout\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
