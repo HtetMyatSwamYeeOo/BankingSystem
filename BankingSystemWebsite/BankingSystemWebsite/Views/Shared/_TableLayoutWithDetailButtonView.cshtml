@@ -1,0 +1,163 @@
+﻿
+@{
+    ViewBag.Title = "_TableLayoutWithDetailButtonView";
+}
+
+@using System.Resources;
+
+
+<section class="panel">
+
+    <table class="table" id="_table" runat="server">
+        @if (Model.Items != null)
+        {
+           
+            <thead>
+                <tr id="table_header" style="background-color: #4CAF50;">
+                    <th></th>
+                    
+
+
+                    @for (int i = 0; i < Model.Items.Tables[0].Columns.Count && Model.Items.Tables[0].Rows.Count > 0; i++)
+                    {
+
+
+                        string str = (string)Model.Items.Tables[0].Columns[i].ColumnName;
+
+                        {
+                            <th>@Model.Items.Tables[0].Columns[i].ColumnName</th>
+                        }
+
+                    }
+
+                    <th></th>
+
+                </tr>
+            </thead>
+        
+            <tbody>
+                @if (Model == null)
+                {
+                    <tr>
+                        <td>There is no items for this option.</td>
+                    </tr>
+                }
+                else if (Model.Items.Tables[0].Rows.Count >= 0)
+                {
+                    for (int i = 0; i < Model.Items.Tables[0].Rows.Count; i++)
+                    {
+
+                        //declaring Custom Id
+                        var str = Model.Items.Tables[0].Rows[i][0];
+
+                        var trIdStr = "TrId" + str + "";
+                    <tr>
+                        <td>  </td>
+
+                        @for (int j = 0; j < Model.Items.Tables[0].Columns.Count; j++)
+                        {
+
+                        
+
+
+
+
+
+                        }@* End of for loop for first column*@
+
+                        @for (int j = 1; j < Model.Items.Tables[0].Columns.Count; j++)
+                        {
+                            <td class="col-lg-2"> @Model.Items.Tables[0].Rows[i][j] </td>
+                        }
+                        <td>
+
+                            @{
+
+                                //Adding Try Catch Exception
+
+
+                                try
+                                {
+                                    bool status1 = Convert.ToBoolean(Model.Items.Tables[0].Rows[i][5]);
+
+                                    if (status1)
+                                    {@*
+                        <div class="form-group">
+
+                            <a class="btn btn-primary1 " href='#Model@(i)' data-toggle="modal">Detail</a>
+
+                            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id='Model@(i)' class="modal fade">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button" style="color:black;">×</button>
+                                        @{
+                                            TempData["idid"] = Model.Items.Tables[0].Rows[i][0];
+                                        }
+                                        @{
+
+
+
+                                            Html.RenderAction("_saleAssignPopupLayoutFun", "_itemPopupLayout", (string)Model.Items.Tables[0].Rows[i][0]);
+
+
+
+                                            }
+                                    *@
+
+
+                                }//end of if
+                            }
+                            catch (Exception e)
+                            {
+                                @*
+
+                <div class="form-group">
+
+                    <a class="btn btn-primary1 " href='#Model@(i)' data-toggle="modal">Detail</a>
+
+                    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id='Model@(i)' class="modal fade">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <button aria-hidden="true" data-dismiss="modal" class="close" type="button" style="color:black;">×</button>
+                                @{
+                                    TempData["idid"] = Model.Items.Tables[0].Rows[i][0];
+                                }
+                                @{
+
+                                    Html.RenderAction("_saleAssignPopupLayoutFun", "_itemPopupLayout", (string)Model.Items.Tables[0].Rows[i][0]);
+
+
+
+
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                                *@
+
+                            }
+
+                            }
+
+                        </td>
+                    </tr>
+                    }
+                }
+                else
+                {
+                <tr>
+                    There is no items for this option.
+                </tr>
+                }
+
+            </tbody>
+
+                }
+
+
+    </table>
+
+</section>

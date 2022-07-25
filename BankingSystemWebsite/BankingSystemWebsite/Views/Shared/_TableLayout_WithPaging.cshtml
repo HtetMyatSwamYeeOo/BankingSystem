@@ -1,0 +1,441 @@
+﻿@using System.Resources;
+<section class="panel">
+
+
+    <table class="table" id="_table" runat="server">
+        @if (Model.Items != null)
+        {
+            <thead>
+                <tr id="table_header">
+                    <th></th>
+
+
+
+                    @for (int i = 1; i < Model.Items.Tables[0].Columns.Count && Model.Items.Tables[0].Rows.Count > 0; i++)
+                    {
+                        string str = ViewRes.SharedString.ResourceManager.GetString(((string)Model.Items.Tables[0].Columns[i].ColumnName).Replace(" ", String.Empty));
+                        if (str != "" && str != null && str != " ")
+                        {
+                            if (Model.Items.Tables[0].Columns[i].ColumnName == "SubTotal" ||
+                               Model.Items.Tables[0].Columns[i].ColumnName == "Receiveable Amount" ||
+                               Model.Items.Tables[0].Columns[i].ColumnName == "Payable Amount" ||
+                               Model.Items.Tables[0].Columns[i].ColumnName == "BalanceDue" ||
+                               Model.Items.Tables[0].Columns[i].ColumnName == "AccountReceiveable" ||
+                               Model.Items.Tables[0].Columns[i].ColumnName == "Amount")
+                            {
+                                <th style="text-align:right;">@str</th>
+                            }
+                            else if (Model.Items.Tables[0].Columns[i].ColumnName == "Status")
+                            {
+
+                            }
+
+                            else if (Model.Items.Tables[0].Columns[i].ColumnName == "QuantityAdjustment" ||
+                                Model.Items.Tables[0].Columns[i].ColumnName == "Quantity Adjustment" ||
+                                Model.Items.Tables[0].Columns[i].ColumnName == "AvailableStock" ||
+                               Model.Items.Tables[0].Columns[i].ColumnName == "QuantityAvailable")
+                            {
+                                <th style="text-align:center;">@str</th>
+                            }
+
+                            else if (Model.Items.Tables[0].Columns[i].ColumnName == "Unit Price" ||
+                                    Model.Items.Tables[0].Columns[i].ColumnName == "Total Sale Price" ||
+                                    Model.Items.Tables[0].Columns[i].ColumnName == "Bill Amount" ||
+                                    Model.Items.Tables[0].Columns[i].ColumnName == "Bill_BalanceDue" ||
+                                   Model.Items.Tables[0].Columns[i].ColumnName == "Invoice Amount")
+                            {
+                                <th style="text-align:right;">@str</th>
+                            }
+                            else
+                            {
+                                <th>@str</th>
+                            }
+                        }
+                        else
+                        {
+                            if (Model.Items.Tables[0].Columns[i].ColumnName == "SubTotal" ||
+                                  Model.Items.Tables[0].Columns[i].ColumnName == "Receiveable Amount" ||
+                                  Model.Items.Tables[0].Columns[i].ColumnName == "Payable Amount" ||
+                                  Model.Items.Tables[0].Columns[i].ColumnName == "BalanceDue" ||
+                                  Model.Items.Tables[0].Columns[i].ColumnName == "AccountReceiveable" ||
+                                  Model.Items.Tables[0].Columns[i].ColumnName == "Amount")
+                            {
+                                <th style="text-align:right;">@Model.Items.Tables[0].Columns[i].ColumnName</th>
+                            }
+
+                            else if (Model.Items.Tables[0].Columns[i].ColumnName == "QuantityAdjustment" ||
+                                Model.Items.Tables[0].Columns[i].ColumnName == "Quantity Adjustment" ||
+                                Model.Items.Tables[0].Columns[i].ColumnName == "AvailableStock" ||
+                               Model.Items.Tables[0].Columns[i].ColumnName == "QuantityAvailable")
+                            {
+                                <th style="text-align:center;">@Model.Items.Tables[0].Columns[i].ColumnName</th>
+                            }
+
+
+                            else if (Model.Items.Tables[0].Columns[i].ColumnName == "Unit Price" ||
+                                        Model.Items.Tables[0].Columns[i].ColumnName == "Inventory Asset Value" ||
+                                        Model.Items.Tables[0].Columns[i].ColumnName == "Total Sale Price" ||
+                                        Model.Items.Tables[0].Columns[i].ColumnName == "Bill Amount" ||
+                                        Model.Items.Tables[0].Columns[i].ColumnName == "Bill_BalanceDue" ||
+                                       Model.Items.Tables[0].Columns[i].ColumnName == "Invoice Amount")
+                            {
+                                <th style="text-align:right;">@Model.Items.Tables[0].Columns[i].ColumnName</th>
+                            }
+                            else
+                            {
+                                <th> @Model.Items.Tables[0].Columns[i].ColumnName</th>
+                            }
+                        }
+
+
+                    }
+
+
+
+
+                </tr>
+            </thead>
+        }
+        <tbody>
+            @if (Model.Items == null)
+            {
+                <tr>
+                    <td>There is no items for this option.</td>
+                </tr>
+            }
+            else if (Model.Items.Tables[0].Rows.Count > 0)
+            {
+                for (int i = 0; i < Model.Items.Tables[0].Rows.Count; i++)
+                {
+
+                    //declaring Custom Id
+                    var str = Model.Items.Tables[0].Rows[i][0];
+
+                    // if (Model.Items.Tables[0].Rows[i][0] == )
+
+                    <tr>
+                        <td>
+                            @*if (Model.Items.Tables[0].Columns[2].ColumnName=="Expenses#")
+                                {
+                                    str = Model.Items.Tables[0].Rows[i][2];
+                                }*@
+
+
+                            <input id='@str' type="checkbox" class="checkbox">
+
+                        </td>
+
+                        @for (int j = 1; j < Model.Items.Tables[0].Columns.Count; j++)
+                        {
+
+
+                            if (Model.Items.Tables[0].Columns[j].ColumnName == "Name")
+                            {
+                                <td>
+
+                                    <a class="link" href="\CustomerOverview\customerOverview\@Model.Items.Tables[0].Rows[i][0]">
+                                        @Model.Items.Tables[0].Rows[i][1]
+                                    </a>
+                                </td>
+                            }
+
+
+
+                            else if (Model.Items.Tables[0].Columns[j].ColumnName == "OrderNo")
+                            {
+                                <td>
+
+                                    <a class="link" href="\SaleOrderPreview\makeinvoicePaymentBySaleID\@Model.Items.Tables[0].Rows[i][0]">
+                                        @Model.Items.Tables[0].Rows[i][j]
+                                    </a>
+                                </td>
+                            }
+                            else if (Model.Items.Tables[0].Columns[j].ColumnName == "SaleOrder#")
+                            {
+                                <td>
+
+                                    <a class="link" href="\SaleOrderPreview\makeinvoicePaymentByID\@Model.Items.Tables[0].Rows[i][0]">
+                                        @Model.Items.Tables[0].Rows[i][j]
+                                    </a>
+                                </td>
+                            }
+                            else if (Model.Items.Tables[0].Columns[j].ColumnName == "InvoiceNo")
+                            {
+                                <td>
+
+                                    <a class="link" href="\SaleOrderPreview\makeinvoicePaymentByID\@Model.Items.Tables[0].Rows[i][0]">
+                                        @Model.Items.Tables[0].Rows[i][j]
+                                    </a>
+                                </td>
+                            }
+                            else if (Model.Items.Tables[0].Columns[j].ColumnName == "PurchaseOrder#" && j == 3)
+                            {
+                                <td>
+
+                                    @*<a class="link"  href="\PurchaseOrderPreview\makeBillPaymentByID\@Model.Items.Tables[0].Rows[i][0]">*@
+                                    @Model.Items.Tables[0].Rows[i][j]
+                                    @*</a>*@
+                                </td>
+                            }
+                            else if (Model.Items.Tables[0].Columns[j].ColumnName == "PurchaseOrder#")
+                            {
+                                <td>
+
+                                    <a class="link" href="\PurchaseOrderPreview\makeBillPaymentByID\@Model.Items.Tables[0].Rows[i][0]">
+                                        @Model.Items.Tables[0].Rows[i][j]
+                                    </a>
+                                </td>
+                            }
+
+
+
+                            else if (Model.Items.Tables[0].Columns[j].ColumnName == "BillNo")
+                            {
+                                <td>
+
+                                    <a class="link" href="\PurchaseOrderPreview\makeBillPaymentByID\@Model.Items.Tables[0].Rows[i][0]">
+                                        @Model.Items.Tables[0].Rows[i][j]
+                                    </a>
+                                </td>
+                            }
+
+
+                            else if (Model.Items.Tables[0].Columns[j].ColumnName == "Date" ||
+                                Model.Items.Tables[0].Columns[j].ColumnName == "Purchase Date" ||
+                                Model.Items.Tables[0].Columns[j].ColumnName == "Bill Date" ||
+                                Model.Items.Tables[0].Columns[j].ColumnName == "BillDate"
+                                )
+
+                            {
+                                <td>
+
+                                    @{
+                                        DateTime date = Model.Items.Tables[0].Rows[i][j];
+                                        string strdate = date.ToString("dd/MM/yyyy");
+                                    }
+                                    @strdate
+
+                                </td>
+                                        }
+                                        else if (Model.Items.Tables[0].Columns[j].ColumnName == "ProductName")
+                                        {
+                                            <td>
+
+                                                <a class="link" href="\ItemOverview\itemOverview\@Model.Items.Tables[0].Rows[i][0]">
+                                                    @Model.Items.Tables[0].Rows[i][1]
+                                                </a>
+                                            </td>
+                                        }
+
+                                        else if (Model.Items.Tables[0].Columns[j].ColumnName == "Receiveable Amount" ||
+                                                 Model.Items.Tables[0].Columns[j].ColumnName == "ReceiveableAmount" ||
+                                                Model.Items.Tables[0].Columns[j].ColumnName == "Payable Amount" ||
+                                                Model.Items.Tables[0].Columns[j].ColumnName == "AccountReceiveable"
+
+                                               )
+                                        {
+
+                                            long amt;
+
+                                            if (Model.Items.Tables[0].Rows[i][j] == null)
+                                            {
+                                                amt = 0;
+                                            }
+                                            else
+                                            {
+                                                amt = Convert.ToInt64(Model.Items.Tables[0].Rows[i][j]);
+                                            }
+
+
+                                            <td style="padding-right:30px;"> <div style="text-align:right;">@string.Format("{0:N0}", amt)</div>  </td>
+
+
+                                        }
+                                        else if (Model.Items.Tables[0].Columns[j].ColumnName == "Status" && j == 3)
+                                        {
+                                            @*bool status = Convert.ToBoolean(Model.Items.Tables[0].Rows[i][j]);
+                                                string ss ="";
+                                                 if (status) {
+                                                       ss = "Active";
+                                                  } else
+                                                  {
+                                                        ss = "InActive";
+                                                  }
+
+
+                                                       <td>
+
+                                                          @ss
+
+                                                       </td>*@
+                                        }
+                                        else if (Model.Items.Tables[0].Columns[j].ColumnName == "SubTotal" ||
+                                                 Model.Items.Tables[0].Columns[j].ColumnName == "BalanceDue")
+                                        {
+
+                                            long amt;
+
+                                            if (Model.Items.Tables[0].Rows[i][j] == null)
+                                            {
+                                                amt = 0;
+                                            }
+                                            else
+                                            {
+                                                amt = Convert.ToInt64(Model.Items.Tables[0].Rows[i][j]);
+                                            }
+
+
+                                            <td> <div style="text-align:right;">@string.Format("{0:N0}", amt)</div>  </td>
+
+                                        }
+
+
+                                        else if (
+                                                Model.Items.Tables[0].Columns[j].ColumnName == "Amount")
+                                        {
+                                            long amt;
+
+                                            if (Model.Items.Tables[0].Rows[i][j] == null)
+                                            {
+                                                amt = 0;
+                                            }
+                                            else
+                                            {
+                                                amt = Convert.ToInt64(Model.Items.Tables[0].Rows[i][j]);
+                                            }
+
+
+                                            <td> <div style="text-align:right;">@string.Format("{0:N0}", amt)</div>  </td>
+
+                                        }
+
+                                        else if (Model.Items.Tables[0].Columns[j].ColumnName == "Amount" && j == 2)
+                                        {
+                                            long amt;
+                                            if (Model.Items.Tables[0].Rows[i][j] == null)
+                                            {
+                                                amt = 0;
+                                            }
+                                            else
+                                            {
+                                                amt = Convert.ToInt64(Model.Items.Tables[0].Rows[i][j]);
+                                            }
+
+
+                                            <td style="padding-right:5em;"> <div style="text-align:right;">@string.Format("{0:N0}", amt)</div>  </td>
+
+                                        }
+
+
+                                        else if (Model.Items.Tables[0].Columns[j].ColumnName == "QuantityAdjustment")
+                                        {
+                                            long amt;
+
+                                            if (Model.Items.Tables[0].Rows[i][j] == null)
+                                            {
+                                                amt = 0;
+                                            }
+                                            else
+                                            {
+                                                amt = Convert.ToInt64(Model.Items.Tables[0].Rows[i][j]);
+                                            }
+
+
+                                            <td> <div style="text-align:right;">@amt</div>  </td>
+                                        }
+
+                                        else
+                                        {
+                                            <td> @Model.Items.Tables[0].Rows[i][j] </td>
+                                            }
+                                        }
+                    </tr>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                There is no items for this option.
+                                            </tr>
+                                        }
+
+
+
+
+        </tbody>
+    </table>
+    <div>
+        <center>
+            @if (Model.Pager.EndPage > 1 && Model.Items.Tables[0].Rows.Count != 0)
+            {
+                <ul class="pagination">
+                    @if (Model.Pager.CurrentPage > 1)
+                {
+                        <li>
+                            <a href="~/@(Model.controller)/Index1">First</a>
+                        </li>
+                        <li>
+                            <a href="~/@(Model.controller)/Index1?page=@(Model.Pager.CurrentPage - 1)">Previous</a>
+                        </li>
+                    }
+
+                    @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                {
+                        <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
+                            <a href="~/@(Model.controller)/Index1?page=@page">@page</a>
+                        </li>}
+
+                    @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                {
+                        <li>
+                            <a href="~/@(Model.controller)/Index1?page=@(Model.Pager.CurrentPage + 1)">Next</a>
+                        </li>
+                        <li>
+                            <a href="~/@(Model.controller)/Index1?page=@(Model.Pager.TotalPages)">Last</a>
+                        </li>
+                    }
+                </ul>
+            }
+        </center>
+    </div>
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            $(":checkbox").find("option").attr("selected", false);
+        });
+
+        $(document).on('change', ":checkbox", function () {
+
+            var selected = new Array();
+            $('input:checked').each(function () {
+                selected.push($(this).attr('id'));
+
+            });
+
+            $.ajax({
+                url: "/_TableLayout/SetArray/",
+                dataType: 'json',
+                data: JSON.stringify({ list: selected }),
+                type: 'POST',
+                contentType: "application/json",
+                traditional: true,
+                success: successFunc,
+                error: error
+            });
+
+            function error() {
+                //alert("An error has occured!!!");
+            }
+
+            function successFunc() {
+                // alert();
+
+            }
+        });
+
+    </script>
+
+
+</section>
