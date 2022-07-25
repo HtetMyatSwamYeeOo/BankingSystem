@@ -1,0 +1,358 @@
+﻿@model BankingSystemWebsite.Models.BankAccount.NewBankAccountObject
+
+<link href='@Url.Content("~/CSS/button.css")' rel="stylesheet" type="text/css"> </link>
+@{
+    string fun, con;
+}
+@if (TempData["BankAccountPage"].ToString() == "" || TempData["BankAccountController"].ToString() == "")
+{
+    fun = "InsertNewBankAccount";
+    con = "newBankAccount";
+}
+else
+{
+    fun = TempData["BankAccountPage"].ToString();
+    con = TempData["BankAccountController"].ToString();
+}
+
+@using (Html.BeginForm(fun, con, FormMethod.Post, new { @id = "BankAccount" }))
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken();
+    <div class="row">
+        <div class="col-lg-12">
+            <section class="panel">
+                <header class="panel-heading"></header>
+                <div class="panel-body">
+
+                    <div class="panel-body">
+
+                        <form class="form-horizontal " method="get">
+
+                            <link href='@Url.Content("~/CSS/button.css")' rel="stylesheet" type="text/css"> </link>
+
+                            <div class="table-responsive">
+                                <table class="table">
+
+                                    <tr>
+                                        <td align="left"><label> Bank Account Type</label></td>
+                                        <td align="left">
+                                            <select name="Type" id="dropdown_select" class="btn1 btn-default dropdown-toggle" onclick="ChangeValue()" style="height:42px;font-size: 14px ; color : #555;">
+                                                <option name="Dealer">@**@Personal</option>
+                                                <option name="Subdealer">@**@Business</option>
+                                            </select>
+                                            @Html.TextBoxFor(m => m.Type, new { @id = "Itemtype", @class = "form-control", placeholder = "Type", style = "display:none" })
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td align="left"><label>Name*</label></td>
+                                        <td>@Html.TextBoxFor(m => m.Name, new { @id = "Name", @class = "form-control", placeholder = "Name", required = "required" })</td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td align="left"><label>ID No / Passport No *</label></td>
+                                        <td>@Html.TextBoxFor(m => m.IDNumber, new { @id = "IDNumber", @class = "form-control", placeholder = "IDNumber", required = "required" })</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td align="left"><label>Date of Birth</label></td>
+                                        <td>
+                                            @Html.TextBoxFor(m => m.DateOfBirth, "{0:dd-MM-yyyy}", new { @id = "DateOfBirth", @class = "form-control", @type = "date", @required = "required" })
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td align="left"><label> Gender</label></td>
+                                        <td align="left">
+                                            <select name="GenderType" id="dropdown_select_gendertype" class="btn1 btn-default dropdown-toggle" onclick="GenderTypeChangeValue()" style="height:42px;font-size: 14px ; color : #555;">
+                                                <option name="Male">@**@Male</option>
+                                                <option name="Female">@**@Female</option>
+                                            </select>
+                                            @Html.TextBoxFor(m => m.Gender, new { @id = "gendertype", @class = "form-control", placeholder = "Gender", style = "display:none" })
+                                        </td>
+
+
+
+                                    </tr>
+                                    <tr>
+                                        <td align="left"><label>Nadtionaly</label></td>
+                                        <td>@Html.TextBoxFor(m => m.Nadtionaly, new { @id = "Nadtionaly", @class = "form-control", placeholder = "Name", required = "required" })</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td align="left"><label>Phone Number*</label></td>
+                                        <td>
+                                            @Html.TextBoxFor(m => m.BankAccountPhone, new { @id = "BankAccountPhone", @class = "form-control", @onkeypress = "return isNumber(event)", placeholder = "Phone", required = "required" })   @*@Html.ValidationMessage("BankAccount Phone", "ဖုန္းနာမည္ထည့္ပါ။")*@
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td align="left"><label>Address</label></td>
+                                        <td>
+                                            @Html.TextAreaFor(m => m.Address, new { @id = "Address", @class = "form-control", placeholder = "Street", required = "required" })     @*@Html.ValidationMessage("Address", "လိပ္စာထည့္ပါ။")*@
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td align="left"><label>City</label></td>
+                                        <td>
+                                            @Html.TextBoxFor(m => m.City, new { @id = "City", @class = "form-control", placeholder = "City", required = "required" })   @*@Html.ValidationMessage("City", "ျမိဳ ့နာမည္ထည့္ပါ။")*@
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td align="left"><label>Country</label></td>
+                                        <td>@Html.TextBoxFor(m => m.CountryName, new { @id = "CountryName", @class = "form-control", placeholder = "CountryName", required = "required" })</td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td align="left"><label>Email</label></td>
+                                        <td>
+                                            @Html.TextBoxFor(m => m.Email, new
+                                            {
+                                                @id = "Email",
+                                                @class = "form-control",
+                                                placeholder = "Email",
+
+                                           required = "required",
+                                           pattern = "[a-z0-9._%+-]+@[a-z0-9.-]+[.]{1}[a-z]{2,3}$"
+                                       })
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td align="left"><label>Account Password</label></td>
+                                        <td>@Html.TextBoxFor(m => m.Password, new { @id = "Password", @class = "form-control", placeholder = "Password", required = "required" })</td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td></td>
+                                        <td align="center">
+                                            <div class="col-lg-8">
+                                                <div id="newBankAccountConfirmBox" class="modal fade" role="dialog">
+                                                    <div class="modal-dialog">
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                <h4 class="modal-title"></h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p> AreyouSure</p>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <input class="btn-primary2 link" type="submit" value="Save" />
+                                                                &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                                                                <button type="button" class="btn-cancel " data-dismiss="modal" style="width:120px;height:40px"> Cancel</button>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4"></div>
+                                            @*<button type="button" class="btn-primary2 " id="BankAccountSubmit" data-toggle="modal" data-target="#newBankAccountConfirmBox"> Save </button>*@
+                                            <button type="submit" class="btn-primary2 " id="submit"> Save Data </button>
+
+                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                            @if (Model.Name != null)
+                                            {
+                                                <a class="btn-cancel link" href="@Url.Action("customerOverview", "customerOverview")" style="width:100px;height:40px">Cancel</a>
+                                            }
+                                            else if (Model.Name == null && (Model.Type == "vendor" || Model.Type == "Vendor"))
+                                            {
+                                                @*<a class="btn-cancel link" href="@Url.Action("newPurchaseOrder", "NewPurchaseOrder")">Cancel</a>*@
+                                            }
+                                            else if (Model.Name == null && (Model.Type == "customer" || Model.Type == "Customer"))
+                                            {
+                                                @*<a class="btn-cancel link" href="@Url.Action("newSale", "NewSale")">Cancel</a>*@
+                                            }
+                                            else
+                                            {
+                                                <a class="btn-cancel link" href="@Url.Action("BankAccount", "BankAccount")" style="width:130px;height:40px">Cancel</a>
+                                            }
+                                        </td>
+
+                                    </tr>
+
+                                </table>
+                            </div>
+
+
+                        </form>
+
+
+                    </div>
+
+
+                </div>
+            </section>
+        </div>
+    </div>
+
+
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script>
+
+
+
+    $('#BankAccount').submit(function () {
+        $('#newBankAccountConfirmBox').hide();
+        $("#loading").show();
+
+    });
+
+
+    $('#BankAccountSubmit').click(function (e) {
+       // $("#loading").hide();
+
+         $("#loading").show();
+        // Get the Login Name value and trim it
+        var Name = ($('#Name').val());
+        var CompanyName = ($('#CompanyName').val());
+        var BankAccountPhone = ($('#BankAccountPhone').val());
+        var Address = ($('#Address').val());
+        var City = ($('#City').val());
+        var WayName=($('#wayname').val());
+        var Email=($('#Email').val());
+        var Discount=($('Dis').val());
+        var DateOfBirth = ($('DateOfBirth').val());
+        var Gender = ($('GenderType').val());
+        var Nadtionaly = ($('Nadtionaly').val());
+        var IDNumber = ($('IDNumber').val());
+        var CountryName = ($('CountryName').val());
+
+
+
+        // Check if empty of not
+        if (Name === '') {
+
+            toastr.warning("BankAccountNameIsEmpty");
+            // toastr.warning("Name is Empty.");
+            $("#loading").hide();
+            return false;
+        }
+        if (CompanyName === '') {
+
+            @*toastr.warning("CompanyNameIsEmpty");*@
+            //  toastr.warning("Company is Empty.");
+            $('#CompanyName').val("-");
+            $("#loading").hide();
+            return true;
+        }
+        if (BankAccountPhone === '') {
+
+            toastr.warning("BankAccountPhIsEmpty");
+            // toastr.warning("Phone No is Empty.");
+            $("#loading").hide();
+            return false;
+        }
+        if (Address === '') {
+
+            toastr.warning("AddressIsEmpty");
+            // toastr.warning("Address is Empty.");
+            $("#loading").hide();
+            return false;
+        }
+        if (City === '') {
+
+            toastr.warning("CityIsEmpty");
+            // toastr.warning("City is Empty.");
+            $("#loading").hide();
+            return false;
+        }
+        if (WayName === '') {
+
+            toastr.warning("WayNameIsEmpty");
+            // toastr.warning("City is Empty.");
+            $("#loading").hide();
+            return false;
+        }
+        if (Email === '') {
+
+            toastr.warning("EmailIsEmpty");
+            // toastr.warning("City is Empty.");
+            $("#loading").hide();
+            return false;
+        }
+        if (Discount === '') {
+
+            toastr.warning("DiscountIsEmpty");
+            // toastr.warning("City is Empty.");
+            $("#loading").hide();
+            return false;
+        }
+        return true;
+    });
+
+    $("#dropdown_select").val("@Model.Type");
+    @if(Model.Type==null)
+    {
+        Session["BankAccountType"] = null;
+    }
+    else
+    {
+        Session["BankAccountType"] = @Model.Type;
+    }
+
+    if (document.getElementsByName("Type").value == null && @Session["BankAccountType"]==null )
+    {
+
+        $("#dropdown_select").val("Dealer");
+
+    }
+
+
+
+
+    function ChangeValue() {
+
+        var val = "aa";
+
+        Val = document.getElementById("dropdown_select").value;
+        document.getElementById("Itemtype").value = Val;
+
+
+    }
+
+
+    function GenderTypeChangeValue() {
+
+        var val = "aa";
+
+        Val = document.getElementById("dropdown_select_gendertype").value;
+        alert(val);
+        document.getElementById("gendertype").value = Val;
+
+
+    }
+
+    $('.link').click(function () {
+        $("#loading").show();
+    });
+
+    function isNumber(event) {
+      // alert("hahahahahaah");
+        event = (event) ? event : window.event;
+        var charCode = (event.which) ? event.which : event.keyCode;
+        //alert(charCode);
+
+        if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57))
+        {
+
+            return false;
+        }
+        return true;
+
+    }
+
+
+</script>
