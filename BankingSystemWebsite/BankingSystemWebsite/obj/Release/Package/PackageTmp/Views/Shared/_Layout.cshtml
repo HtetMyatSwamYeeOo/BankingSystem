@@ -1,42 +1,39 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+
+    <link href='@Url.Content("~/CSS/checkboxstyle.css")' rel="stylesheet" type="text/css"> </link>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Banking System</title>
+    <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template" />
+    <meta name="author" content="GeeksLabs" />
+    <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal" />
+
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <!-- owl carousel -->
+
+    @{
+
+
+        Html.RenderPartial("_importLayout");
+
+
+    }
+
+    @RenderSection("Scripts", false)
+
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    @RenderBody()
+
+
+    <footer style="align-content:center;align-items:center">
+        <p style="color: #004466;font-family: 'Century Gothic';align-self: center;text-align:center">
+            <span style="font-weight:bold">©All Rights Reserved By Mr.Htet Myat's Banking Technical Test Project for Brand New Day </span>
+        </p>
+    </footer>
 </body>
 </html>
+<link href='@Url.Content("~/CSS/checkboxstyle.css")' rel="stylesheet" type="text/css"> </link>

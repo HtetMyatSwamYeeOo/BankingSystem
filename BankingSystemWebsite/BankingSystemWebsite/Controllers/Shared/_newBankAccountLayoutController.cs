@@ -53,16 +53,6 @@ namespace BankingSystemWebsite.Controllers.Shared
             [ChildActionOnly]
             public PartialViewResult editNewBankAccount()
             {
-                //M_BankAccount mc = BankAccountBL.SelectAllBankAccountBYID(id);
-
-                //NewBankAccountObject nco = new NewBankAccountObject();
-
-                //nco.CompanyName = mc.BankAccount_CompanyName;
-                //nco.Name = mc.BankAccount_PersonName;
-                //nco.City = mc.BankAccount_City;
-                //nco.Note = mc.BankAccount_Notes;
-                //nco.BankAccountPhone = mc.BankAccount_MobilePhone;
-                //nco.Address = mc.BankAccount_Address;
 
                 if (TempData["temp_array"] != null)
                 {
@@ -73,17 +63,12 @@ namespace BankingSystemWebsite.Controllers.Shared
                     TempData["BankAccountControllerCancel"] = "BankAccount";
                 }
 
-
                 NewBankAccountObject nco = new NewBankAccountObject();
 
                 if (TempData["EditID"] != null)
                 {
                     nco = (NewBankAccountObject)TempData["EditID"];
                 }
-
-
-
-
                 return PartialView("_newBankAccountLayout", nco);
             }
 

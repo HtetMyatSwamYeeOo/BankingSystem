@@ -1,0 +1,652 @@
+﻿@using System.Data;
+@using BankingSystemWebsite.Models;
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Bootstrap CSS -->
+    <script src='@Url.Content("~/Scripts/bootstrap.js")' type="text/javascript"></script>
+
+    @{Html.RenderPartial("_importLayout"); }
+
+
+    <style>
+        input[type=text] {
+            width: 250px;
+            height: 42px;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: white;
+            /*background-image: Url('~/Image/searchicon.png');
+            background-position: 10px 10px;
+            background-repeat: no-repeat;*/
+            padding: 12px 5px 12px 20px;
+            /*-webkit-transition: width 0.4s ease-in-out;
+            transition: width 0.4s ease-in-out;*/
+        }
+    </style>
+
+
+
+
+</head>
+
+<body>
+    <!-- container section start -->
+    <section id="container" class="">
+        <!--Navigation-->
+        @{Html.RenderPartial("_navLayout"); }<section id="main-content">
+            <section class="wrapper">
+                <!--overview start-->
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="col-lg-4">
+                            <h3 class="page-header"><img src="~/Image/bank.png" style="height:40px; margin: 0 0 20px;" />&nbsp;&nbsp; BankAccounts</h3>
+                        </div>
+                        <div class="col-lg-2"></div>
+                        <div class="col-lg-2"></div>
+                        <div class="col-lg-4" style="margin-top :25px;">
+
+
+                            <i class="icon-search"></i>
+                            <input id="searchbar" type="text" list="list" placeholder="Search..." />
+                            @{
+
+                                List<BankingSystemWebsite.Models.BankAccount.BankAccountObject> mylist = new List<BankingSystemWebsite.Models.BankAccount.BankAccountObject>();
+                                mylist = (List<BankingSystemWebsite.Models.BankAccount.BankAccountObject>)TempData["BankAccountName"];
+
+
+                                <datalist id="list">
+                                    @foreach (var item in mylist)
+                                    {
+                                        <option id="optionid" hidden="" value="@item.Name" name="@item.Name">@item.Name</option>
+                                    }
+
+                                </datalist>
+
+
+                            }
+                        </div>
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+                <!-- project team & activity end -->
+                <ul class="row">
+
+
+
+                    <li class="col-lg-4">
+
+                        <select id="dropdown_select" class="btn1 btn-default dropdown-toggle" style="height:48px;">
+
+                            <option name="All BankAccounts">AllBankAccounts</option>
+                            <option name="Personal">Personal</option>
+                            <option name="Business">Business</option>
+                        </select>
+
+
+                    </li>
+
+                    <li class="col-lg-4">
+                        <div class="dropdown">
+                            <button class="btn1 btn-default dorpdown-toggle" type="button" id="menu1" data-toggle="dropdown" style=" height:48px;">
+                                MoreActions &nbsp;&nbsp;&nbsp;&nbsp;
+                                <span class="caret"></span>
+                            </button>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <!--  <li role="presentation"><a role="menuitem" tabindex="-1" href="/BankAccount/GetAllCheckedItemActive">Mark as Active</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="/BankAccount/GetAllCheckedItemInactive">Mark as Inactive</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="/BankAccount/DelteBankAccountItemById">Delete</a></li>-->
+
+                                <li id="MarkAsActive" role="presentation"><a role="menuitem" tabindex="-1">MarkAsActive</a></li>
+                                <li id="MarkAsInactive" role="presentation"><a role="menuitem" tabindex="-1">MarkAsInactive</a></li>
+                                <li id="MarkDelete" role="presentation"><a role="menuitem" tabindex="-1">Delete</a></li>
+                            </ul>
+                        </div>
+                                      </li>
+
+
+                    <li class="col-lg-2">
+                        <a href="@Url.Action("newBankAccount", "NewBankAccount")" class="btn1 btn-primary1 link" role="button" style="background-color:#2979FF">
+                            NewBankAccount
+                        </a>
+                    </li>
+
+                    <li class="col-lg-2">
+                        <div class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <img alt="" src="~/Image/sorting.png" style="height:25px;">
+                                <i class="caret"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a id="SortByName" class="sort">Name</a></li>
+                                <li><a id="SortByCompanyName" class="sort">CompanyName</a></li>
+                                <li><a id="SortByCreatedTime" class="sort">CreatedTime</a></li>
+                                <li><a id="SortByLastModifiedTime" class="sort">LastModifiedTime</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                </ul>
+                <br />
+                <div class="row">
+                    <div class="table-responsive">
+                        <div class="col-sm-12">
+
+                            <div id="divid">
+
+                                @{Html.RenderAction("DisplayPartialResult", "_TableLayout", (BankingSystem_Common.Constants.IndexViewModel)TempData["Dataset"]);}
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+    </section>
+
+    <script>
+
+
+        $(document).ready(function () {
+            $('#searchbar').on('input', function () {
+                var userText = $(this).val();
+
+
+                //$("#list").find("option").each(function () {
+                //    var s = $(this).val();
+                    //var s = datalist.push($(this).val());
+                    //alert(s + " = " + userText);
+
+                    //if (s == userText) {
+                        // alert(s + " = " + userText);
+                        //alert("Found");
+                        //var ss = s;
+                        $("#loading").show();
+                        $.ajax({
+                            url: '@Url.Action("GetAllBankAccountByName", "BankAccount")',
+                            type: 'GET',
+                            data: { name: userText },
+                            success: function (result) {
+
+                            }
+                        }).done(function (partialViewResult) {
+
+                            $("#divid").html(partialViewResult);
+                            $("#loading").hide();
+
+
+                        });
+
+                    //}
+
+                    @*else
+                    {
+                        $.ajax({
+                            url: '@Url.Action("GetAllBankAccountByName", "BankAccount")',
+                            type: 'GET',
+                            data: { name: userText },
+                            success: function (result) {
+
+                            }
+                        }).done(function (partialViewResult) {
+
+                            $("#divid").html(partialViewResult);
+                            $("#loading").hide();
+                        })
+                        }*@
+
+            //    })
+            })
+        });
+
+
+
+
+
+
+        $('.link').click(function () {
+            $("#loading").show();
+        });
+        //knob
+        $(function () {
+            $(".knob").knob({
+                'draw': function () {
+                    $(this.i).val(this.cv + '%')
+                }
+            })
+        });
+
+        //carousel
+        $(document).ready(function () {
+            $("#owl-slider").owlCarousel({
+                navigation: true,
+                slideSpeed: 300,
+                paginationSpeed: 400,
+                singleItem: true
+            });
+        });
+
+        //custom select box
+        $(function () {
+            $('select.styled').customSelect();
+        });
+
+        /* ---------- Map ---------- */
+        $(function () {
+            $('#map').vectorMap({
+                map: 'world_mill_en',
+                series: {
+                    regions: [{
+                        values: gdpData,
+                        scale: ['#000', '#000'],
+                        normalizeFunction: 'polynomial'
+                    }]
+                },
+                backgroundColor: '#eef3f7',
+                onLabelShow: function (e, el, code) {
+                    el.html(el.html() + ' (GDP - ' + gdpData[code] + ')');
+                }
+            });
+        });
+
+        /* ---------- To restore the selected value for option select menu ---------- */
+        // var selectedItem = sessionStorage.getItem("SelectedItem");
+
+        // $('#dropdown_select').val(selectedItem);
+
+
+
+
+
+        $('#dropdown_select').change(function () {
+            var dropVal_val = $(this).val();
+            var dropVal = $('#dropdown_select option:selected').attr("name");
+            $("#loading").show();
+
+
+            $.ajax({
+                url: '@Url.Action("GetAllusingSelectedName", "BankAccount")',
+                type: 'GET',
+                data: { name: dropVal },
+                success: function (result) {
+
+                }
+            }).done(function (partialViewResult) {
+
+                $("#divid").html(partialViewResult);
+                $("#loading").hide();
+
+                $.ajax({
+                    url: '@Url.Action("CheckNULL", "BankAccount")',
+                    type: 'GET',
+                    success: function (result2) {
+                        //  alert(result2);
+                        //alert(result1);
+
+                        if (result2 == "null") {
+                            $("#dividid").hide();
+                        } else {
+                            $("#dividid").show();
+                        }
+
+
+                    }
+
+
+                });
+
+
+                $.ajax({
+                    url: '@Url.Action("GetSelectedName", "BankAccount")',
+                    type: 'GET',
+                    success: function (result1) {
+                        //alert(result1);
+                        var drop = $("#dropdown_select").find('[name="' + result1 + '"]').val();
+                        $("#dropdown_select").val(drop);
+                    }
+
+
+                });
+
+            });
+
+
+        });
+
+
+        var AllItems = $("#dropdown_select option:selected").val();
+
+
+        $('#dropdown_select1').change(function () {
+            var dropVal = $(this).val();
+            //var dropVal = $('#dropdown_select option:selected').attr("name");
+
+            $("#loading").show();
+            // $("#dropdown_select").val(AllItems);
+
+            $.ajax({
+                url: '@Url.Action("DoAction", "BankAccount")',
+                type: 'GET',
+                data: { name: dropVal },
+                success: function (result) {
+
+                    $.ajax({
+                        url: '@Url.Action("GetCheckerName", "BankAccount")',
+                        success: function(result4) {
+
+                            if (result4 == "s") {
+
+                                toastr.success("Success");
+
+                            } else if (result4 == "fc") {
+
+                                toastr.warning("AlreadyActive");
+
+                            } else {
+
+                                toastr.warning("Uncheck");
+
+                            }
+
+
+                        }
+                    });
+
+                }
+
+            }).done(function (partialViewResult) {
+
+                $("#divid").html(partialViewResult);
+
+
+                $("#loading").hide();
+
+
+
+                $.ajax({
+                    url: '@Url.Action("GetSelectedName", "BankAccount")',
+                    type: 'GET',
+                    success: function (result1) {
+                        //alert(result1);
+                        var drop = $("#dropdown_select").find('[name="' + result1 + '"]').val();
+                        $("#dropdown_select").val(drop);
+                    }
+
+
+                });
+
+
+
+
+            });
+
+
+        });
+
+
+
+
+        $('.sort').click(function () {
+            $("#loading").show();
+            var key = $(this).attr("id");
+            $.ajax({
+                url: '@Url.Action("GetSorted", "BankAccount")',
+                type: 'GET',
+                data: { sortname: key },
+                success: function (result) {
+
+                }
+            }).done(function (partialViewResult) {
+
+                $("#divid").html(partialViewResult);
+                $("#loading").hide();
+                $.ajax({
+                    url: '@Url.Action("GetSelectedName", "BankAccount")',
+                    type: 'GET',
+                    success: function (result1) {
+                        //alert(result1);
+                        var drop = $("#dropdown_select").find('[name="' + result1 + '"]').val();
+                        $("#dropdown_select").val(drop);
+                    }
+
+
+                });
+
+            });
+
+        });
+
+        $('#MarkAsActive').click(function () {
+            $("#loading").hide();
+            var key = $(this).attr("id");
+            $.ajax({
+                url: '@Url.Action("GetAllCheckedItemActive", "BankAccount")',
+                type: 'GET',
+                success: function (result) {
+                    $.ajax({
+                        url: '@Url.Action("GetCheckerName", "BankAccount")',
+                        success: function (result4) {
+
+                            if (result4 == "s") {
+
+                                toastr.success("Success");
+                                // toastr.success('success');
+                                // $.iaoAlert({ msg: "success!!!", type: "success", mode: "dark", autoHide: true, fadeTime: "1000", alertTime: "10000" });
+                            } else if (result4 == "fc") {
+
+                                toastr.warning("AlreadyActive");
+                                // toastr.warning('BankAccount had already been Active!!!');
+                                //  $.iaoAlert({ msg: "BankAccount had already been Active!!!", type: "warning", mode: "dark", autoHide: true, fadeTime: "700", alertTime: "10000" });
+
+                            } else if (result4 == "ai") {
+
+                                toastr.warning("AlreadyInActive");
+                                //toastr.warning('BankAccount had already been Inactive!!!');
+                                //  $.iaoAlert({ msg: "BankAccount had already been Inactive!!!", type: "warning", mode: "dark", autoHide: true, fadeTime: "700", alertTime: "10000" });
+
+                            } else {
+
+                                toastr.warning("Uncheck");
+                                //  toastr.error('Checked Something!!!');
+                                //  $.iaoAlert({ msg: "Checked Something!!!", type: "error", mode: "dark", autoHide: true, fadeTime: "1000", alertTime: "10000" });
+
+                            }
+
+
+                        }
+                    });
+
+                }
+            }).done(function (partialViewResult) {
+
+                $("#divid").html(partialViewResult);
+                $("#loading").hide();
+
+
+
+
+               $.ajax({
+                    url: '@Url.Action("GetSelectedName", "BankAccount")',
+                    type: 'GET',
+                    success: function (result1) {
+                        //alert(result1);
+                        var drop = $("#dropdown_select").find('[name="' + result1 + '"]').val();
+                        $("#dropdown_select").val(drop);
+                    }
+
+
+                });
+
+            });
+
+        });
+
+        $('#MarkAsInactive').click(function () {
+            $("#loading").hide();
+            var key = $(this).attr("id");
+            $.ajax({
+                url: '@Url.Action("GetAllCheckedItemInactive", "BankAccount")',
+                type: 'GET',
+                success: function (result) {
+
+                    $.ajax({
+                        url: '@Url.Action("GetCheckerName", "BankAccount")',
+                        success: function (result4) {
+
+                            if (result4 == "s") {
+
+                                toastr.success("Success");
+                            } else if (result4 == "fc") {
+
+                                toastr.warning("AlreadyActive");
+
+                            } else if (result4 == "ai") {
+
+                                toastr.warning("AlreadyInActive");
+
+                            } else {
+
+                                toastr.warning("Uncheck");
+
+                            }
+
+
+                        }
+                    });
+
+                }
+            }).done(function (partialViewResult) {
+
+                $("#divid").html(partialViewResult);
+                $("#loading").hide();
+                @*$.ajax({
+                    url: '@Url.Action("GetSelectedName", "BankAccount")',
+                    type: 'GET',
+                    success: function (result1) {
+                        //alert(result1);
+                        $("#dropdown_select").val(result1);
+                    }
+
+
+                });*@
+
+                $.ajax({
+                    url: '@Url.Action("GetSelectedName", "BankAccount")',
+                    type: 'GET',
+                    success: function (result1) {
+                        //alert(result1);
+                        $("#dropdown_select[name='" + result1 + "']").attr("selected", "selected");
+                        var drop = $("#dropdown_select").find('[name="' + result1 + '"]').val();
+                        $("#dropdown_select").val(drop);
+                    }
+
+
+                });
+
+            });
+
+        });
+
+
+        $('#MarkDelete').click(function () {
+         //   $("#loading").show();
+            var key = $(this).attr("id");
+            $.ajax({
+                url: '@Url.Action("DelteBankAccountItemById", "BankAccount")',
+                type: 'GET',
+                success: function (result) {
+                    $.ajax({
+                        url: '@Url.Action("GetCheckerName", "BankAccount")',
+                        success: function (result4) {
+
+                            if (result4 == "s") {
+
+                                toastr.success("Success");
+
+                            } else {
+
+                                toastr.warning("Uncheck");
+
+                            }
+
+
+                        }
+                    });
+
+                }
+            }).done(function (partialViewResult) {
+
+                $("#divid").html(partialViewResult);
+                $("#loading").hide();
+                @*$.ajax({
+                    url: '@Url.Action("GetSelectedName", "BankAccount")',
+                    type: 'GET',
+                    success: function (result1) {
+
+                        $("#dropdown_select").val(result1);
+                    }
+
+
+                });*@
+                $.ajax({
+                    url: '@Url.Action("GetSelectedName", "BankAccount")',
+                    type: 'GET',
+                    success: function (result1) {
+                        //alert(result1);
+                        var drop = $("#dropdown_select").find('[name="' + result1 + '"]').val();
+                        $("#dropdown_select").val(drop);
+                    }
+
+
+                });
+
+            });
+
+        });
+
+
+        $(document).ready(function () {
+            $.ajax({
+                url: '@Url.Action("GetCheckerName", "BankAccount")',
+                success: function (result4) {
+
+                    if (result4 == "BankAccount is Deleted successfully!") {
+                        toastr.success("DeleteSuccessful");
+
+                    } else if (result4 == "New BankAccount is Added successfully!") {
+                        toastr.success("BankAccountAddSuccess");
+                    }
+
+
+                }
+            });
+
+
+        });
+
+        /* ---------- ----------------------------------------------------- ---------- */
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,253 @@
+﻿<html>
+<head>
+
+    <script>
+        $(document).ready(function () {
+            jQuery('#sidebar .sub-menu > a').click(function () {
+                var last = jQuery('.sub-menu.open', jQuery('#sidebar'));
+                jQuery('.menu-arrow').removeClass('arrow_carrot-right');
+                jQuery('.sub', last).slideUp(200);
+                var sub = jQuery(this).next();
+                if (sub.is(":visible")) {
+                    jQuery('.menu-arrow').addClass('arrow_carrot-right');
+                    sub.slideUp(200);
+                } else {
+                    jQuery('.menu-arrow').addClass('arrow_carrot-down');
+                    sub.slideDown(200);
+                }
+                var o = (jQuery(this).offset());
+                diff = 200 - o.top;
+                if (diff > 0)
+                    jQuery("#sidebar").scrollTo("-=" + Math.abs(diff), 500);
+                else
+                    jQuery("#sidebar").scrollTo("+=" + Math.abs(diff), 500);
+            });
+            jQuery(function () {
+                function responsiveView() {
+                    var wSize = jQuery(window).width();
+                    if (wSize <= 768) {
+                        jQuery('#container').addClass('sidebar-close');
+                        jQuery('#sidebar > ul').hide();
+                    }
+
+                    if (wSize > 768) {
+                        jQuery('#container').removeClass('sidebar-close');
+                        jQuery('#sidebar > ul').show();
+                    }
+                }
+                jQuery(window).on('load', responsiveView);
+                jQuery(window).on('resize', responsiveView);
+            });
+
+            jQuery('.toggle-nav').click(function () {
+                if (jQuery('#sidebar > ul').is(":visible") === true) {
+                    jQuery('#main-content').css({
+                        'margin-left': '0px'
+                    });
+                    jQuery('#sidebar').css({
+                        'margin-left': '-230px'
+                    });
+                    jQuery('#sidebar > ul').hide();
+                    jQuery("#container").addClass("sidebar-closed");
+                } else {
+                    jQuery('#main-content').css({
+                        'margin-left': '230px'
+                    });
+                    jQuery('#sidebar > ul').show();
+                    jQuery('#sidebar').css({
+                        'margin-left': '0'
+                    });
+                    jQuery("#container").removeClass("sidebar-closed");
+                }
+            });
+        })
+        //For Disable Browser Back Button
+        history.pushState(null, null, document.URL);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, document.URL);
+        });
+
+    </script>
+    <style>
+
+        #sidebar > ul > li > ul.sub {
+            display: none;
+        }
+
+            #sidebar > ul > li > ul.sub, #sidebar > ul > li > ul.sub > li > a {
+                display: block;
+            }
+
+        .sidebar-closed > #sidebar > ul {
+            display: none;
+        }
+
+
+
+        .sidebar-closed #main-content {
+            margin-left: 0px;
+        }
+
+
+
+        .sidebar-closed #sidebar {
+            margin-left: -230px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header dark-bg">
+        <div class="toggle-nav">
+            <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
+        </div>
+        <!--logo start-->
+        @*<a href="@Url.Action("dashboard", "Dashboard")" class="logo link "><span class="lite"><b>Banking</b></span><b>System</b></a>*@
+        <!--logo end-->
+
+        <div class="top-nav notification-row" style="margin-top:.1cm; margin-bottom:.1cm;">
+
+
+            <!-- notificatoin dropdown start-->
+            <ul class="nav pull-right top-menu">
+                <li class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <span class="profile-ava">
+                            <img alt="" src="~/Image/loginuser1.png">
+                        </span>
+
+                        <span class="username" id="username"> @Session["UserName123"]</span>
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        @*extended logout*@
+                        <li>
+                            @*
+                                <a href="/Profile/profile">Profile </a>
+
+                            *@
+                            <a href="/Profile/profile">Profile </a>
+
+                        </li>
+                        <li>
+                            <a href="/Login/logout">LogOut</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+     
+
+
+    </header>
+    <!--header end-->
+    <!--sidebar start-->
+    <aside>
+        <div id="sidebar" class="nav-collapse " style="overflow: hidden;">
+            <!-- sidebar menu start-->
+            <ul class="sidebar-menu" style="overflow:auto;height:90%;width:300px;">
+                <li class="">
+                    <a class="link" href="@Url.Action("dashboard", "Dashboard")">
+                        <img src="~/Image/dashboard.png" style="height:25px; ">
+                        &nbsp;&nbsp;&nbsp;
+                        <span>
+                            <b style="color:#ffffff;"> Dashboard</b>
+                        </span>
+                    </a>
+                </li>
+                <!--Contact-->
+                <!--<li class="">
+                    <a href="@Url.Action("Contact","Contact")" class="link">
+                        <img src="~/Image/contact.png" style="height:25px; ">
+                        &nbsp;&nbsp;&nbsp;
+                        <span> <b style="color:#ffffff;">Contacts</b></span>
+                    </a>
+                </li>-->
+                <!--Bank Account-->
+                <li class="sub-menu">
+                    <a href="#" class="">
+                        <img src="~/Image/bank.png" style="height:25px; ">
+                        &nbsp;&nbsp;&nbsp;
+                        <span> <b style="color:#ffffff;">Bank Account</b></span>
+                        <span class="menu-arrow arrow_carrot-right"></span>
+                    </a>
+                    <ul class="sub" style="display:none;">
+                        <li><a class="link" href="@Url.Action("BankAccount","BankAccount")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; "> &nbsp;Bank Account List</a></li>
+                        <li><a class="link" href="@Url.Action("newBankAccount","NewBankAccount")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; "> &nbsp;New Bank Account</a></li>
+                    </ul>
+                </li>
+
+                <!--Item-->
+                <!--<li class="sub-menu">
+                    <a href="#" class="">
+                        <img src="~/Image/item.png" style="height:25px; ">
+                        &nbsp;&nbsp;&nbsp;
+                        <span> <b style="color:#ffffff;"> Items</b></span>
+                        <span class="menu-arrow arrow_carrot-right"></span>
+                    </a>
+                    <ul class="sub" style="display:none;">
+                        <li><a class="link" href="@Url.Action("item","Item")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; "> &nbsp;ItemList</a></li>
+                        <li><a class="link" href="@Url.Action("newItem","NewItem")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; "> &nbsp;NewItem</a></li>
+                        <li><a class="link" href="@Url.Action("itemAdjustment","ItemAdjustment")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; "> &nbsp;ItemAdjustment</a></li>
+                    </ul>
+                </li>-->
+
+                <!--Sale-->
+                <!--<li class="sub-menu">
+                    <a href="#" class="">
+                        <img src="~/Image/sale.png" style="height:25px; ">
+                        &nbsp;&nbsp;&nbsp;
+                        <span> <b style="color:#ffffff;">Sales</b></span>
+                        <span class="menu-arrow arrow_carrot-right"></span>
+                    </a>
+                    <ul class="sub" style="display:none;">
+                        <li><a class="link" href="@Url.Action("sale","Sale")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; "> &nbsp;SaleList</a></li>
+                        <li><a class="link" href="@Url.Action("newSale","NewSale")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; ">&nbsp;NewSale</a></li>
+
+                        <li><a class="link" href="@Url.Action("SaleReturnList","SaleReturnList")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; ">&nbsp;SaleReturnList</a></li>
+                        <li><a class="link" href="@Url.Action("newSaleReturn","NewSaleReturn")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; ">&nbsp;NewSaleReturn</a></li>
+                        <li><a class="link" href="@Url.Action("AssignSaleList","AssignSaleList")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; ">&nbsp;AssignSaleList</a></li>
+                        <li><a class="link" href="@Url.Action("newAssignSale","NewAssignSale")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; "> &nbsp;NewAssignSale</a></li>
+
+
+                        <li><a class="link" href="@Url.Action("invoice","Invoice")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; "> &nbsp;Invoices</a></li>
+
+                    </ul>
+                </li>-->
+                <!--Issue Item-->
+                <!--<li class="sub-menu">
+                    <a href="#" class="">
+                        <img src="~/Image/Truck.png" style="height:25px; ">
+                        &nbsp;&nbsp;&nbsp;
+                        <span> <b style="color:#ffffff;">IssueItem</b></span>
+                        <span class="menu-arrow arrow_carrot-right"></span>
+                    </a>
+
+                    <ul class="sub" style="display:none;">
+                        <li><a class="link" href="@Url.Action("IssueItem","IssueItem")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; "> &nbsp;IssueItemList</a></li>
+                        <li><a class="link" href="@Url.Action("newIssueItem","NewIssueItem")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; "> &nbsp;NewIssueItem</a></li>
+
+                    </ul>
+
+
+                </li>-->
+
+                <!--Reports-->
+            </ul>
+            <!-- sidebar menu end-->
+        </div>
+    </aside>
+
+    <div id="loading" style="margin: 0px; padding: 0px; position: fixed; right: 50%;top: 50%; width: 100%; height: 100%; z-index: 30001;opacity:1; filter: alpha(opacity=100);display:none">
+        <p style="position: fixed; top:50%; left: 50%; color: White;">
+            <img src="~/Image/loader.gif">
+        </p>
+    </div>
+
+
+    <script>
+        $('.link').click(function () {
+            $("#loading").show();
+        });
+    </script>
+</body>
+</html>

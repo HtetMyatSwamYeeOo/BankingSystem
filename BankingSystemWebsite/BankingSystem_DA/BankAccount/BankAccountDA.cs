@@ -85,7 +85,45 @@ namespace BankingSystem_DA.BankAccount
                 }
             }//end of search way name
 
-            public static bool InsertNewWaytoWayTable(string wayName, string Created_By)
+        public static object SelectAllPersonalTypeBankAccount()
+        {
+            using (SqlConnection con = new SqlConnection(CommonDA.getConnection()))
+            {
+                using (SqlCommand cmd = new SqlCommand("sps_SelectAllBankAccountName", con))
+                {
+
+                    try
+                    {
+                        DataSet dsBankAccount = new DataSet("BankAccount_Object");
+                        List<M_BankAccount> BankAccountList = new List<M_BankAccount>();
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@AccountType","Personal");
+
+                        SqlDataAdapter da = new SqlDataAdapter();
+                        da.SelectCommand = cmd;
+                        con.Open();
+                        da.Fill(dsBankAccount);
+                        for (int i = 0; i < dsBankAccount.Tables[0].Rows.Count; i++)
+                        {
+                            M_BankAccount mc = new M_BankAccount();
+                            mc.BankAccount_ID = Convert.ToString(dsBankAccount.Tables[0].Rows[i]["IBAN_ID"]);
+                            mc.BankAccount_PersonName = Convert.ToString(dsBankAccount.Tables[0].Rows[i]["Name"]);
+                            BankAccountList.Add(mc);
+                        }
+                        con.Close();
+                        return BankAccountList;
+                    }
+                    catch (Exception ex)
+                    {
+                        return null;
+                    }
+
+
+                }
+            }
+        }
+
+        public static bool InsertNewWaytoWayTable(string wayName, string Created_By)
             {
 
                 using (SqlConnection con = new SqlConnection(CommonDA.getConnection()))
@@ -129,7 +167,45 @@ namespace BankingSystem_DA.BankAccount
                 }
             }
 
-            public static string checkWayNameisAlreadyExitorNot(string wayName)
+        public static object SelectAllBusinessTypeBankAccount()
+        {
+            using (SqlConnection con = new SqlConnection(CommonDA.getConnection()))
+            {
+                using (SqlCommand cmd = new SqlCommand("sps_SelectAllBankAccountName", con))
+                {
+
+                    try
+                    {
+                        DataSet dsBankAccount = new DataSet("BankAccount_Object");
+                        List<M_BankAccount> BankAccountList = new List<M_BankAccount>();
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@AccountType", "Business");
+
+                        SqlDataAdapter da = new SqlDataAdapter();
+                        da.SelectCommand = cmd;
+                        con.Open();
+                        da.Fill(dsBankAccount);
+                        for (int i = 0; i < dsBankAccount.Tables[0].Rows.Count; i++)
+                        {
+                            M_BankAccount mc = new M_BankAccount();
+                            mc.BankAccount_ID = Convert.ToString(dsBankAccount.Tables[0].Rows[i]["IBAN_ID"]);
+                            mc.BankAccount_PersonName = Convert.ToString(dsBankAccount.Tables[0].Rows[i]["Name"]);
+                            BankAccountList.Add(mc);
+                        }
+                        con.Close();
+                        return BankAccountList;
+                    }
+                    catch (Exception ex)
+                    {
+                        return null;
+                    }
+
+
+                }
+            }
+        }
+
+        public static string checkWayNameisAlreadyExitorNot(string wayName)
             {
 
                 using (SqlConnection con = new SqlConnection(CommonDA.getConnection()))
@@ -189,8 +265,9 @@ namespace BankingSystem_DA.BankAccount
 
 
                             cmd.CommandType = CommandType.StoredProcedure;
+                           cmd.Parameters.AddWithValue("@AccountType", "All");
 
-                            SqlDataAdapter da = new SqlDataAdapter();
+                        SqlDataAdapter da = new SqlDataAdapter();
                             da.SelectCommand = cmd;
                             con.Open();
                             da.Fill(dsBankAccount);
@@ -221,8 +298,9 @@ namespace BankingSystem_DA.BankAccount
                             DataSet dsBankAccount = new DataSet("BankAccount_Object");
                             List<M_BankAccount> BankAccountList = new List<M_BankAccount>();
                             cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@AccountType", "All");
 
-                            SqlDataAdapter da = new SqlDataAdapter();
+                        SqlDataAdapter da = new SqlDataAdapter();
                             da.SelectCommand = cmd;
                             con.Open();
                             da.Fill(dsBankAccount);
@@ -573,22 +651,6 @@ namespace BankingSystem_DA.BankAccount
                         try
                         {
 
-                        //cmd.Parameters.AddWithValue("@IBAN_ID", BankAccount.BankAccount_ID.ToString());
-                        //cmd.Parameters.AddWithValue("@AccountType", BankAccount.BankAccount_Type.ToString());
-                        //cmd.Parameters.AddWithValue("@Name", BankAccount.BankAccount_PersonName.ToString());
-                        //cmd.Parameters.AddWithValue("@CompanyName", BankAccount.BankAccount_CompanyName.ToString());
-                        //cmd.Parameters.AddWithValue("@DateOfBirth", BankAccount.DateOfBirth);
-                        //cmd.Parameters.AddWithValue("@Phone", BankAccount.BankAccount_MobilePhone.ToString());
-                        //cmd.Parameters.AddWithValue("@Gender", BankAccount.Gender.ToString());
-                        //cmd.Parameters.AddWithValue("@Nationality", BankAccount.Nadtionaly.ToString());
-                        //cmd.Parameters.AddWithValue("@Address", BankAccount.BankAccount_Address.ToString());
-                        //cmd.Parameters.AddWithValue("@MonthlyIncome", BankAccount.MonthlyIncome.ToString());
-                        //cmd.Parameters.AddWithValue("@BalanceAmount", BankAccount.BalanceAmount.ToString());
-                        //cmd.Parameters.AddWithValue("@BankAccountName", BankAccount.Name.ToString());
-                        //cmd.Parameters.AddWithValue("@email", BankAccount.BankAccount_Email.ToString());
-                        //cmd.Parameters.AddWithValue("@IDNumber", BankAccount.IDNumber.ToString());
-                        //cmd.Parameters.AddWithValue("@createby", BankAccount.CreatedBy.ToString());
-                        //cmd.Parameters.AddWithValue("@password", BankAccount.Password.ToString());
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@IBAN_ID", BankAccount.BankAccount_ID.ToString());
                         cmd.Parameters.AddWithValue("@AccountType", BankAccount.BankAccount_Type.ToString());
@@ -606,6 +668,8 @@ namespace BankingSystem_DA.BankAccount
                         cmd.Parameters.AddWithValue("@IDNumber", BankAccount.IDNumber.ToString());
                         cmd.Parameters.AddWithValue("@createby", BankAccount.CreatedBy.ToString());
                         cmd.Parameters.AddWithValue("@password", BankAccount.Password.ToString());
+                        cmd.Parameters.AddWithValue("@city", BankAccount.BankAccount_City.ToString());
+                        cmd.Parameters.AddWithValue("@countryname", BankAccount.CountryName.ToString());
 
                         con.Open();
 
@@ -649,40 +713,31 @@ namespace BankingSystem_DA.BankAccount
             {
                 using (SqlConnection con = new SqlConnection(CommonDA.getConnection()))
                 {
-                    using (SqlCommand cmd = new SqlCommand(UPDATEBankAccountBYID, con))
+                    using (SqlCommand cmd = new SqlCommand("spu_UpdateBankAccountByID", con))
                     {
 
 
                         try
                         {
                             cmd.CommandType = CommandType.StoredProcedure;
-                            /*cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.Parameters.AddWithValue("@BankAccount_ID", BankAccount.BankAccount_ID);
-                            cmd.Parameters.AddWithValue("@BankAccount_PersonName", BankAccount.BankAccount_PersonName);
-                            cmd.Parameters.AddWithValue("@BankAccount_Type", BankAccount.BankAccount_Type);
-                            cmd.Parameters.AddWithValue("@BankAccount_CompanyName", BankAccount.BankAccount_CompanyName);
-                            cmd.Parameters.AddWithValue("@BankAccount_MobilePhone", BankAccount.BankAccount_MobilePhone);
-                            cmd.Parameters.AddWithValue("@BankAccount_WorkPhone", BankAccount.BankAccount_WorkPhone);
-                            cmd.Parameters.AddWithValue("@BankAccount_Address", BankAccount.BankAccount_Address);
-                            cmd.Parameters.AddWithValue("@BankAccount_City", BankAccount.BankAccount_City);
-                            cmd.Parameters.AddWithValue("@BankAccount_Notes", BankAccount.BankAccount_Notes);
-                            cmd.Parameters.AddWithValue("@BankAccount_IsActive", BankAccount.BankAccount_IsActive);
-                            cmd.Parameters.AddWithValue("@UpdatedBy", BankAccount.UpdatedBy);*/
-
-                            cmd.Parameters.Add("@BankAccount_ID", SqlDbType.NChar, 20).Value = BankAccount.BankAccount_ID;
-                            cmd.Parameters.Add("@BankAccount_PersonName", SqlDbType.NVarChar, 100).Value = BankAccount.BankAccount_PersonName;
-                            cmd.Parameters.Add("@BankAccount_Type", SqlDbType.NVarChar, 20).Value = BankAccount.BankAccount_Type;
-                            cmd.Parameters.Add("@BankAccount_CompanyName", SqlDbType.NVarChar, 100).Value = BankAccount.BankAccount_CompanyName;
-                            cmd.Parameters.Add("@BankAccount_MobilePhone", SqlDbType.NVarChar, 50).Value = BankAccount.BankAccount_MobilePhone;
-                            cmd.Parameters.Add("@BankAccount_WorkPhone", SqlDbType.NVarChar, 50).Value = BankAccount.BankAccount_WorkPhone;
-                            cmd.Parameters.Add("@BankAccount_Address", SqlDbType.NVarChar, 200).Value = BankAccount.BankAccount_Address;
-                            cmd.Parameters.Add("@BankAccount_City", SqlDbType.NVarChar, 50).Value = BankAccount.BankAccount_City;
-                            cmd.Parameters.Add("@BankAccount_Notes", SqlDbType.NVarChar, 200).Value = BankAccount.BankAccount_Notes;
-                            cmd.Parameters.Add("@Way_ID", SqlDbType.NVarChar, 200).Value = BankAccount.Way_ID;
-                            cmd.Parameters.Add("@BankAccount_Email", SqlDbType.NVarChar, 200).Value = BankAccount.BankAccount_Email;
-                            cmd.Parameters.Add("@BankAccount_Discount_percent", SqlDbType.NVarChar, 200).Value = BankAccount.BankAccount_Discount_percent;
-                            cmd.Parameters.Add("@BankAccount_IsActive", SqlDbType.Bit).Value = BankAccount.BankAccount_IsActive;
-                            cmd.Parameters.Add("@UpdatedBy", SqlDbType.NChar, 10).Value = BankAccount.UpdatedBy;
+                             cmd.Parameters.AddWithValue("@IBAN_ID", BankAccount.BankAccount_ID.ToString());
+                             cmd.Parameters.AddWithValue("@AccountType", BankAccount.BankAccount_Type.ToString());
+                            cmd.Parameters.AddWithValue("@Name", BankAccount.BankAccount_PersonName.ToString());
+                            cmd.Parameters.AddWithValue("@CompanyName", BankAccount.BankAccount_CompanyName.ToString());
+                            cmd.Parameters.AddWithValue("@DateOfBirth", BankAccount.DateOfBirth);
+                            cmd.Parameters.AddWithValue("@Phone", BankAccount.BankAccount_MobilePhone.ToString());
+                            cmd.Parameters.AddWithValue("@Gender", BankAccount.Gender.ToString());
+                            cmd.Parameters.AddWithValue("@Nationality", BankAccount.Nadtionaly.ToString());
+                            cmd.Parameters.AddWithValue("@Address", BankAccount.BankAccount_Address.ToString());
+                            cmd.Parameters.AddWithValue("@MonthlyIncome", BankAccount.MonthlyIncome.ToString());
+                            cmd.Parameters.AddWithValue("@BalanceAmount", BankAccount.BalanceAmount.ToString());
+                            cmd.Parameters.AddWithValue("@BankAccountName", BankAccount.Name.ToString());
+                            cmd.Parameters.AddWithValue("@email", BankAccount.BankAccount_Email.ToString());
+                            cmd.Parameters.AddWithValue("@IDNumber", BankAccount.IDNumber.ToString());
+                            cmd.Parameters.AddWithValue("@updateby", BankAccount.UpdatedBy.ToString());
+                            cmd.Parameters.AddWithValue("@password", BankAccount.Password.ToString());
+                            cmd.Parameters.AddWithValue("@city", BankAccount.BankAccount_City.ToString());
+                            cmd.Parameters.AddWithValue("@countryname", BankAccount.CountryName.ToString());
                             con.Open();
 
                             int i = cmd.ExecuteNonQuery();
@@ -848,7 +903,7 @@ namespace BankingSystem_DA.BankAccount
             {
                 using (SqlConnection con = new SqlConnection(CommonDA.getConnection()))
                 {
-                    using (SqlCommand cmd = new SqlCommand(SELECTBankAccountBYID, con))
+                    using (SqlCommand cmd = new SqlCommand("sps_SelectBankAccountByID", con))
                     {
 
                         try
@@ -867,21 +922,27 @@ namespace BankingSystem_DA.BankAccount
 
                             da.Fill(dsBankAccount);
 
+                        mBankAccount.BankAccount_ID = Convert.ToString(dsBankAccount.Tables[0].Rows[0]["IBAN_ID"]);
+                        mBankAccount.BankAccount_PersonName = Convert.ToString(dsBankAccount.Tables[0].Rows[0]["Name"]);
+                        mBankAccount.Name = Convert.ToString(dsBankAccount.Tables[0].Rows[0]["Name"]);
+                        mBankAccount.DateOfBirth =Convert.ToDateTime(dsBankAccount.Tables[0].Rows[0]["DateOfBirth"]);
+                        mBankAccount.Gender = Convert.ToString(dsBankAccount.Tables[0].Rows[0]["Gender"]);
+                        mBankAccount.Nadtionaly = Convert.ToString(dsBankAccount.Tables[0].Rows[0]["Nationality"]);
+                        mBankAccount.IDNumber = Convert.ToString(dsBankAccount.Tables[0].Rows[0]["IDNumber"]);
+                        mBankAccount.MonthlyIncome =Convert.ToDecimal(dsBankAccount.Tables[0].Rows[0]["MonthlyIncome"]);
+                        mBankAccount.CountryName = Convert.ToString(dsBankAccount.Tables[0].Rows[0]["Country"]);
+                        mBankAccount.BankAccount_MobilePhone = Convert.ToString(dsBankAccount.Tables[0].Rows[0]["Phone"]);
+                        mBankAccount.BankAccount_CompanyName = Convert.ToString(dsBankAccount.Tables[0].Rows[0]["CompanyName"]);
+                        mBankAccount.BankAccount_City = Convert.ToString(dsBankAccount.Tables[0].Rows[0]["City"]);
+                        mBankAccount.BankAccount_Email = Convert.ToString(dsBankAccount.Tables[0].Rows[0]["email"]);
+                        mBankAccount.BankAccount_IsActive = true;
+                        mBankAccount.BankAccount_Type = Convert.ToString(dsBankAccount.Tables[0].Rows[0]["AccountType"]);
+                        mBankAccount.BankAccount_Address = Convert.ToString(dsBankAccount.Tables[0].Rows[0]["Address"]);
+                        //mBankAccount.CreatedBy = Convert.ToString(dsBankAccount.Tables[0].Rows[0]["CreatedBy"]);
+                        mBankAccount.Password = Convert.ToString(dsBankAccount.Tables[0].Rows[0]["Password"]);
 
-                            mBankAccount.BankAccount_ID = Convert.ToString(dsBankAccount.Tables[0].Rows[0]["BankAccount_ID"]);
-                            mBankAccount.BankAccount_PersonName = Convert.ToString(dsBankAccount.Tables[0].Rows[0]["BankAccount_PersonName"]);
-                            mBankAccount.BankAccount_Type = Convert.ToString(dsBankAccount.Tables[0].Rows[0]["BankAccount_Type"]);
-                            mBankAccount.BankAccount_CompanyName = Convert.ToString(dsBankAccount.Tables[0].Rows[0]["BankAccount_CompanyName"]);
-                            mBankAccount.BankAccount_MobilePhone = Convert.ToString(dsBankAccount.Tables[0].Rows[0]["BankAccount_MobilePhone"]);
-                            mBankAccount.BankAccount_WorkPhone = Convert.ToString(dsBankAccount.Tables[0].Rows[0]["BankAccount_WorkPhone"]);
-                            mBankAccount.BankAccount_Address = Convert.ToString(dsBankAccount.Tables[0].Rows[0]["BankAccount_Address"]);
-                            mBankAccount.BankAccount_City = Convert.ToString(dsBankAccount.Tables[0].Rows[0]["BankAccount_City"]);
-                            mBankAccount.BankAccount_Notes = Convert.ToString(dsBankAccount.Tables[0].Rows[0]["BankAccount_Notes"]);
-                            mBankAccount.Way_Name = Convert.ToString(dsBankAccount.Tables[0].Rows[0]["Way_Description"]);
-                            mBankAccount.BankAccount_Email = Convert.ToString(dsBankAccount.Tables[0].Rows[0]["BankAccount_Email"]);
-                            mBankAccount.BankAccount_Discount_percent = Convert.ToString(dsBankAccount.Tables[0].Rows[0]["BankAccount_Discount_Percent"]);
-                            mBankAccount.BankAccount_IsActive = Convert.ToBoolean(dsBankAccount.Tables[0].Rows[0]["BankAccount_isActive"]);
-                            con.Close();
+
+                        con.Close();
                             return mBankAccount;
                         }
                         catch (Exception ex)

@@ -97,7 +97,7 @@ namespace BankingSystemWebsite.Controllers.BankAccount
                 mc.Nadtionaly = (string.IsNullOrEmpty(m.Nadtionaly)) ? string.Empty : m.Nadtionaly.Trim(); ;
                 mc.IDNumber = (string.IsNullOrEmpty(m.IDNumber)) ? string.Empty : m.IDNumber.Trim(); ;
                 mc.MonthlyIncome = m.MonthlyIncome;
-                mc.CountryName = (string.IsNullOrEmpty(m.BankAccountPhone)) ? string.Empty : m.BankAccountPhone.Trim(); ;
+                mc.CountryName = (string.IsNullOrEmpty(m.CountryName)) ? string.Empty : m.CountryName.Trim(); ;
                 mc.BankAccount_MobilePhone = (string.IsNullOrEmpty(m.BankAccountPhone)) ? string.Empty : m.BankAccountPhone.Trim(); ;
                 mc.BankAccount_CompanyName = (string.IsNullOrEmpty(m.CompanyName)) ? string.Empty : m.CompanyName.Trim(); ;
                 mc.BankAccount_City = (string.IsNullOrEmpty(m.City)) ? string.Empty : m.City.Trim();

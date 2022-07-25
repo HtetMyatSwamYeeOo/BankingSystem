@@ -114,46 +114,18 @@ namespace BankingSystemWebsite.Controllers.BankAccount
         public ActionResult GetAllusingSelectedName(string name)
         {
 
-            if (name == "Dealer")
+            if (name == "Personal")
             {
-                selectedItem = "Dealer";
+                selectedItem = "Personal";
                 checkobj(obj);
-                AddToObj(BankAccountBL.SelectAllBankAccountByDealer());
+                AddToObj(BankAccountBL.SelectAllPersonalTypeBankAccount());
             }
-            else if (name == "Subdealer")
+            else if (name == "Business")
             {
-                selectedItem = "Subdealer";
+                selectedItem = "Business";
                 checkobj(obj);
-                AddToObj(BankAccountBL.SelectAllBankAccountBySubDealer());
-            }
-            else if (name == "Outlet")
-            {
-                selectedItem = "Outlet";
-                checkobj(obj);
-                AddToObj(BankAccountBL.SelectAllBankAccountByOutlet());
-            }
-
-            else if (name == "OEM")
-            {
-                selectedItem = "OEM";
-                checkobj(obj);
-                AddToObj(BankAccountBL.SelectAllBankAccountByOem());
-            }
-            else if (name == "Marketing")
-            {
-                selectedItem = "Marketing";
-                checkobj(obj);
-                AddToObj(BankAccountBL.SelectAllBankAccountByMarketing());
-            }
-            else if (name == "Busline")
-            {
-                selectedItem = "Busline";
-                checkobj(obj);
-                AddToObj(BankAccountBL.SelectAllBankAccountByBusline());
-            }
-
-
-
+                AddToObj(BankAccountBL.SelectAllBusinessTypeBankAccount());
+            } 
             else
             {
                 selectedItem = "All BankAccounts";

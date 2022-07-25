@@ -107,12 +107,22 @@ namespace BankingSystem_BL.BankAccount
                 return BankAccountDA.SearchBankAccount(name);
             }
 
-            public static List<M_BankAccount> SelectAllBankAccountName()
+        public static object SelectAllPersonalTypeBankAccount()
+        {
+            return BankAccountDA.SelectAllPersonalTypeBankAccount();
+        }
+
+        public static List<M_BankAccount> SelectAllBankAccountName()
             {
                 return BankAccountDA.SelectAllBankAccountName();
             }
 
-            public static List<string> SelectAllCompanyName()
+        public static object SelectAllBusinessTypeBankAccount()
+        {
+            return BankAccountDA.SelectAllBusinessTypeBankAccount();
+        }
+
+        public static List<string> SelectAllCompanyName()
             {
                 return BankAccountDA.SelectAllCompanyName();
             }

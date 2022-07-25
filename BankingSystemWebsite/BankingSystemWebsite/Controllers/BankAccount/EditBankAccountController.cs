@@ -48,26 +48,30 @@ namespace BankingSystemWebsite.Controllers.BankAccount
             try
             {
                 usertype = Convert.ToString(Session["LoginUserType"]).Trim();
-                if (usertype == "Admin" || usertype == "Sale Admin")
+                if (usertype == "Admin" || usertype == "Staff")
                 {
-
-                    //id =(string) TempData["EditID"];
                     _id = id;
                     Session["editBankAccount"] = id;
                     M_BankAccount mc = BankAccountBL.SelectAllBankAccountBYID(id);
 
                     NewBankAccountObject nco = new NewBankAccountObject();
 
-                    nco.CompanyName = mc.BankAccount_CompanyName;
+                    nco.BankAccountId = mc.BankAccount_ID;
                     nco.Name = mc.BankAccount_PersonName;
-                    nco.City = mc.BankAccount_City;
-                    nco.Type = mc.BankAccount_Type;
-                    nco.Note = mc.BankAccount_Notes;
+                    nco.DateOfBirth = mc.DateOfBirth;
+                    nco.Gender = mc.Gender;
+                    nco.Nadtionaly = mc.Nadtionaly;
+                    nco.IDNumber = mc.IDNumber;
+                    nco.MonthlyIncome = mc.MonthlyIncome;
+                    nco.CountryName = mc.CountryName;
                     nco.BankAccountPhone = mc.BankAccount_MobilePhone;
-                    nco.Address = mc.BankAccount_Address;
-                    nco.Way_Name = mc.Way_Name;
+                    nco.CompanyName = mc.BankAccount_CompanyName;
+                    nco.City = mc.BankAccount_City;
                     nco.Email = mc.BankAccount_Email;
-                    nco.Discount_Percent = mc.BankAccount_Discount_percent;
+                    //nco.BankAccount_IsActive = mc.BankAccount_IsActive;
+                    nco.Type = mc.BankAccount_Type;
+                    nco.Address = mc.BankAccount_Address;
+                    nco.Password = mc.Password;
 
                     NewBankAccountObject = nco;
 
@@ -82,10 +86,10 @@ namespace BankingSystemWebsite.Controllers.BankAccount
                     ErrorObject eo = new ErrorObject();
                     eo.usertype = this.usertype;
                     eo.Error_Title = "Access Denied Warning";
-                    eo.Error_Controller_name = "TranHistory";
-                    eo.Error_ActionResult_Method_name = "tranHistory";
+                    eo.Error_Controller_name = "EditBankAccount";
+                    eo.Error_ActionResult_Method_name = "editBankAccountByID";
                     eo.Error_Detail = "Edit  Access Denied Warning";
-                    eo.Error_Message = "You cannont Edit this  BankAccount because you are not admin user type";
+                    eo.Error_Message = "You cannont Edit this  BankAccount because you are not admin and Staff user type";
                     eo.Fix_Error = "To fix this Warning  you need to change your admin account";
                     Session["ErrorData"] = eo;
                     return RedirectToAction("DeleteDenied", "ErrorPage", new { ErrorObject = eo });
@@ -101,6 +105,7 @@ namespace BankingSystemWebsite.Controllers.BankAccount
             }
            
         }
+
 
         // update BankAccount   using the data from edit BankAccount page
         public ActionResult updateBankAccount(NewBankAccountObject NewBankAccountObject)
@@ -121,71 +126,37 @@ namespace BankingSystemWebsite.Controllers.BankAccount
                     NewBankAccountObject m = new NewBankAccountObject();
                     m = NewBankAccountObject;
 
-                    M_BankAccount _mc = BankAccountBL.SelectAllBankAccountBYID(_id);
+                    //M_BankAccount _mc = BankAccountBL.SelectAllBankAccountBYID(_id);
 
                     M_BankAccount mc = new M_BankAccount();
 
                     mc.BankAccount_ID = _id;
-                    mc.BankAccount_Notes = (string.IsNullOrEmpty(m.Note)) ? string.Empty : m.Note.Trim();
-                    mc.BankAccount_PersonName = m.Name.Trim();
+                    mc.BankAccount_PersonName = (string.IsNullOrEmpty(m.Name)) ? string.Empty : m.Name.Trim(); ;
+                    mc.Name = (string.IsNullOrEmpty(m.Name)) ? string.Empty : m.Name.Trim(); ;
+                    mc.DateOfBirth = m.DateOfBirth;
+                    mc.Gender = (string.IsNullOrEmpty(m.Gender)) ? string.Empty : m.Gender.Trim(); ;
+                    mc.Nadtionaly = (string.IsNullOrEmpty(m.Nadtionaly)) ? string.Empty : m.Nadtionaly.Trim(); ;
+                    mc.IDNumber = (string.IsNullOrEmpty(m.IDNumber)) ? string.Empty : m.IDNumber.Trim(); ;
+                    mc.MonthlyIncome = m.MonthlyIncome;
+                    mc.CountryName = (string.IsNullOrEmpty(m.CountryName)) ? string.Empty : m.CountryName.Trim(); ;
                     mc.BankAccount_MobilePhone = (string.IsNullOrEmpty(m.BankAccountPhone)) ? string.Empty : m.BankAccountPhone.Trim(); ;
                     mc.BankAccount_CompanyName = (string.IsNullOrEmpty(m.CompanyName)) ? string.Empty : m.CompanyName.Trim(); ;
-                    mc.BankAccount_WorkPhone = (string.IsNullOrEmpty(m.Workphone)) ? string.Empty : m.Workphone.Trim(); ;
-                    mc.BankAccount_City = (string.IsNullOrEmpty(m.City)) ? string.Empty : m.City.Trim(); ;
-                    mc.BankAccount_IsActive = _mc.BankAccount_IsActive;
+                    mc.BankAccount_City = (string.IsNullOrEmpty(m.City)) ? string.Empty : m.City.Trim();
+                    mc.BankAccount_Email = (string.IsNullOrEmpty(m.Email)) ? string.Empty : m.Email.Trim();
+                    mc.BankAccount_IsActive = true;
                     mc.BankAccount_Type = (string.IsNullOrEmpty(m.Type)) ? string.Empty : m.Type.Trim();
                     mc.BankAccount_Address = (string.IsNullOrEmpty(m.Address)) ? string.Empty : m.Address.Trim();
-                    mc.Way_Name = (string.IsNullOrEmpty(m.Way_Name)) ? string.Empty : m.Way_Name.Trim();
-                    mc.BankAccount_Email = (string.IsNullOrEmpty(m.Email)) ? string.Empty : m.Email.Trim();
-                    mc.BankAccount_Discount_percent = (string.IsNullOrEmpty(m.Discount_Percent)) ? string.Empty : m.Discount_Percent.Trim();
                     mc.UpdatedBy = Session["UserName"].ToString();
+                    mc.Password = m.Password.ToString();
 
-                    String WayName = (string.IsNullOrEmpty(mc.Way_Name)) ? string.Empty : mc.Way_Name.Trim(); ;
-                    if (WayName != null)
+
+                    if (BankAccountBL.UpdateBankAccountById(mc))
                     {
-
-                        String WayID = BankAccountBL.checkWayNameisAlreadyExitorNot(WayName);
-                        if (WayID == null || WayID == "")
-                        {
-                            WayID = "NewWay";
-                        }
-                        if (WayID == "NewWay")
-                        {
-                            String Created_By = Session["UserIDS"].ToString();
-                            Boolean InsertNewWay = BankAccountBL.InsertNewWaytoWayTable(WayName, Created_By);
-                            if (InsertNewWay == true)
-                            {
-                                WayID = BankAccountBL.checkWayNameisAlreadyExitorNot(WayName);
-                                mc.Way_ID = WayID;
-
-                                if (BankAccountBL.UpdateBankAccountById(mc))
-
-                                {
-                                    // (new CreateUserActivityLog()).updated(Session["UserName"].ToString(), " Customer " + mc.BankAccount_ID, Server.MapPath("~/Logs/ActivityLog"));
-                                    //customerOverviewController.checker = "Edit Successful";
-                                    //TranHistoryController.checker = "Edit Successful";
-                                    BankAccountController.obj = BankAccountBL.SelectAllBankAccount();
-                                    //customerOverviewController._id = _id;
-                                    return RedirectToAction("customerOverview", "customerOverview", _id);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            WayID = BankAccountBL.checkWayNameisAlreadyExitorNot(WayName);
-                            mc.Way_ID = WayID;
-
-                            if (BankAccountBL.UpdateBankAccountById(mc))
-
-                            {
-                                // (new CreateUserActivityLog()).updated(Session["UserName"].ToString(), " Customer " + mc.BankAccount_ID, Server.MapPath("~/Logs/ActivityLog"));
-                                //customerOverviewController.checker = "Edit Successful";
-                                //TranHistoryController.checker = "Edit Successful";
-                                BankAccountController.obj = BankAccountBL.SelectAllBankAccount();
-                                //customerOverviewController._id = _id;
-                                return RedirectToAction("customerOverview", "customerOverview", _id);
-                            }
-                        }
+                        //customerOverviewController.checker = "Edit Successful";
+                        //TranHistoryController.checker = "Edit Successful";
+                        BankAccountController.obj = BankAccountBL.SelectAllBankAccount();
+                        //customerOverviewController._id = _id;
+                        return RedirectToAction("BankAccount", "BankAccount");
                     }
 
 

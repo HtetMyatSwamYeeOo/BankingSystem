@@ -1,0 +1,377 @@
+
+@using System.Resources;
+
+<section class="panel">
+    <div class="table">
+        <table class="table table-responsive" id="_table" runat="server">
+
+            @if (Model.Items != null)
+            {
+
+
+
+                <thead>
+                    <tr id="table_header" style="background-color:  #4CAF50;"><!--#4CAF50-->
+                        <th></th>
+
+                        @for (int i = 0; i < Model.Items.Tables[0].Columns.Count && Model.Items.Tables[0].Rows.Count > 0; i++)
+                        {
+
+
+                            string str = (string)Model.Items.Tables[0].Columns[i].ColumnName;
+                            if (str != "" && str != null && str != " ")
+                            {
+                                if (Model.Items.Tables[0].Columns[i].ColumnName == "Status")
+                                {
+
+                                }
+                                else
+                                {
+                                    <th>@str</th>
+                                }
+                            }
+                            else
+                            {
+                                <th>@Model.Items.Tables[0].Columns[i].ColumnName</th>
+                            }
+
+                        }
+                        <th></th>
+                    </tr>
+                </thead>
+            }
+
+            <tbody>
+                @if (Model == null)
+            {
+                    <tr>
+                        <td>There is no items for this option.</td>
+                    </tr>
+                }
+
+
+                else if (Model.Items.Tables[0].Rows.Count > 0)
+                {
+                    for (int i = 0; i < Model.Items.Tables[0].Rows.Count; i++)
+                    {
+
+                        //declaring Custom Id
+                        var str = Model.Items.Tables[0].Rows[i][0];
+
+                        var trIdStr = "TrId" + str + "";
+
+                        <tr>
+                        <td> 
+                        <!--<input id='@str' type="checkbox" class="checkbox">-->
+                            <label class="container1">
+                                <input id='@str' type="checkbox"> <!-- checked="checked"-->
+                                <span class="checkmark"></span>
+                            </label> </td>
+                        
+
+
+
+
+
+                            @for (int j = 0; j < Model.Items.Tables[0].Columns.Count; j++)
+                            {
+
+                                if (Model.Items.Tables[0].Columns[j].ColumnName == "Name")
+                                {
+                                    <td class="col-lg-2">
+
+                                        <a class="link" href="\CustomerOverview\customerOverview\@Model.Items.Tables[0].Rows[i][0]">
+                                            @Model.Items.Tables[0].Rows[i][1]
+                                        </a>
+                                        @*  @Html.ActionLink((string)@Model.Items.Tables[0].Rows[i][1], "customerOverview", "customerOverview", new {nm= (string)@Model.Items.Tables[0].Rows[i][0] }, null)*@
+
+
+                                    </td>
+                                }
+
+                                if (Model.Items.Tables[0].Columns[j].ColumnName == "Issue Item ID")
+                                {
+
+                                    <td class="col-lg-2">
+
+                                        @Html.ActionLink((string)@Model.Items.Tables[0].Rows[i][0], "_issueItem_Popup_layout", "_itemPopupLayout", new { incoming_id = (string)@Model.Items.Tables[0].Rows[i][0] }, null)
+
+
+                                    </td>
+                                }
+
+
+
+
+                                else if (Model.Items.Tables[0].Columns[j].ColumnName == "ProductName")
+                                {
+                                    <td class="col-lg-2">
+
+                                        @*<a class="link" href="\ItemAdjustHistory\itemAdjustHistory\@Model.Items.Tables[0].Rows[i][0]">
+                                            @Model.Items.Tables[0].Rows[i][1]
+                                            </a>*@
+                                        @Html.ActionLink((string)@Model.Items.Tables[0].Rows[i][1], "itemAdjustHistory", "ItemAdjustHistory", new { pn = (string)@Model.Items.Tables[0].Rows[i][0] }, null)
+
+                                    </td>
+                                }
+
+
+                                else if (Model.Items.Tables[0].Columns[j].ColumnName == "Status")
+                                {
+                                    @*bool status = Convert.ToBoolean(Model.Items.Tables[0].Rows[i][j]);
+                                        string ss = "";
+                                        if (status)
+                                        {
+                                            ss = "Active";
+                                        }
+                                        else
+                                        {
+                                            ss = "InActive";
+                                        }
+
+
+                                        <td>
+
+                                            @ss
+
+                                        </td>*@
+                                }
+
+
+                                else if (Model.Items.Tables[0].Columns[j].ColumnName == "AvailableStock")
+                                {
+                                    int amt = Convert.ToInt32(Model.Items.Tables[0].Rows[i][j]);
+
+                                    <td style="padding-right:80px;" class="col-lg-2"> <div style="text-align:right;">@amt</div>  </td>
+
+                                }
+
+                                else if (Model.Items.Tables[0].Columns[j].ColumnName == "Created User Name")
+                                {
+
+
+
+                                    <td class="col-lg-2"> @Model.Items.Tables[0].Rows[i][j] </td>
+
+                                    <td>
+                                        @*
+                                            <div class="form-group">
+
+                                                <a class="btn btn-primary1 " href='#Model@(i)' data-toggle="modal"><i class="icon_plus_alt2"></i></a>
+
+                                                <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id='Model@(i)' class="modal fade">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <button aria-hidden="true" data-dismiss="modal" class="close" type="button" style="color:black;">×</button>
+
+                                                            @{
+                                                                TempData["Issue_Item_ID_TempData"] = Model.Items.Tables[0].Rows[i][0];//Issue_Item_ID_Te
+                                                            }
+                                                            @{
+
+
+                                                                Html.RenderAction("_issueItem_Popup_layout", "_itemPopupLayout", (string)Model.Items.Tables[0].Rows[i][0]);
+
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        *@
+
+                                        @* @Html.ActionLink(
+                                            "Detail",                                                  // linkText
+                                              "_issueItem_Popup_layout",                                    // actionName
+                                                   "_itemPopupLayout",                                                   // controllerName
+                                                            new
+                                                            {
+
+                                                                incoming_id = (string)Model.Items.Tables[0].Rows[i][0]
+
+                                                            },
+                                                                                         new { @class = "btn btn-primary" }// htmlAttributes
+                                                                                                 )
+
+                                        *@
+                                    </td>
+
+
+
+
+
+                                }
+
+                                else
+                                {
+                                    <td class="col-lg-2"> @Model.Items.Tables[0].Rows[i][j] </td>
+
+                                }
+                            }
+                            <td>
+                                @{
+
+                                    //Adding Try Catch Exception
+
+
+                                    try
+                                    {
+                                        bool status1 = Convert.ToBoolean(Model.Items.Tables[0].Rows[i][5]);
+
+                                        if (status1 == true)
+                                        {
+                                            <div class="form-group">
+                                                <a class="btn btn-primary1 " href='#Model@(i)' data-toggle="modal"><i class="icon_plus_alt2"></i></a>
+                                                <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id='Model@(i)' class="modal fade">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <button aria-hidden="true" data-dismiss="modal" class="close" type="button" style="color:black;">×</button>
+                                                            @{
+                                                                TempData["idid"] = Model.Items.Tables[0].Rows[i][0];
+                                                            }
+                                                            @{
+
+                                                                Html.RenderAction("_itemPopupLayoutFun", "_itemPopupLayout", (string)Model.Items.Tables[0].Rows[i][0]);
+
+
+
+
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                                                    }//end of if
+
+
+
+                                                                }//end of try
+                                                                catch (Exception e)
+                                                                {
+
+
+
+                                                                }
+
+
+
+                                                                /*
+                                                      bool status1 = Convert.ToBoolean(Model.Items.Tables[0].Rows[i][6]);
+
+                                                      if (status1)
+                                                      {
+                                                          <!--add item popup layout-->
+                                                          <div class="form-group">
+
+                                                              <a class="btn btn-primary1 " href='#Model@(i)' data-toggle="modal"><i class="icon_plus_alt2"></i></a>
+
+                                                              <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id='Model@(i)' class="modal fade">
+                                                                  <div class="modal-dialog">
+                                                                      <div class="modal-content">
+                                                                          <button aria-hidden="true" data-dismiss="modal" class="close" type="button" style="color:black;">×</button>
+                                                                          @{
+                                                                              TempData["idid"] = Model.Items.Tables[0].Rows[i][0];
+                                                                          }
+                                                                          @{
+
+                                                                              Html.RenderAction("_itemPopupLayoutFun", "_itemPopupLayout", (string)Model.Items.Tables[0].Rows[i][0]);
+
+
+
+
+                                                                          }
+                                                                      </div>
+                                                                  </div>
+                                                              </div>
+
+                                                          </div>
+                                                      }*/
+                        <!----end call new customer form-->
+                                }
+                            </td>
+                        </tr>
+                                                                    }//end of for loop
+                                                                }
+                                                                else
+                                                                {
+                                                                    <tr>
+                                                                        There is no items for this option.
+                                                                    </tr>
+                                                                }
+
+
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <center>
+            @if (Model.Pager.EndPage > 1 && Model.Items.Tables[0].Rows.Count != 0)
+            {
+                <ul class="pagination">
+                    @if (Model.Pager.CurrentPage > 1)
+                    {
+                        <li>
+                            <a href="~/@(Model.controller)/Index1">First</a>
+                        </li>
+                        <li>
+                            <a href="~/@(Model.controller)/Index1?page=@(Model.Pager.CurrentPage - 1)">Previous</a>
+                        </li>
+                    }
+                    @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                    {
+                        <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
+                            <a href="~/@(Model.controller)/Index1?page=@page">@page</a>
+                        </li>}
+                    @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                    {
+                        <li>
+                            <a href="~/@(Model.controller)/Index1?page=@(Model.Pager.CurrentPage + 1)">Next</a>
+                        </li>
+                        <li>
+                            <a href="~/@(Model.controller)/Index1?page=@(Model.Pager.TotalPages)">Last</a>
+                        </li>
+                    }
+                </ul>
+            }
+        </center>
+    </div>
+
+    <script type="text/javascript">
+
+        $(document).on('change', ":checkbox", function () {
+
+            var selected = new Array();
+            $('input:checked').each(function () {
+                selected.push($(this).attr('id'));
+
+            });
+
+            $.ajax({
+                url: "/_TableLayout/SetArray/",
+                dataType: 'json',
+                data: JSON.stringify({ list: selected }),
+                type: 'POST',
+                contentType: "application/json",
+                traditional: true,
+                success: successFunc,
+                error: error
+            });
+
+            function error() {
+                // alert("An error has occured!!!");s
+            }
+
+            function successFunc() {
+                // alert();
+
+            }
+        });
+
+        $(document).ready(function () {
+            $(":checkbox").find("option").attr("selected", false);
+        });
+
+    </script>
+</section>
