@@ -144,7 +144,7 @@
                     </div><!--/.col-->
 
                 </div><!--/.row-->
-                <br /><br />
+                <br />
 
 
 
@@ -152,13 +152,13 @@
                 <div class="row">
                     <div class="col-sm-12">
 
-                        <div class="header1 dashFont " style="background-color:#E1B16A" ; padding:10px 10px;">
-                            @*<h2><strong>@ViewRes.SharedString.TodayInvoiceList</strong></h2>*@
-                        </div>
+                        <!--<div class="header1 dashFont " style="background-color:#4CAF50" ; padding:10px 10px;">-->
+                            @*<h2><strong>Transaction List</strong></h2>*@
+                        <!--</div>-->
 
-                        <header class="panel-heading"></header>
+                        <header class="panel-heading" style="background-color:#004466"><strong>Transaction List</strong></header>
                         <div class="table table-responsive">
-                            @*@{Html.RenderAction("DisplayPartialResult", "_reportTableLayout", (VEM_InventoryCommon.Constants.IndexViewModel)TempData["Dataset"]);}*@
+                            @{Html.RenderAction("DisplayPartialResult", "_TableLayout", (BankingSystem_Common.Constants.IndexViewModel)TempData["Dataset"]);}
                         </div>
                     </div>
                 </div>
@@ -166,7 +166,7 @@
 
 
                 <!-- project team & activity start -->
-                <div class="row">
+                @*<div class="row">
                     <div class="row">
                         <div class="table-responsive">
                             <div class="col-sm-12">
@@ -180,7 +180,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>*@
 
 
 

@@ -18,7 +18,7 @@
                 @if (Model.Items != null)
                 {
                 <tr id="table_header" style="background-color: #4CAF50; ">
-                    <th></th>
+                    @*<th></th>*@
                     @for (int i = 0; i < Model.Items.Tables[0].Columns.Count && Model.Items.Tables[0].Rows.Count > 0; i++)
                     {
                         string str = (string)Model.Items.Tables[0].Columns[i].ColumnName;
@@ -56,12 +56,12 @@
 
             <tr>
 
-                <td class="col-lg-1">
+                <!--<td class="col-lg-1">
                     <label class="container1" style="width:20px;">
-                        <input id='@str' type="checkbox"> <!-- checked="checked"-->
-                        <span class="checkmark"></span>
+                        <input id='@str' type="checkbox">--> <!-- checked="checked"-->
+                        <!--<span class="checkmark"></span>
                     </label>
-                </td>
+                </td>-->
 
 
                 @for (int j = 0; j < Model.Items.Tables[0].Columns.Count; j++)
