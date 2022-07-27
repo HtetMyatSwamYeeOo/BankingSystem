@@ -129,6 +129,7 @@
     <Compile Include="Controllers\Shared\_newTransactionLayoutController.cs" />
     <Compile Include="Controllers\Shared\_TableLayoutController.cs" />
     <Compile Include="Controllers\Transaction\NewTransactionController.cs" />
+    <Compile Include="Controllers\Transaction\TransactionController.cs" />
     <Compile Include="Controllers\UserAccount\LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -295,9 +296,11 @@
     <Content Include="Views\Shared\_NewTransactionLayout.cshtml" />
     <Content Include="Views\NewTransaction\newWidthdrawTransaction.cshtml" />
     <Content Include="Views\NewTransaction\newInternalTransaction.cshtml" />
+    <Content Include="Views\Transaction\Transaction.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\NewFolder1\" />
     <Folder Include="Views\New\" />
     <Folder Include="Views\_newBankAccountLayout\" />
     <Folder Include="Views\_newTransactionLayout\" />

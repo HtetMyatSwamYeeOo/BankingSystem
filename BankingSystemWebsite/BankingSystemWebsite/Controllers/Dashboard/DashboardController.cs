@@ -1,4 +1,6 @@
-﻿using BankingSystem_Common.Constants;
+﻿using BankingSystem_BL.Dashboard;
+using BankingSystem_BL.Transaction;
+using BankingSystem_Common.Constants;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,7 +12,7 @@ namespace BankingSystemWebsite.Controllers.Dashboard
 {
     public class DashboardController : Controller
     {
-
+        string usertype = "";
         public static DataSet obj = null;
         public static DataSet Use_obj = null;
         public static List<string> list = new List<string>();
@@ -29,9 +31,16 @@ namespace BankingSystemWebsite.Controllers.Dashboard
                 return RedirectToAction("login", "Login");
             }
 
-            //AddToObj(DashboardBL.SelectAllInvoiceByToday());
-            //obj = DashboardBL.SelectAllInvoiceByToday();
+            usertype = Convert.ToString(Session["LoginUserType"]).Trim();
+            AddToObj(TransactionBL.SelectAllTransaction(name, usertype));
 
+            DataTable dt = new DataTable();
+
+            dt = DashboardBL.GetDashBoarddataDT(name, usertype);
+
+
+            //TempData["DashBoadData"] = dt;
+            Session["DashBoadData"] = dt;
             return View(ViewModelobj);
         }
 
@@ -42,10 +51,7 @@ namespace BankingSystemWebsite.Controllers.Dashboard
             //copy dataset without affecting ds
             obj = ds.Copy();
 
-            // remove some column for show
-            Use_obj.Tables[0].Columns.RemoveAt(1);
-            Use_obj.Tables[0].Columns.RemoveAt(7);
-            Use_obj.Tables[0].Columns.RemoveAt(7);
+
             Session["Dataset1"] = Use_obj;
 
             ViewModelobj = getModel(1);
@@ -54,6 +60,7 @@ namespace BankingSystemWebsite.Controllers.Dashboard
             //store dataset tempolarily to use in next page
 
         }
+
 
         public BankingSystem_Common.Constants.IndexViewModel getModel(int page)
         {

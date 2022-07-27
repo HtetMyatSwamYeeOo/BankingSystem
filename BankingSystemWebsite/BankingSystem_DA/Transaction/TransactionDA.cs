@@ -62,5 +62,41 @@ namespace BankingSystem_DA.Transaction
                 }
             }
         }
+
+        public static DataSet SelectAllBankAccount(string userid, string usertype)
+        {
+            using (SqlConnection con = new SqlConnection(CommonDA.getConnection()))
+            {
+                using (SqlCommand cmd = new SqlCommand("sps_selectalltransaction", con))
+                {
+
+                    try
+                    {
+                        DataSet dsBankAccount = new DataSet("Transaction_Object");
+
+                        //DataSet dsBankAccount;
+
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@userid", userid);
+                        cmd.Parameters.AddWithValue("@usertype", usertype);
+
+                        SqlDataAdapter da = new SqlDataAdapter();
+                        da.SelectCommand = cmd;
+                        con.Open();
+                        da.Fill(dsBankAccount);
+                        con.Close();
+                        return dsBankAccount;
+                    }
+                    catch (Exception ex)
+                    {
+                        return null;
+                    }
+
+
+                }
+            }
+        }
+
+
     }
 }
