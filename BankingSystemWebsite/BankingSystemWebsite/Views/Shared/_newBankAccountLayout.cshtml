@@ -46,7 +46,7 @@ else
                                     </tr>
 
                                     <tr>
-                                        <td align="left"><label>Name*</label></td>
+                                        <td align="left"><label>Name *</label></td>
                                         <td>@Html.TextBoxFor(m => m.Name, new { @id = "Name", @class = "form-control", placeholder = "Name", required = "required" })</td>
                                     </tr>
 
@@ -57,14 +57,14 @@ else
                                     </tr>
 
                                     <tr>
-                                        <td align="left"><label>Date of Birth</label></td>
+                                        <td align="left"><label>Date of Birth *</label></td>
                                         <td>
-                                            @Html.TextBoxFor(m => m.DateOfBirth, "{0:dd-MM-yyyy}", new { @id = "DateOfBirth", @class = "form-control", @type = "date", @required = "required" })
+                                            @Html.TextBoxFor(m => m.DateOfBirth, "{0:yyyy-MM-dd}", new { @id = "DateOfBirth", @class = "form-control", @type = "date", @required = "required" })
                                         </td>
                                     </tr>
 
                                     <tr>
-                                        <td align="left"><label>Gender</label></td>
+                                        <td align="left"><label>Gender *</label></td>
                                         <td align="left">
                                             <select name="GenderType" id="dropdown_select_gendertype" class="btn1 btn-default dropdown-toggle" onclick="GenderTypeChangeValue()" style="height:42px;font-size: 14px ; color : #555;">
                                                 <option name="Male">Male</option>
@@ -77,28 +77,28 @@ else
 
                                     </tr>
                                     <tr>
-                                        <td align="left"><label>Nadtionaly</label></td>
+                                        <td align="left"><label>Nadtionaly *</label></td>
                                         <td>@Html.TextBoxFor(m => m.Nadtionaly, new { @id = "Nadtionaly", @class = "form-control", placeholder = "Name", required = "required" })</td>
                                     </tr>
 
                                     <tr>
-                                        <td align="left"><label>Phone Number*</label></td>
+                                        <td align="left"><label>Phone Number *</label></td>
                                         <td>
-                                            @Html.TextBoxFor(m => m.BankAccountPhone, new { @id = "BankAccountPhone", @class = "form-control", @onkeypress = "return isNumber(event)", placeholder = "Phone", required = "required" })   @*@Html.ValidationMessage("BankAccount Phone", "ဖုန္းနာမည္ထည့္ပါ။")*@
+                                            @Html.TextBoxFor(m => m.BankAccountPhone, new { @id = "BankAccountPhone", @class = "form-control", @onkeypress = "return isNumber(event)", placeholder = "Phone", required = "required" }) 
                                         </td>
                                     </tr>
 
                                     <tr>
-                                        <td align="left"><label>Address</label></td>
+                                        <td align="left"><label>Address *</label></td>
                                         <td>
-                                            @Html.TextAreaFor(m => m.Address, new { @id = "Address", @class = "form-control", placeholder = "Street", required = "required" })     @*@Html.ValidationMessage("Address", "လိပ္စာထည့္ပါ။")*@
+                                            @Html.TextAreaFor(m => m.Address, new { @id = "Address", @class = "form-control", placeholder = "Street", required = "required" })  
                                         </td>
                                     </tr>
 
                                     <tr>
-                                        <td align="left"><label>City</label></td>
+                                        <td align="left"><label>City *</label></td>
                                         <td>
-                                            @Html.TextBoxFor(m => m.City, new { @id = "City", @class = "form-control", placeholder = "City", required = "required" })   @*@Html.ValidationMessage("City", "ျမိဳ ့နာမည္ထည့္ပါ။")*@
+                                            @Html.TextBoxFor(m => m.City, new { @id = "City", @class = "form-control", placeholder = "City", required = "required" })   
                                         </td>
                                     </tr>
 
@@ -109,7 +109,7 @@ else
 
 
                                     <tr>
-                                        <td align="left"><label>Email</label></td>
+                                        <td align="left"><label>Email *</label></td>
                                         <td>
                                             @Html.TextBoxFor(m => m.Email, new
                                             {
@@ -124,7 +124,7 @@ else
                                     </tr>
 
                                     <tr>
-                                        <td align="left"><label>Account Password</label></td>
+                                        <td align="left"><label>Account Password *</label></td>
                                         <td>@Html.TextBoxFor(m => m.Password, new { @id = "Password", @class = "form-control", placeholder = "Password", required = "required" })</td>
                                     </tr>
 
@@ -158,23 +158,6 @@ else
                                             @*<button type="button" class="btn-primary2 " id="BankAccountSubmit" data-toggle="modal" data-target="#newBankAccountConfirmBox"> Save </button>*@
                                             <button type="submit" class="btn-primary2 " id="submit"> Save Data </button>
 
-                                            &nbsp;&nbsp;&nbsp;&nbsp;
-                                            @if (Model.Name != null)
-                                            {
-                                                <a class="btn-cancel link" href="@Url.Action("customerOverview", "customerOverview")" style="width:100px;height:40px">Cancel</a>
-                                            }
-                                            else if (Model.Name == null && (Model.Type == "vendor" || Model.Type == "Vendor"))
-                                            {
-                                                @*<a class="btn-cancel link" href="@Url.Action("newPurchaseOrder", "NewPurchaseOrder")">Cancel</a>*@
-                                            }
-                                            else if (Model.Name == null && (Model.Type == "customer" || Model.Type == "Customer"))
-                                            {
-                                                @*<a class="btn-cancel link" href="@Url.Action("newSale", "NewSale")">Cancel</a>*@
-                                            }
-                                            else
-                                            {
-                                                <a class="btn-cancel link" href="@Url.Action("BankAccount", "BankAccount")" style="width:130px;height:40px">Cancel</a>
-                                            }
                                         </td>
 
                                     </tr>
@@ -202,7 +185,12 @@ else
 
 <script>
 
+        if (document.getElementsByName("Type").value == null && @Session["BankAccountType"]==null )
+    {
 
+        $("#dropdown_select").val("Personal");
+
+    }
 
     $('#BankAccount').submit(function () {
         $('#newBankAccountConfirmBox').hide();
@@ -210,6 +198,12 @@ else
 
     });
 
+        if (document.getElementsByName("Type").value == null  )
+    {
+
+        $("#dropdown_select").val("Personal");
+
+    }
 
     $('#BankAccountSubmit').click(function (e) {
        // $("#loading").hide();
@@ -313,17 +307,10 @@ else
         Session["Gender"] = @Model.Gender;
     }
 
-    if (document.getElementsByName("gendertype").value == null && @Session["Gender"]==null )
+    if (document.getElementsByName("gendertype").value == null )
     {
 
         $("#dropdown_select_gendertype").val("Male");
-
-    }
-
-    if (document.getElementsByName("Type").value == null && @Session["BankAccountType"]==null )
-    {
-
-        $("#dropdown_select").val("Dealer");
 
     }
 
@@ -346,9 +333,7 @@ else
         var val = "aa";
 
         Val = document.getElementById("dropdown_select_gendertype").value;
-        alert(val);
         document.getElementById("gendertype").value = Val;
-
 
     }
 
