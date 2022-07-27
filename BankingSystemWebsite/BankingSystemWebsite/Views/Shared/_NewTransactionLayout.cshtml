@@ -76,12 +76,12 @@ else
 
 
                                                     <panel style="height:10px;overflow:scroll;">
-                                                        <datalist id="listfrom">
-                                                            @foreach (var item in mylists)
-                                                            {
-                                                                <option id='@item.Name' value='@item.BankAccountId' hidden="@item.IDNumber" ids="@item.IDNumber">@item.Name</option>
-                                                            }
-                                                        </datalist>
+                                                       <datalist id="listfrom">
+                                                           @foreach (var item in mylists)
+                                                           {
+                                                               <option id='@item.Name' value='@item.BankAccountId' hidden="@item.IDNumber" ids="@item.IDNumber" label="@item.Name" name="@item.BalanceAmount">@item.Name</option>
+                                                           }
+                                                       </datalist>
 
                                                     </panel>
                                                 }
@@ -97,10 +97,11 @@ else
                                                 <td>@Html.TextBoxFor(m => m.customeridno, new { @id = "fromcustomeridno", @class = "form-control", placeholder = "Customer ID NO", required = "required", @readonly = true })</td>
                                             </tr>
 
-                                            <tr>
-                                                <td align="left"><label>Bank Name</label></td>
-                                                <td>@Html.TextBoxFor(m => m.bankname, new { @id = "frombankname", @class = "form-control", placeholder = "Bank Name", required = "required", @readonly = true })</td>
-                                            </tr>
+
+                                                <tr>
+                                                    <td align="left"><label>Available Balance</label></td>
+                                                    <td>@Html.TextBoxFor(m => m.bankname, new { @id = "transferavaliablebalance", @class = "form-control", placeholder = "Available Balance", required = "required", @readonly = true })</td>
+                                                </tr>
 
                                         }
 
@@ -121,7 +122,7 @@ else
                                                     <datalist id="listss">
                                                         @foreach (var item in mylist)
                                                         {
-                                                            <option id='@item.Name' value='@item.BankAccountId' hidden="@item.IDNumber" ids="@item.IDNumber">@item.Name</option>
+                                                            <option id='@item.Name' value='@item.BankAccountId' hidden="@item.IDNumber" ids="@item.IDNumber" label="@item.Name" name="@item.BalanceAmount">@item.Name</option>
                                                         }
                                                     </datalist>
 
@@ -141,11 +142,13 @@ else
                                         <td>@Html.TextBoxFor(m => m.customeridno, new { @id = "tocustomeridno", @class = "form-control", placeholder = "Customer ID NO", required = "required", @readonly = true })</td>
                                     </tr>
 
-
-                                    <tr>
-                                        <td align="left"><label>Bank Name</label></td>
-                                        <td>@Html.TextBoxFor(m => m.bankname, new { @id = "frombankname", @class = "form-control", placeholder = "Bank Name", required = "required", @readonly = true })</td>
-                                    </tr>
+                                    @if (trxtype != "3")
+                                    {
+                                        <tr>
+                                            <td align="left"><label>Available Balance</label></td>
+                                            <td>@Html.TextBoxFor(m => m.bankname, new { @id = "widthdrawavaliablebalance", @class = "form-control", placeholder = "Available Balance", required = "required", @readonly = true })</td>
+                                        </tr>
+                                    }
 
                                     <tr>
                                         <td align="left"><label>Remark</label></td>
@@ -157,7 +160,9 @@ else
 
                                     <tr>
                                         <td align="left"><label>Amount</label></td>
-                                        <td>@Html.TextBoxFor(m => m.amount, new { @id = "txtbankAmount", @class = "form-control", @onkeypress = "return isNumber(event)", @onchange = "ChangeValueAmount();", placeholder = trxtypedesc + " Amount", required = "required", @style = "text-align:right" })</td>
+                                        <td>@Html.TextBoxFor(m => m.amount, new { @id = "txtbankAmount", @class = "form-control", @onkeypress = "return isNumber(event)", @onchange = "ChangeValueAmount();", placeholder = trxtypedesc + " Amount", required = "required", @style = "text-align:right" })
+                                            <strong id="shownotenoughbalance" style = " display:none;color:red" > Not Enough Balance !</strong>
+                                        </td>
 
                                     </tr>
 

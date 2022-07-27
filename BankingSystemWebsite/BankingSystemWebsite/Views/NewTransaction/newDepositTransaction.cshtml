@@ -58,7 +58,9 @@
             var id = $("#listss").find("option[value='" + g + "']").attr('id');
             var name = $("#listss").find("option[value='" + g + "']").attr('value');
             var userpassportid = $("#listss").find("option[value='" + g + "']").attr('ids');
+            var balanceamt = $("#listss").find("option[value='" + g + "']").attr('name');
 
+            $('#widthdrawavaliablebalance').val(balanceamt);
             $('#tousername').val(id);
             $('#tocustomeridno').val(userpassportid);
 
@@ -73,7 +75,9 @@
             var id = $("#listss").find("option[value='" + g + "']").attr('id');
             var name = $("#listss").find("option[value='" + g + "']").attr('value');
             var userpassportid = $("#listss").find("option[value='" + g + "']").attr('ids');
+            var balanceamt = $("#listss").find("option[value='" + g + "']").attr('name');
 
+            $('#transferavaliablebalance').val(balanceamt);
             $('#fromusername').val(id);
             $('#fromcustomeridno').val(userpassportid);
 

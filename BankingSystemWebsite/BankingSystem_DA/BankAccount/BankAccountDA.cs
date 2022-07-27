@@ -311,6 +311,8 @@ namespace BankingSystem_DA.BankAccount
                                 mc.BankAccount_PersonName = Convert.ToString(dsBankAccount.Tables[0].Rows[i]["Name"]);
                                 mc.Name = Convert.ToString(dsBankAccount.Tables[0].Rows[i]["Name"]);
                                 mc.IDNumber = Convert.ToString(dsBankAccount.Tables[0].Rows[i]["IDNumber"]);
+                                mc.BalanceAmount = Convert.ToDecimal(dsBankAccount.Tables[0].Rows[i]["BalanceAmount"]);
+
                             BankAccountList.Add(mc);
                             }
                             con.Close();

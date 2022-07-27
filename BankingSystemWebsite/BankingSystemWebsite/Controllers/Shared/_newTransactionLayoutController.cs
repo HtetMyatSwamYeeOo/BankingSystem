@@ -47,6 +47,8 @@ namespace BankingSystemWebsite.Controllers.Shared
                 BankAccount.BankAccountId = BankAccountList[i].BankAccount_ID;
                 BankAccount.Name = BankAccountList[i].BankAccount_PersonName;
                 BankAccount.IDNumber = BankAccountList[i].IDNumber;
+                BankAccount.BalanceAmount = BankAccountList[i].BalanceAmount;
+
                 BankAccountobjList.Add(BankAccount);
             }
 

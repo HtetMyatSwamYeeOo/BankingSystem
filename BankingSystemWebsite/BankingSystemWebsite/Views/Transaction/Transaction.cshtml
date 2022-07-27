@@ -58,25 +58,46 @@
                         @*<div class="col-lg-4" style="margin-top :25px;">
 
 
-                            <i class="icon-search"></i>
-                            <input id="searchbar" type="text" list="list" placeholder="Search..." />
-                            @{
+            <i class="icon-search"></i>
+            <input id="searchbar" type="text" list="list" placeholder="Search..." />
+            @{
 
-                                List<BankingSystemWebsite.Models.BankAccount.BankAccountObject> mylist = new List<BankingSystemWebsite.Models.BankAccount.BankAccountObject>();
-                                mylist = (List<BankingSystemWebsite.Models.BankAccount.BankAccountObject>)TempData["BankAccountName"];
-
-
-                                <datalist id="list">
-                                    @foreach (var item in mylist)
-                                    {
-                                        <option id="optionid" hidden="" value="@item.Name" name="@item.Name">@item.Name</option>
-                                    }
-
-                                </datalist>
+                List<BankingSystemWebsite.Models.BankAccount.BankAccountObject> mylist = new List<BankingSystemWebsite.Models.BankAccount.BankAccountObject>();
+                mylist = (List<BankingSystemWebsite.Models.BankAccount.BankAccountObject>)TempData["BankAccountName"];
 
 
-                            }
-                        </div>*@
+                <datalist id="list">
+                    @foreach (var item in mylist)
+                    {
+                        <option id="optionid" hidden="" value="@item.Name" name="@item.Name">@item.Name</option>
+                    }
+
+                </datalist>
+
+
+            }
+        </div>*@
+
+                        @{
+                            DataTable dt = new DataTable();
+                            dt = (DataTable)Session["DashBoadData"];
+                            string usertype = Convert.ToString(Session["LoginUserType"]).Trim();
+                            string userid = Convert.ToString(Session["LoginUserType"]).Trim();
+
+                            if (usertype != "Admin")
+                            {
+                                <strong> IBAN : @userid.</strong>
+                                <strong> Available Balance : @{dt.Rows[0]["AvailableBalance"].ToString() + " Baht "}</strong>
+                                <strong> Total Income : @{dt.Rows[0]["TotalIncome"].ToString() + " Baht "}</strong>
+                                <strong> Total Expense : @{dt.Rows[0]["TotalExpense"].ToString() + " Baht "}</strong>
+                                        
+
+                              }
+
+
+                        }
+
+
                     </div>
                 </div>
                 <!-- project team & activity end -->

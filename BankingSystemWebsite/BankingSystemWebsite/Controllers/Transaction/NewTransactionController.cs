@@ -154,21 +154,21 @@ namespace BankingSystemWebsite.Controllers.Transaction
                     //BankAccountController.checkerDoAction = "New BankAccount is Added successfully!";
                     //BankAccountController.obj = BankAccountBL.SelectAllBankAccount();
 
-                    return RedirectToAction("dashboard", "Dashboard");
+                    return RedirectToAction("Transaction", "Transaction");
 
                 }//nn
 
                 if(mc.trxtype=="1")
                 {
-                    return View("newDepositTransaction", "NewTransaction");
+                    return View("dashboard", "Dashboard");
                 }
                 else if (mc.trxtype == "2")
                 {
-                    return View("newWidthdrawTransaction", "NewTransaction");
+                    return View("dashboard", "Dashboard");
                 }
                 else
                 {
-                    return View("newInternalTransaction", "NewTransaction");
+                    return View("dashboard", "Dashboard");
                 }
 
             }

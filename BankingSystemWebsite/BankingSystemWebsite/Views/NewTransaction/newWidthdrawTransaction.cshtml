@@ -52,12 +52,25 @@
     <script>
 
         function ChangeValueAmount() {
+            var availableamt = $('#widthdrawavaliablebalance').val();
             var amount = $('#txtbankAmount').val();
-            var serviceamount = (amount * 0.1) / 100;
-            var totalamount = amount - serviceamount;
+            if (availableamt - amount < 0) {
+                $("#txtbankAmount").css("background-color", "red");
+                $("#shownotenoughbalance").show();
 
-            $("#txtservicefeeamt").val(serviceamount);
-            $("#txttoatalamount").val(totalamount);
+                
+            } else {
+                $("#txtbankAmount").css("background-color", "white");
+                $("#shownotenoughbalance").hide();
+
+                var serviceamount = (amount * 0.1) / 100;
+                var totalamount = amount - serviceamount;
+
+                $("#txtservicefeeamt").val(serviceamount);
+                $("#txttoatalamount").val(totalamount);
+            }
+
+
 
         }
 
@@ -82,7 +95,9 @@
             var id = $("#listss").find("option[value='" + g + "']").attr('id');
             var name = $("#listss").find("option[value='" + g + "']").attr('value');
             var userpassportid = $("#listss").find("option[value='" + g + "']").attr('ids');
-
+            var balanceamt = $("#listss").find("option[value='" + g + "']").attr('name');
+            
+            $('#widthdrawavaliablebalance').val(balanceamt);
             $('#tousername').val(id);
             $('#tocustomeridno').val(userpassportid);
 
@@ -97,7 +112,9 @@
             var id = $("#listss").find("option[value='" + g + "']").attr('id');
             var name = $("#listss").find("option[value='" + g + "']").attr('value');
             var userpassportid = $("#listss").find("option[value='" + g + "']").attr('ids');
+            var balanceamt = $("#listss").find("option[value='" + g + "']").attr('name');
 
+            $('#transferavaliablebalance').val(balanceamt);
             $('#fromusername').val(id);
             $('#fromcustomeridno').val(userpassportid);
 

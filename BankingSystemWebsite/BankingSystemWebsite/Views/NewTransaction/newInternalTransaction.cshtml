@@ -51,6 +51,7 @@
 
     <script>
 
+
         $(document).on('input', '#To_IBANo', function () {
 
             var g = $("#To_IBANo").val();
@@ -58,7 +59,9 @@
             var id = $("#listss").find("option[value='" + g + "']").attr('id');
             var name = $("#listss").find("option[value='" + g + "']").attr('value');
             var userpassportid = $("#listss").find("option[value='" + g + "']").attr('ids');
+            var balanceamt = $("#listss").find("option[value='" + g + "']").attr('name');
 
+            $('#widthdrawavaliablebalance').val(balanceamt);
             $('#tousername').val(id);
             $('#tocustomeridno').val(userpassportid);
 
@@ -73,7 +76,9 @@
             var id = $("#listss").find("option[value='" + g + "']").attr('id');
             var name = $("#listss").find("option[value='" + g + "']").attr('value');
             var userpassportid = $("#listss").find("option[value='" + g + "']").attr('ids');
+            var balanceamt = $("#listss").find("option[value='" + g + "']").attr('name');
 
+            $('#transferavaliablebalance').val(balanceamt);
             $('#fromusername').val(id);
             $('#fromcustomeridno').val(userpassportid);
 
@@ -81,12 +86,26 @@
 
 
         function ChangeValueAmount() {
+            var availableamt = $('#transferavaliablebalance').val();
             var amount = $('#txtbankAmount').val();
-            var serviceamount = (amount * 0.1) / 100;
-            var totalamount = amount - serviceamount;
+      
+            if (availableamt - amount<0) {
 
-            $("#txtservicefeeamt").val(serviceamount);
-            $("#txttoatalamount").val(totalamount);
+                $("#txtbankAmount").css("background-color", "red");
+                $("#shownotenoughbalance").show();
+
+
+            } else {
+                $("#txtbankAmount").css("background-color", "white");
+                $("#shownotenoughbalance").hide();
+
+                var serviceamount = (amount * 0.1) / 100;
+                var totalamount = amount - serviceamount;
+
+                $("#txtservicefeeamt").val(serviceamount);
+                $("#txttoatalamount").val(totalamount);
+            }
+
         }
 
 
