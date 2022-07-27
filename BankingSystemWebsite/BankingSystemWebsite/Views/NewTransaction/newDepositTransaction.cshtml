@@ -1,0 +1,225 @@
+﻿
+@{
+    ViewBag.Title = "Add Deposit";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <script src='@Url.Content("~/Scripts/bootstrap.js")' type="text/javascript"></script>
+
+    @{Html.RenderPartial("_importLayout"); }
+
+</head>
+
+
+<body>
+
+    <!-- container section start -->
+    <section id="container" class="">
+        <!--Navigation-->
+        @{Html.RenderPartial("_navLayout"); }
+
+        <section id="main-content">
+            <section class="wrapper">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h3 class="panel-heading1"><img src="~/Image/bank.png" style="height:40px;margin: 5px 0 20px;" />&nbsp;&nbsp; New Deposit</h3>
+                        @{
+                            string[] temp = { "", "" ,"","",""};
+                            temp[0] = "InsertNewTransaction";
+                            temp[1] = "newTransaction";
+                            temp[2] = "1";
+                            temp[3] = "Deposit";
+                            temp[4] = "10001";
+                            TempData["temp_array"] = temp;
+
+                        }
+
+                        @{Html.RenderAction("DisplayPartialResultInsertForm", "_newTransactionLayout");}
+
+                    </div>
+                </div>
+            </section>
+            <!--main content end-->
+
+        </section>
+
+
+    </section>
+
+    <script>
+
+        $(document).on('input', '#To_IBANo', function () {
+
+            var g = $("#To_IBANo").val();
+
+            var id = $("#listss").find("option[value='" + g + "']").attr('id');
+            var name = $("#listss").find("option[value='" + g + "']").attr('value');
+            var userpassportid = $("#listss").find("option[value='" + g + "']").attr('ids');
+
+            $('#tousername').val(id);
+            $('#tocustomeridno').val(userpassportid);
+
+
+
+        });
+
+        $(document).on('input', '#fromuser_IBANo', function () {
+
+            var g = $("#fromuser_IBANo").val();
+
+            var id = $("#listss").find("option[value='" + g + "']").attr('id');
+            var name = $("#listss").find("option[value='" + g + "']").attr('value');
+            var userpassportid = $("#listss").find("option[value='" + g + "']").attr('ids');
+
+            $('#fromusername').val(id);
+            $('#fromcustomeridno').val(userpassportid);
+
+        });
+
+
+        function ChangeValueAmount() {
+            var amount = $('#txtbankAmount').val();
+            var serviceamount = (amount * 0.1) / 100;
+            var totalamount = amount - serviceamount;
+            
+            $("#txtservicefeeamt").val(serviceamount);
+            $("#txttoatalamount").val(totalamount);
+
+        }
+
+        function isNumber(event) {
+           // alert("hahahahahaah");
+            event = (event) ? event : window.event;
+            var charCode = (event.which) ? event.which : event.keyCode;
+            //alert(charCode);
+
+            if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+
+                return false;
+            }
+            return true;
+
+        }
+
+              //get Way Name
+    $(document).on('input', '.clickwayname', function () {
+
+   //     alert("Start");
+
+        var userText = $(this).val();
+   //     alert("User Input Text is " + userText);
+
+        //Get All Item with user input
+        if (userText != null) {
+
+            $.ajax({
+                url: '@Url.Action("SearchAllWayName", "newBankAccount")',
+                type: 'GET',
+                dataType: "json",
+                data: { searchKey: userText },
+                contentType: "application/json;charset=utf-8",
+                success: function (result) {
+               //     alert("Reach .Success function");
+              //      alert("The return Result is" + result);
+                    if (result != null) {
+               //         alert("Not null");
+                        $("#list").empty();
+                        //alert(result[0].values);
+                        //for (var i = 0; i < result.length; i++) {
+                        for (var i = 0; i < 10; i++) {
+                       //     alert("The result is"+result[i].Way_Name);
+                            $("#list").append("<option>" + result[i].Way_Name + "</option>")
+                        }
+                    }
+                    else {
+                        //errorpage;
+                        alert("The result is null");
+                    }
+                }
+            }).done(function (list) {
+                alert("Reach .done function");
+                if (list != null) {
+                    $("#list").empty();
+                   alert(result[0].values);
+                    if (list.length < 10) {
+                        for (var i = 0; i < list.length; i++) {
+                            alert(result[i].Way_Name);
+                            $("#list").append("<option>" + list[i].Way_Name + "</option>")
+                        }
+                    } else {
+                        for (var i = 0; i < 10; i++) {
+                            alert(result[i].Way_Name);
+                            $("#list").append("<option>" + list[i].Way_Name + "</option>")
+                        }
+                    }
+                    $('#loading').hide();
+                }
+                else {
+                    //errorpage;
+                }
+
+                $('#loading').hide();
+            });
+
+            $('#loading').hide();
+
+        }
+            });
+
+    //_______________________________---------------------------------------------------------------------------
+
+
+        //---------------------------------------------------------------
+        //knob
+        $(function () {
+            $(".knob").knob({
+                'draw': function () {
+                    $(this.i).val(this.cv + '%')
+                }
+            })
+        });
+
+        //carousel
+        $(document).ready(function () {
+            $("#owl-slider").owlCarousel({
+                navigation: true,
+                slideSpeed: 300,
+                paginationSpeed: 400,
+                singleItem: true
+
+            });
+        });
+
+        //custom select box
+
+        $(function () {
+            $('select.styled').customSelect();
+        });
+
+        /* ---------- Map ---------- */
+        $(function () {
+            $('#map').vectorMap({
+                map: 'world_mill_en',
+                series: {
+                    regions: [{
+                        values: gdpData,
+                        scale: ['#000', '#000'],
+                        normalizeFunction: 'polynomial'
+                    }]
+                },
+                backgroundColor: '#eef3f7',
+                onLabelShow: function (e, el, code) {
+                    el.html(el.html() + ' (GDP - ' + gdpData[code] + ')');
+                }
+            });
+        });
+
+    </script>
+
+</body>
+</html>
+
+

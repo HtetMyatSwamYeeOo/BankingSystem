@@ -51,7 +51,7 @@
                     <div class="col-lg-12">
 
                         <div class="col-lg-4">
-                            <h3 class="page-header"><img src="~/Image/BankAccounts.png" style="height:40px; margin: 0 0 20px;" />&nbsp;&nbsp; BankAccounts</h3>
+                            <h3 class="page-header"><img src="~/Image/bank.png" style="height:40px; margin: 0 0 20px;" />&nbsp;&nbsp; BankAccounts</h3>
                         </div>
                         <div class="col-lg-2"></div>
                         <div class="col-lg-2"></div>
@@ -96,20 +96,9 @@
 
                         <select id="dropdown_select" class="btn1 btn-default dropdown-toggle" style="height:48px;">
 
-                            <!--
-                                 <select id="dropdown_select" class="btn1 btn-default dropdown-toggle " onchange="location = this.value;">
-                                <option value="/BankAccount/SelectAllBankAccount" >All BankAccounts</option>
-                            <option value="/BankAccount/SelectAllBankAccountByCustomer">Customers</option>
-                            <option value="/BankAccount/SelectAllBankAccountByVendor">Vendors</option>
-                            <option value="/BankAccount/SelectAllBankAccountByInactive">Inactive</option>
-                                -->
                             <option name="All BankAccounts">AllBankAccounts</option>
-                            <option name="Dealer">Dealer</option>
-                            <option name="Subdealer">Subdealer</option>
-                            <option name="Outlet">Outlet</option>
-                            <option name="Busline">Busline</option>
-                            <option name="OEM">OEM</option>
-                            <option name="Marketing">Marketing</option>
+                            <option name="Personal">Personal</option>
+                            <option name="Business">Business</option>
                         </select>
 
 
@@ -132,62 +121,29 @@
                                 <li id="MarkDelete" role="presentation"><a role="menuitem" tabindex="-1">Delete</a></li>
                             </ul>
                         </div>
-                        @*<select class="btn1 btn-default dropdown-toggle ">
-
-                                <option selected>More Actions</option>
-                                <option>Mark as Active</option>
-                                <option>Mark as Inactive</option>
-                                <option>Delete</option>
-                            </select>*@
-                    </li>
+                                      </li>
 
 
                     <li class="col-lg-2">
-
-
-
-
-
-
                         <a href="@Url.Action("newBankAccount", "NewBankAccount")" class="btn1 btn-primary1 link" role="button" style="background-color:#2979FF">
-
                             NewBankAccount
                         </a>
-
                     </li>
-
-
-
-
-
-
-
-
-
 
                     <li class="col-lg-2">
                         <div class="dropdown">
-
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                 <img alt="" src="~/Image/sorting.png" style="height:25px;">
                                 <i class="caret"></i>
                             </a>
                             <ul class="dropdown-menu">
-
-
                                 <li><a id="SortByName" class="sort">Name</a></li>
                                 <li><a id="SortByCompanyName" class="sort">CompanyName</a></li>
                                 <li><a id="SortByCreatedTime" class="sort">CreatedTime</a></li>
                                 <li><a id="SortByLastModifiedTime" class="sort">LastModifiedTime</a></li>
-
-
                             </ul>
                         </div>
                     </li>
-
-
-
-
 
                 </ul>
                 <br />
@@ -263,11 +219,6 @@
             //    })
             })
         });
-
-
-
-
-
 
         $('.link').click(function () {
             $("#loading").show();

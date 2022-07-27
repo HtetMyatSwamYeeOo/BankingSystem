@@ -309,7 +309,9 @@ namespace BankingSystem_DA.BankAccount
                                 M_BankAccount mc = new M_BankAccount();
                                 mc.BankAccount_ID = Convert.ToString(dsBankAccount.Tables[0].Rows[i]["IBAN_ID"]);
                                 mc.BankAccount_PersonName = Convert.ToString(dsBankAccount.Tables[0].Rows[i]["Name"]);
-                                BankAccountList.Add(mc);
+                                mc.Name = Convert.ToString(dsBankAccount.Tables[0].Rows[i]["Name"]);
+                                mc.IDNumber = Convert.ToString(dsBankAccount.Tables[0].Rows[i]["IDNumber"]);
+                            BankAccountList.Add(mc);
                             }
                             con.Close();
                             return BankAccountList;
@@ -738,7 +740,9 @@ namespace BankingSystem_DA.BankAccount
                             cmd.Parameters.AddWithValue("@password", BankAccount.Password.ToString());
                             cmd.Parameters.AddWithValue("@city", BankAccount.BankAccount_City.ToString());
                             cmd.Parameters.AddWithValue("@countryname", BankAccount.CountryName.ToString());
-                            con.Open();
+
+                        con.Open();
+
 
                             int i = cmd.ExecuteNonQuery();
 

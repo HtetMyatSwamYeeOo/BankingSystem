@@ -126,7 +126,9 @@
     <Compile Include="Controllers\Dashboard\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Shared\_newBankAccountLayoutController.cs" />
+    <Compile Include="Controllers\Shared\_newTransactionLayoutController.cs" />
     <Compile Include="Controllers\Shared\_TableLayoutController.cs" />
+    <Compile Include="Controllers\Transaction\NewTransactionController.cs" />
     <Compile Include="Controllers\UserAccount\LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -134,6 +136,8 @@
     <Compile Include="Models\BankAccount\BankAccountObject.cs" />
     <Compile Include="Models\BankAccount\NewBankAccountObject.cs" />
     <Compile Include="Models\Error\ErrorObject.cs" />
+    <Compile Include="Models\Transaction\NewTransactionObject.cs" />
+    <Compile Include="Models\Transaction\TransactionObject.cs" />
     <Compile Include="Models\User\UserObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -281,10 +285,22 @@
     <Content Include="Views\BankAccount\BankAccount.cshtml" />
     <Content Include="Views\NewBankAccount\NewBankAccount.cshtml" />
     <Content Include="Views\Shared\_newBankAccountLayout.cshtml" />
+    <Content Include="Views\Shared\_TableLayout.cshtml" />
+    <Content Include="Views\Shared\_TableLayoutWithButtonView.cshtml" />
+    <Content Include="Views\Shared\_TableLayoutWithDetailButtonView.cshtml" />
+    <Content Include="Views\Shared\_TableLayoutWithRemoveButtonView.cshtml" />
+    <Content Include="Views\Shared\_TableLayout_WithPaging.cshtml" />
+    <Content Include="Views\EditBankAccount\EditBankAccount.cshtml" />
+    <Content Include="Views\NewTransaction\newDepositTransaction.cshtml" />
+    <Content Include="Views\Shared\_NewTransactionLayout.cshtml" />
+    <Content Include="Views\NewTransaction\newWidthdrawTransaction.cshtml" />
+    <Content Include="Views\NewTransaction\newInternalTransaction.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\New\" />
     <Folder Include="Views\_newBankAccountLayout\" />
+    <Folder Include="Views\_newTransactionLayout\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

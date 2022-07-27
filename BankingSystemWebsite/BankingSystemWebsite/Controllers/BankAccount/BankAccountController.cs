@@ -313,8 +313,17 @@ namespace BankingSystemWebsite.Controllers.BankAccount
                 selectedItem = "All BankAccounts";
                 if (name != "" || name != null)
                 {
-
-                    AddToObj(BankAccountBL.SearchBankAccount(name));
+                    DataSet ds = new DataSet();
+                    ds = BankAccountBL.SearchBankAccount(name);
+                    if (ds != null)
+                    {
+                        AddToObj(ds);
+                    }
+                    else
+                    {
+                        selectedItem = "All BankAccounts";
+                        AddToObj(BankAccountBL.SelectAllBankAccount());
+                    }
                 }
                 else
                 {
@@ -334,6 +343,49 @@ namespace BankingSystemWebsite.Controllers.BankAccount
                 return PartialView("_TableLayout", ViewModelobj);
             }
         }
+
+        //search all item name 
+        [HttpGet]
+        public JsonResult SearchBankAccountInfo(string searchKey)
+        {
+            if (searchKey != "" || searchKey != null)
+            {
+                    List<BankAccountObject> BankAccountobjList = new List<BankAccountObject>();
+                    List<M_BankAccount> BankAccountList = BankAccountBL.SelectAllBankAccountName();
+                    for (int i = 0; i < BankAccountList.Count; i++)
+                    {
+                        BankAccountObject BankAccount = new BankAccountObject();
+
+                        BankAccount.BankAccountId = BankAccountList[i].BankAccount_ID;
+                        BankAccount.Name = BankAccountList[i].BankAccount_PersonName;
+                        BankAccountobjList.Add(BankAccount);
+                    }
+
+                    TempData["BankAccountName"] = BankAccountobjList;
+                      return Json(BankAccountobjList, JsonRequestBehavior.AllowGet);
+
+            }
+            else
+            {
+                List<BankAccountObject> BankAccountobjList = new List<BankAccountObject>();
+                List<M_BankAccount> BankAccountList = BankAccountBL.SelectAllBankAccountName();
+                for (int i = 0; i < BankAccountList.Count; i++)
+                {
+                    BankAccountObject BankAccount = new BankAccountObject();
+
+                    BankAccount.BankAccountId = BankAccountList[i].BankAccount_ID;
+                    BankAccount.Name = BankAccountList[i].BankAccount_PersonName;
+                    BankAccountobjList.Add(BankAccount);
+                }
+
+                TempData["BankAccountName"] = BankAccountobjList;
+                return Json(BankAccountobjList, JsonRequestBehavior.AllowGet);
+            }
+  
+                //return View("newSale");
+            
+        }//end of SearchAllItemName method
+
 
         //Set all checked Item 'InActive'
         public ActionResult GetAllCheckedItemInactive()
@@ -505,9 +557,9 @@ namespace BankingSystemWebsite.Controllers.BankAccount
 
             //remove some column for show 
             //Use_obj.Tables[0].Columns.RemoveAt(0);
-            Use_obj.Tables[0].Columns.RemoveAt(5);
-            Use_obj.Tables[0].Columns.RemoveAt(5);
-            Use_obj.Tables[0].Columns.RemoveAt(5);
+            //Use_obj.Tables[0].Columns.RemoveAt(5);
+            //Use_obj.Tables[0].Columns.RemoveAt(5);
+            //Use_obj.Tables[0].Columns.RemoveAt(5);
             Session["Dataset1"] = Use_obj;
 
             ViewModelobj = getModel(1);

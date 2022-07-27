@@ -64,11 +64,11 @@ else
                                     </tr>
 
                                     <tr>
-                                        <td align="left"><label> Gender</label></td>
+                                        <td align="left"><label>Gender</label></td>
                                         <td align="left">
                                             <select name="GenderType" id="dropdown_select_gendertype" class="btn1 btn-default dropdown-toggle" onclick="GenderTypeChangeValue()" style="height:42px;font-size: 14px ; color : #555;">
-                                                <option name="Male">@**@Male</option>
-                                                <option name="Female">@**@Female</option>
+                                                <option name="Male">Male</option>
+                                                <option name="Female">Female</option>
                                             </select>
                                             @Html.TextBoxFor(m => m.Gender, new { @id = "gendertype", @class = "form-control", placeholder = "Gender", style = "display:none" })
                                         </td>
@@ -301,6 +301,23 @@ else
     else
     {
         Session["BankAccountType"] = @Model.Type;
+    }
+
+    $("#dropdown_select_gendertype").val("@Model.Gender");
+    @if(Model.Gender == null)
+    {
+        Session["Gender"] = null;
+    }
+    else
+    {
+        Session["Gender"] = @Model.Gender;
+    }
+
+    if (document.getElementsByName("gendertype").value == null && @Session["Gender"]==null )
+    {
+
+        $("#dropdown_select_gendertype").val("Male");
+
     }
 
     if (document.getElementsByName("Type").value == null && @Session["BankAccountType"]==null )

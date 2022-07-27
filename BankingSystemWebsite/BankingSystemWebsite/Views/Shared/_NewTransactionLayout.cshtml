@@ -1,0 +1,353 @@
+﻿@model BankingSystemWebsite.Models.Transaction.NewTransactionObject
+
+<link href='@Url.Content("~/CSS/button.css")' rel="stylesheet" type="text/css"> </link>
+@{
+    string fun, con;
+    string trxtype, trxtypedesc, acccode;
+}
+@if (TempData["TransactionPage"].ToString() == "" || TempData["TransactionController"].ToString() == "")
+{
+    fun = "InsertNewInternalTransaction";
+    con = "newTransaction";
+    trxtype = "1";
+    trxtypedesc = "Deposite";
+    acccode = "10001";
+}
+else
+{
+    fun = TempData["TransactionPage"].ToString();
+    con = TempData["TransactionController"].ToString();
+    trxtype = TempData["TrxType"].ToString();
+    trxtypedesc = TempData["TrxTypeDesc"].ToString();
+    acccode = TempData["AccountCode"].ToString();
+}
+
+@using (Html.BeginForm(fun, con, FormMethod.Post, new { @id = "Transaction" }))
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken();
+    <div class="row">
+        <div class="col-lg-12">
+            <section class="panel">
+                <header class="panel-heading"></header>
+                <div class="panel-body">
+
+                    <div class="panel-body">
+
+                        <form class="form-horizontal " method="get">
+
+                            <link href='@Url.Content("~/CSS/button.css")' rel="stylesheet" type="text/css"> </link>
+
+                            <div class="table-responsive">
+                                <table class="table">
+
+                                    <tr>
+                                        <td align="left"><label> Transaction Type</label></td>
+                                        <td align="left">
+                                            <table class="">
+                                                <tr>
+                                                    <td width="50px">@Html.TextBoxFor(m => m.trxtype, new { @id = "trxtype", @class = "form-control", @Value = trxtype, placeholder = "", @readonly = true })</td>
+                                                    <td width="2px"></td>
+                                                    <td>
+                                                        @Html.TextBoxFor(m => m.desc, new { @id = "desc", @class = "form-control", @Value = trxtypedesc, placeholder = "", @readonly = true })
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td align="left"><label>Account Code</label></td>
+                                        <td>@Html.TextBoxFor(m => m.acccode, new { @id = "acccode", @class = "form-control", placeholder = "acccode", @Value = acccode, required = "required", @readonly = true })</td>
+                                    </tr>
+
+                                    @{
+
+                                        if (trxtype == "3")
+                                        {
+                                            <tr>
+                                                <td align="left"><label>From Customer IBAN *</label></td>
+                                                <td>@Html.TextBoxFor(m => m.From_IBANo, new { @id = "fromuser_IBANo", @list = "listfrom", autocomplete = "off", @class = "form-control", placeholder = "From Customer IBAN No", required = "required" })</td>
+
+                                                @{
+
+                                                    List<BankingSystemWebsite.Models.BankAccount.BankAccountObject> mylists = new List<BankingSystemWebsite.Models.BankAccount.BankAccountObject>();
+                                                    mylists = (List<BankingSystemWebsite.Models.BankAccount.BankAccountObject>)TempData["BankAccountName"];
+
+
+                                                    <panel style="height:10px;overflow:scroll;">
+                                                        <datalist id="listfrom">
+                                                            @foreach (var item in mylists)
+                                                            {
+                                                                <option id='@item.Name' value='@item.BankAccountId' hidden="@item.IDNumber" ids="@item.IDNumber">@item.Name</option>
+                                                            }
+                                                        </datalist>
+
+                                                    </panel>
+                                                }
+                                            </tr>
+
+                                            <tr>
+                                                <td align="left"><label>Customer Name</label></td>
+                                                <td>@Html.TextBoxFor(m => m.username, new { @id = "fromusername", @class = "form-control", placeholder = "Customer Name", required = "required", @readonly = true })</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td align="left"><label>Customer ID / Passport No</label></td>
+                                                <td>@Html.TextBoxFor(m => m.customeridno, new { @id = "fromcustomeridno", @class = "form-control", placeholder = "Customer ID NO", required = "required", @readonly = true })</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td align="left"><label>Bank Name</label></td>
+                                                <td>@Html.TextBoxFor(m => m.bankname, new { @id = "frombankname", @class = "form-control", placeholder = "Bank Name", required = "required", @readonly = true })</td>
+                                            </tr>
+
+                                        }
+
+                                    }
+
+                                    <tr>
+                                        <td align="left"><label>To Customer IBAN *</label></td>
+                                        <td>
+                                            @Html.TextBoxFor(m => m.To_IBANo, new { @id = "To_IBANo", autocomplete = "off", @class = "form-control", placeholder = "To Customer IBAN No", @list = "listss", @required = "required" })
+
+                                            @{
+
+                                                List<BankingSystemWebsite.Models.BankAccount.BankAccountObject> mylist = new List<BankingSystemWebsite.Models.BankAccount.BankAccountObject>();
+                                                mylist = (List<BankingSystemWebsite.Models.BankAccount.BankAccountObject>)TempData["BankAccountName"];
+
+
+                                                <panel style="height:10px;overflow:scroll;">
+                                                    <datalist id="listss">
+                                                        @foreach (var item in mylist)
+                                                        {
+                                                            <option id='@item.Name' value='@item.BankAccountId' hidden="@item.IDNumber" ids="@item.IDNumber">@item.Name</option>
+                                                        }
+                                                    </datalist>
+
+                                                </panel>
+                                            }
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td align="left"><label>Customer Name</label></td>
+                                        <td>@Html.TextBoxFor(m => m.username, new { @id = "tousername", @class = "form-control", placeholder = "Customer Name", required = "required", @readonly = true })</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td align="left"><label>Customer ID / Passport No</label></td>
+                                        <td>@Html.TextBoxFor(m => m.customeridno, new { @id = "tocustomeridno", @class = "form-control", placeholder = "Customer ID NO", required = "required", @readonly = true })</td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td align="left"><label>Bank Name</label></td>
+                                        <td>@Html.TextBoxFor(m => m.bankname, new { @id = "frombankname", @class = "form-control", placeholder = "Bank Name", required = "required", @readonly = true })</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td align="left"><label>Remark</label></td>
+                                        <td>
+                                            @Html.TextAreaFor(m => m.remark, new { @id = "remark", @class = "form-control", placeholder = "remark", required = "required" })
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td align="left"><label>Amount</label></td>
+                                        <td>@Html.TextBoxFor(m => m.amount, new { @id = "txtbankAmount", @class = "form-control", @onkeypress = "return isNumber(event)", @onchange = "ChangeValueAmount();", placeholder = trxtypedesc + " Amount", required = "required", @style = "text-align:right" })</td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td align="left"><label>Service Charges Fee 0.1%</label></td>
+                                        <td>@Html.TextBoxFor(m => m.servicefeeamt, new { @id = "txtservicefeeamt", @class = "form-control", placeholder = " Amount", required = "required", @readonly = true, @style = "text-align:right" })</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td align="left"><label>Total @trxtypedesc Amount</label></td>
+                                        <td>@Html.TextBoxFor(m => m.totalamount, new { @id = "txttoatalamount", @class = "form-control", placeholder = " Amount", required = "required", @readonly = true, @style = "text-align:right" })</td>
+                                    </tr>
+
+
+
+
+                                    <tr>
+                                        <td></td>
+                                        <td align="center">
+                                            <div class="col-lg-8">
+                                                <div id="newTransactionConfirmBox" class="modal fade" role="dialog">
+                                                    <div class="modal-dialog">
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                <h4 class="modal-title"></h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p> AreyouSure</p>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <input class="btn-primary2 link" type="submit" value="Save" />
+                                                                &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                                                                <button type="button" class="btn-cancel " data-dismiss="modal" style="width:120px;height:40px"> Cancel</button>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4"></div>
+                                            <button type="submit" class="btn-primary2 " id="submit"> Save Data </button>
+
+                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                        </td>
+
+                                    </tr>
+
+                                </table>
+                            </div>
+
+
+                        </form>
+
+
+                    </div>
+
+
+                </div>
+            </section>
+        </div>
+    </div>
+
+
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script>
+
+    function ChangeValueAmount() {
+
+        var amount = $("#txtbankAmount").value;
+        var serviceamount = (amount * 0.1)/100;
+        $("#txtservicefeeamt").text = serviceamount;
+
+    }
+
+
+    $('#Transaction').submit(function () {
+        $('#newTransactionConfirmBox').hide();
+        $("#loading").show();
+
+    });
+
+
+    $('#TransactionSubmit').click(function (e) {
+       // $("#loading").hide();
+
+         $("#loading").show();
+        // Get the Login Name value and trim it
+        var Name = ($('#Name').val());
+        var CompanyName = ($('#CompanyName').val());
+        var TransactionPhone = ($('#TransactionPhone').val());
+        var Address = ($('#Address').val());
+        var City = ($('#City').val());
+        var WayName=($('#wayname').val());
+        var Email=($('#Email').val());
+        var Discount=($('Dis').val());
+        var DateOfBirth = ($('DateOfBirth').val());
+        var Gender = ($('GenderType').val());
+        var Nadtionaly = ($('Nadtionaly').val());
+        var IDNumber = ($('IDNumber').val());
+        var CountryName = ($('CountryName').val());
+
+
+
+        // Check if empty of not
+        if (Name === '') {
+
+            toastr.warning("TransactionNameIsEmpty");
+            // toastr.warning("Name is Empty.");
+            $("#loading").hide();
+            return false;
+        }
+        if (CompanyName === '') {
+
+            @*toastr.warning("CompanyNameIsEmpty");*@
+            //  toastr.warning("Company is Empty.");
+            $('#CompanyName').val("-");
+            $("#loading").hide();
+            return true;
+        }
+        if (TransactionPhone === '') {
+
+            toastr.warning("TransactionPhIsEmpty");
+            // toastr.warning("Phone No is Empty.");
+            $("#loading").hide();
+            return false;
+        }
+        if (Address === '') {
+
+            toastr.warning("AddressIsEmpty");
+            // toastr.warning("Address is Empty.");
+            $("#loading").hide();
+            return false;
+        }
+        if (City === '') {
+
+            toastr.warning("CityIsEmpty");
+            // toastr.warning("City is Empty.");
+            $("#loading").hide();
+            return false;
+        }
+        if (WayName === '') {
+
+            toastr.warning("WayNameIsEmpty");
+            // toastr.warning("City is Empty.");
+            $("#loading").hide();
+            return false;
+        }
+        if (Email === '') {
+
+            toastr.warning("EmailIsEmpty");
+            // toastr.warning("City is Empty.");
+            $("#loading").hide();
+            return false;
+        }
+        if (Discount === '') {
+
+            toastr.warning("DiscountIsEmpty");
+            // toastr.warning("City is Empty.");
+            $("#loading").hide();
+            return false;
+        }
+        return true;
+    });
+
+
+
+    $('.link').click(function () {
+        $("#loading").show();
+    });
+
+    function isNumber(event) {
+      // alert("hahahahahaah");
+        event = (event) ? event : window.event;
+        var charCode = (event.which) ? event.which : event.keyCode;
+        //alert(charCode);
+
+        if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57))
+        {
+
+            return false;
+        }
+        return true;
+
+    }
+
+
+</script>

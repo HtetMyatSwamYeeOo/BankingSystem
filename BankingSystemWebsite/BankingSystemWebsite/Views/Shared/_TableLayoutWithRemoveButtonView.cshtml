@@ -1,0 +1,134 @@
+﻿
+<table class="table table-hover" id="ItemTB" runat="server">
+
+    <thead>
+        <tr id="table_header">
+            <th></th>
+
+
+            @for (int i = 0; i < Model.Tables[0].Columns.Count; i++)
+            {
+                string str = (string)Model.Tables[0].Columns[i].ColumnName;
+                if (str != "" && str != null && str != " ")
+                {
+                    <th>@str</th>
+                }
+                else
+                {
+                    <th>@Model.Tables[0].Columns[i].ColumnName</th>
+                }
+            }
+
+
+        </tr>
+    </thead>
+
+    <tbody>
+      
+
+
+        @if (Model == null)
+            {
+            <tr>
+                <td>There is no items for this option.</td>
+            </tr>
+        }
+        else if (Model.Tables[0].Rows.Count > 0)
+        {
+            for (int i = 0; i < Model.Tables[0].Rows.Count; i++)
+            {
+
+                //declaring Custom Id
+                var str = Model.Tables[0].Rows[i][0];
+
+                var trIdStr = "TrId" + str + "";
+
+                <tr>
+                    <td> <input id='@str' type="checkbox" class="checkbox"> </td>
+
+                    @for (int j = 1; j < Model.Tables[0].Columns.Count; j++)
+                    {
+
+                        if (Model.Tables[0].Columns[j].ColumnName == "Name")
+                        {
+                            <td>
+                                <a href="@Url.Action("customerOverview", "CustomerOverview", new { id = @Model.Tables[0].Rows[i][0] });">
+                                    @Model.Tables[0].Rows[i][1]
+                                </a>
+                            </td>
+                        }
+                        else if (Model.Tables[0].Columns[j].ColumnName == "ProductName")
+                        {
+                            <td>
+                                <a href="@Url.Action("itemDetail", "ItemOverview", new { id = @Model.Tables[0].Rows[i][0] });">
+                                    @Model.Tables[0].Rows[i][1]
+                                </a>
+                            </td>
+                        }
+                        else
+                        {
+                            <td> @Model.Tables[0].Rows[i][j] </td>
+                        }
+                    }
+
+                    <td></td>
+                    <td><a href='#' class='btn btn-danger deleteContact '><i class='icon_close_alt2'></i></a></td>
+
+
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                There is no items for this option.
+            </tr>
+        }
+
+
+
+
+    </tbody>
+
+
+
+</table>
+
+<script type="text/javascript">
+    $(document).on("click", ".deleteContact", function () {
+        $(this).closest("tr").remove();
+    });
+    $(document).on('change', ":checkbox", function () {
+
+        var selected = new Array();
+        $('input:checked').each(function () {
+            selected.push($(this).attr('id'));
+
+        });
+
+        $.ajax({
+            url: "/_TableLayout/SetArray/",
+            dataType: 'json',
+            data: JSON.stringify({ list: selected }),
+            type: 'POST',
+            contentType: "application/json",
+            traditional: true,
+            success: successFunc,
+            error: error
+        });
+
+        function error() {
+           // alert("An error has occured!!!");
+        }
+
+        function successFunc() {
+            // alert();
+        }
+    });
+
+    $(document).ready(function () {
+        $(":checkbox").find("option").attr("selected", false);
+    });
+
+    
+</script>
