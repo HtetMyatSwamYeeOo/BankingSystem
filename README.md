@@ -6,10 +6,13 @@ Dear Sir ,
 I have done the technical test project development for Beand New Day Coding Challenge within the project timeline (One Week). 
 To Test Easily, I have uploaded it on my personal server too. 
 Here is the production Link that you all can test it directly.
+
 http://183.89.251.20:8083/
 
 For User Login Info of this Banking System :I created two user role 
+
 (1) Admin (Bank Staff and Banking System Admin ) 
+
 (2) Customer (Bank User)
 
 Based on that two User Role,The  Permission and Authority is different.
@@ -17,17 +20,22 @@ Admin user have full access and permission like can create/edit new bank account
 For the Customer User , they can deposit money , withdraw cash and can do Internal Bank Transfer with this Web Application.
 
 Here is the Login User Name and Password Information 
+
 Admin User USER ID : Admin
+
 PASSWORD : admin12345
 
 Customer UserUSER ID : NL05ABNA2807222223
+
 PASSWORD : htetmyat
 
 For the customer , when login, they need to use their IBAN (International Bank Account Number ) as a User ID .
 
 Base on the technical test document of Brand New Day, I did propertly all of the steps and requirements to be done within the instructions.
 And Here is the Private Git Repository Link for this Banking System Project. 
+
 https://github.com/HtetMyatSwamYeeOo/BankingSystem
+
 I also added this mail to my repository access "jobsth@werkenbijbrandnewday.recruitee.com"
 
 If you want to add other manager mail, let me know too. I will send the invitation link or you can share my Git Repository Link with them.
@@ -45,8 +53,13 @@ I have created as a responsive web application, Therefore, this Banking System c
 Thank you a lot for giving me a chance to show up my experience and skill with this technical test project.
 
 Best RegardsMr. 
+
 Htet Myat Swam Yee Oo
+
 Thailand Phone No : +66 0992586144
+
 Whatapps Phone No : +95 09962967226
+
 htetmyatswamyeoo@gmail.com
+
 LINE ID: htetmyatswamyeeoo
