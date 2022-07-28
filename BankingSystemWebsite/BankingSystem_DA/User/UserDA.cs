@@ -96,6 +96,67 @@ namespace BankingSystem_DA.User
 
         }
 
+        public static string searchUserIDWithUserAccountName(string username)
+        {
+            using (SqlConnection con = new SqlConnection(CommonDA.getConnection()))
+            {
+                using (SqlCommand cmd = new SqlCommand(SEARCHNAMEWITHUSERNAME, con))
+                {
+
+
+                    try
+                    {
+                        DataSet dsContact = new DataSet("UserObj");
+
+
+
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+
+                        cmd.Parameters.Add("@name", SqlDbType.NVarChar, 100).Value = username;
+                        con.Open();
+
+
+                        SqlDataAdapter da = new SqlDataAdapter();
+                        da.SelectCommand = cmd;
+
+                        da.Fill(dsContact);
+                        int i = dsContact.Tables[0].Rows.Count;
+
+                        M_User user = new M_User();
+
+                        if (i != 0)
+                        {
+                            user.User_ID = Convert.ToString(dsContact.Tables[0].Rows[0]["User_ID"]);
+                            user.User_AccName = Convert.ToString(dsContact.Tables[0].Rows[0]["User_AccName"]);
+                            user.User_Password = Convert.ToString(dsContact.Tables[0].Rows[0]["User_Password"]);
+                            user.User_Type = Convert.ToString(dsContact.Tables[0].Rows[0]["User_Type"]);
+
+
+
+                            con.Close();
+                            return user.User_AccName;
+
+
+                        }
+
+
+                        con.Close();
+                        return null;
+                    }
+                    catch (Exception ex)
+                    {
+                        //(new CreateDALogFile()).ErrorLogfile(ex, HttpContext.Current.Server.MapPath("~/Logs/ErrorLog"));
+                        //(new CreateDALogFile()).ErrorLogfile(ex, HttpContext.Current.Server.MapPath("~/Logs/Database_ErrorLog"));
+
+                        return null;
+                    }
+
+
+                }
+            }
+        }
+
         public static M_User searchUserDetailWithUserName(string l)
         {
 

@@ -25,14 +25,15 @@
             <section class="wrapper">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h3 class="panel-heading1"><img src="~/Image/bank.png" style="height:40px;margin: 5px 0 20px;" />&nbsp;&nbsp; New Deposit</h3>
+                        @*<h3 class="panel-heading1"><img src="~/Image/bank.png" style="height:40px;margin: 5px 0 20px;" />&nbsp;&nbsp; New Deposit</h3>*@
                         @{
-                            string[] temp = { "", "" ,"","",""};
+                            string[] temp = { "", "" ,"","","",""};
                             temp[0] = "InsertNewTransaction";
                             temp[1] = "newTransaction";
                             temp[2] = "1";
                             temp[3] = "Deposit";
                             temp[4] = "10001";
+                            temp[5] = "New Deposit";
                             TempData["temp_array"] = temp;
 
                         }

@@ -55,15 +55,57 @@
                     </div>
                 </div><br />
 
+                @{ 
+                    DataTable dt = new DataTable();
+                    dt = (DataTable) Session["DashBoadData"];
+                    string usertype = Convert.ToString(Session["LoginUserType"]).Trim();
+                    String Tab1 =  "";
+                    String Tab2 =  "";
+                    String Tab3 = "";
+                    string Tab4 = "";
+                    string valuetab4 = "";
+                    string   valuetab1= "";
+                    string   valuetab2= "";
+                    string valuetab3 = "";
+                    if (dt!=null)
+                    {
+                        if(usertype=="Admin")
+                        {
+                            Tab1 = "Total Available Blank Balance";
+                            Tab2 = "Total Deposit Amount";
+                            Tab3 = "Total Withdrawal Amount";
+                            Tab4 = "Total Bank User";
+                            valuetab1 = dt.Rows[0]["AvailableBalance"].ToString() + " Baht";
+                            valuetab2 = dt.Rows[0]["TotalIncome"].ToString() + " Baht";
+                            valuetab3 = dt.Rows[0]["TotalExpense"].ToString() + " Baht";
+                            valuetab4 = dt.Rows[0]["TotalNumberofUser"].ToString() + " User";
+                        }
+                        else
+                        {
+                            Tab1 = " Available Balance";
+                            Tab2 = "Total Income";
+                            Tab3 = "Total Withdrawal";
+                            Tab4 = "Your IABN";
+                            valuetab1 = dt.Rows[0]["AvailableBalance"].ToString() + " Baht";
+                            valuetab2 = dt.Rows[0]["TotalIncome"].ToString() + " Baht";
+                            valuetab3 = dt.Rows[0]["TotalExpense"].ToString() + " Baht";
+                            valuetab4 = dt.Rows[0]["CurrentIBAN"].ToString();
+
+                        }
+
+
+                    }
+                }
+
                 <div class="row">
                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                         <div class="info-box blue-bg" style="background-color:#4093ad">
                             <div class="count">
                                 <img src="~/Image/sale.png" style="height:50px;">
                                 &nbsp;&nbsp;&nbsp;
-                                <label class="control-label dashFont" id="todaysale">0</label>
+                                <label class="control-label dashFont" id="todaysale">@valuetab1</label>
                             </div>
-                            <div class="dashFont1" style="float:right;">TodaySaleAmount </div>
+                            <div class="dashFont1" style="float:right;">@Tab1 </div>
                         </div><!--/.info-box-->
                     </div><!--/.col-->
 
@@ -72,9 +114,9 @@
                             <div class="count">
                                 <img src="~/Image/bill.png" style="height:50px; ">
                                 &nbsp;&nbsp;&nbsp;
-                                <label class="control-label dashFont" id="todaypurchase">0</label>
+                                <label class="control-label dashFont" id="todaypurchase">@valuetab2</label>
                             </div>
-                            <div class="dashFont1" style="float:right;">TodayPurchaseAmount</div>
+                            <div class="dashFont1" style="float:right;">@Tab2</div>
                         </div>
 
                     </div><!--/.col-->
@@ -84,9 +126,9 @@
                             <div class="count">
                                 <img src="~/Image/today summary .png" style="height:50px; ">
                                 &nbsp;&nbsp;&nbsp;
-                                <label class="control-label dashFont" id="todaygeneralexp">0</label>
+                                <label class="control-label dashFont" id="todaygeneralexp">@valuetab3</label>
                             </div>
-                            <div class="dashFont1" style="float:right;">TodayGeneralExpense</div>
+                            <div class="dashFont1" style="float:right;">@Tab3</div>
                         </div><!--/.info-box-->
                     </div><!--/.col-->
 
@@ -95,14 +137,14 @@
                             <div class="count">
                                 <img src="~/Image/item.png" style="height:50px; ">
                                 &nbsp;&nbsp;&nbsp;
-                                <label class="control-label forItemfont" id="todaybestselling">No Item</label>
+                                <label class="control-label forItemfont" id="todaybestselling">@valuetab4</label>
                             </div>
-                            <div class="dashFont1" style="float:right;">BestSellingProduct</div>
+                            <div class="dashFont1" style="float:right;">@Tab4</div>
                         </div><!--/.info-box-->
                     </div><!--/.col-->
 
                 </div><!--/.row-->
-                <br /><br />
+                <br />
 
 
 
@@ -110,13 +152,13 @@
                 <div class="row">
                     <div class="col-sm-12">
 
-                        <div class="header1 dashFont " style="background-color:#E1B16A" ; padding:10px 10px;">
-                            @*<h2><strong>@ViewRes.SharedString.TodayInvoiceList</strong></h2>*@
-                        </div>
+                        <!--<div class="header1 dashFont " style="background-color:#4CAF50" ; padding:10px 10px;">-->
+                            @*<h2><strong>Transaction List</strong></h2>*@
+                        <!--</div>-->
 
-                        <header class="panel-heading"></header>
+                        <header class="panel-heading" style="background-color:#004466"><strong>Transaction List</strong></header>
                         <div class="table table-responsive">
-                            @*@{Html.RenderAction("DisplayPartialResult", "_reportTableLayout", (VEM_InventoryCommon.Constants.IndexViewModel)TempData["Dataset"]);}*@
+                            @{Html.RenderAction("DisplayPartialResult", "_TableLayout", (BankingSystem_Common.Constants.IndexViewModel)TempData["Dataset"]);}
                         </div>
                     </div>
                 </div>
@@ -124,58 +166,21 @@
 
 
                 <!-- project team & activity start -->
-                <div class="row">
+                @*<div class="row">
+                    <div class="row">
+                        <div class="table-responsive">
+                            <div class="col-sm-12">
 
+                                <div id="divid">
 
-                    <div class="col-md-6 portlets">
+                                    @{Html.RenderAction("DisplayPartialResult", "_TableLayout", (BankingSystem_Common.Constants.IndexViewModel)TempData["Dataset"]);}
 
-
-                        <div class="panel panel-default">
-                            <div class="header1 dashFont" style="background-color:#4093ad; height:150px;padding:30px 20px;">
-                                <h2><strong>Calendar</strong></h2>
-
-
-                            </div><br /><br />
-                            <div class="panel-body">
-                                <!-- Widget content -->
-                                <!-- Below line produces calendar. I am using FullCalendar plugin. -->
-                                <div id="calendar"></div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 portlets">
-                        <div class="panel panel-default">
-
-                            <div class="body-cover">
-                                <div id="myDIV" class="header1 dashFont" style="background-color:#63b2a2 ">
-                                    <h2 style="margin:3px;"><strong>ToDoList</strong></h2><br />
-                                    <div class="col-lg-12">
-
-                                        <input type="text" id="myInput" placeholder="Todo"
-                                               style="border: none;
-                                              width: 75%;
-                                              padding: 10px;
-                                              float: left;
-                                              color:black;
-                                              font-size:16px;">
-
-
-                                        <span onclick="newElement()" class="addBtn">Add</span>
-
-                                    </div>
                                 </div>
+
                             </div>
-
-                            <section class="panel">
-                                <ul id="myUL" class="unlist" style="margin: 0; padding: 0;"></ul>
-                            </section>
-
-
                         </div>
                     </div>
-                </div>
+                </div>*@
 
 
 
@@ -362,267 +367,6 @@
 
 
 
-
-
-        var closeIndex;
-        var k;
-        var tempindex;
-        // Create a new list item when clicking on the "Add" button
-        function newElement() {
-            var li = document.createElement("li");
-            var inputValue = document.getElementById("myInput").value;
-
-            $.ajax({
-                url: '@Url.Action("GetDoList", "Dashboard")',
-                type: 'GET',
-                data: { dolist: inputValue },
-                success: function (result1) {
-                }
-            });
-
-
-            var t = document.createTextNode(inputValue);
-
-            if (inputValue === '') {
-                toastr.warning("WriteSomething");
-               // alert("You must write something!");
-            } else {
-                li.appendChild(t);
-                document.getElementById("myUL").appendChild(li);
-            }
-            document.getElementById("myInput").value = "";
-
-            var span = document.createElement("SPAN");
-            var txt = document.createTextNode("\u00D7");
-            span.className = "closed";
-            span.id = close.length;
-            span.appendChild(txt);
-            li.appendChild(span);
-
-
-            for (var k = 0; k < close.length; k++) {
-                //  closeIndex = 0;
-                closeIndex = k;
-                var c = k;
-                //alert("CloseLengt" + k);
-
-                close[k].onclick = function () {
-                    //alert("CloseFunction" + c);
-                    var div = this.parentElement;
-                    var index = $(this).attr('id');
-                    //var temp = this.parentElement;
-                    //alert("Temp is " +);
-
-
-                    $.ajax({
-                        url: '@Url.Action("DeleteList", "Dashboard")',
-                        type: 'GET',
-                        data: { checklistindex: index },
-                        success: function (result1) {
-                            return;
-                        }
-                    });
-
-                    div.style.display = "none";
-
-                }
-            }
-        }
-
-
-        //---------------------------To Do List--------------------------------------------//
-
-        var l;
-        var checklistIndex;
-        var j;
-        var i;
-        $(document).ready(function () {
-            //GetList
-            $.ajax({
-                url: '@Url.Action("GetDoList1", "Dashboard")',
-                type: 'GET',
-                success: function (result1) { //Success GetList
-
-                    $.ajax({ //Get CheckList
-                        url: '@Url.Action("GetCheckList", "Dashboard")',
-                        type: 'GET',
-
-                        success: function (getcheck) { //Success GetCheck
-
-                            //alert("Result1 Length=" + result1.length + " GetCheck length" + getcheck.length);
-                            if (getcheck.length > 0) {
-                                //alert("getcheck.lenght is greater than 0")
-                                for (j = 0; j < result1.length; j++) {//ForLoop result1
-                                    //alert(result1[j]);
-                                    // alert(result1[0] + "" + getcheck[0]);
-                                    var li = document.createElement("li");
-                                    var t = document.createTextNode(result1[j]);
-                                    li.appendChild(t);
-                                    document.getElementById("myUL").appendChild(li);
-                                    //document.getElementById("myInput").value = "";
-
-                                    var span = document.createElement("SPAN");
-                                    var txt = document.createTextNode("\u00D7");
-                                    span.className = "closed";
-                                    span.appendChild(txt);
-                                    li.appendChild(span);
-                                    for (var i = 0; i < getcheck.length; i++) {
-                                        if (result1[j] === getcheck[i]) {
-                                            $(li).toggleClass('checked');
-                                        }//end if
-                                    }
-                                    for (var l = 0; l < close.length; l++) {
-
-                                        checklistIndex = l;
-                                        close[l].onclick = function () {
-
-                                            var div = this.parentElement;
-                                            var index = $(this).attr('id');
-                                            //alert(index);
-                                            $.ajax({
-                                                url: '@Url.Action("DeleteList", "Dashboard")',
-                                                type: 'GET',
-                                                data: { checklistindex: index },
-                                                success: function (result1) {
-                                                    return;
-
-                                                }
-                                            });
-                                            div.style.display = "none";
-
-                                        }//close
-                                    }//forloop
-
-                                }
-
-                            }
-                            else {
-                                //alert("There is no getcheck list")
-                                for (j = 0; j < result1.length; j++) {
-
-                                    var li = document.createElement("li");
-                                    var t = document.createTextNode(result1[j]);
-                                    li.appendChild(t);
-                                    document.getElementById("myUL").appendChild(li);
-                                    //document.getElementById("myInput").value = "";
-
-                                    var span = document.createElement("SPAN");
-                                    var txt = document.createTextNode("\u00D7");
-                                    span.className = "closed";
-                                    span.appendChild(txt);
-                                    li.appendChild(span);
-
-
-                                    for (l = 0; l < close.length; l++) {
-                                        checklistIndex = l;
-                                        close[l].onclick = function () {
-
-                                            var div = this.parentElement;
-                                            var index = $(this).attr('id');
-                                            //alert(index);
-                                            $.ajax({
-                                                url: '@Url.Action("DeleteList", "Dashboard")',
-                                                type: 'GET',
-                                                data: { checklistindex: index },
-                                                success: function (result1) {
-                                                    return;
-
-                                                }
-                                            });
-                                            div.style.display = "none";
-
-                                        }//close
-                                    }//forloop
-                                }
-                            }//Forloop result1
-                        }
-
-                    });//Get CheckList
-
-
-
-
-
-
-                }//Success GetList
-
-
-
-
-
-
-
-            });
-            //GetList
-
-        });
-
-
-
-        //Today Sale
-        $(document).ready(function () {
-            $.ajax({
-                url: '@Url.Action("GetTodaySaleAmount", "Dashboard")',
-                type: 'GET',
-                data: {},
-                success: function (result1) {
-
-
-                    $("#todaysale").text(result1.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
-                }
-
-
-            });
-        })
-
-        //Today Purchase
-        $(document).ready(function () {
-            $.ajax({
-                url: '@Url.Action("GetTodayPurchaseAmount", "Dashboard")',
-                type: 'GET',
-                data: {},
-                success: function (result1) {
-                    //alert(result1);
-                    $("#todaypurchase").text(result1.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
-                }
-
-
-            });
-        })
-
-
-        //Today GeneralExpense
-
-        $(document).ready(function () {
-            $.ajax({
-                url: '@Url.Action("GetTodayGeneralExpAmount", "Dashboard")',
-                type: 'GET',
-                data: {},
-                success: function (result1) {
-                    //alert(result1);
-                    $("#todaygeneralexp").text(result1.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
-                }
-
-
-            });
-
-        })
-
-        //Today Best Selling Product
-        $(document).ready(function () {
-            $.ajax({
-                url: '@Url.Action("GetTodayBestSellingProduct", "Dashboard")',
-                type: 'GET',
-                data: {},
-                success: function (result1) {
-                    //alert(result1);
-                    $("#todaybestselling").text(result1);
-                }
-
-
-            });
-
-        })
 
     </script>
 

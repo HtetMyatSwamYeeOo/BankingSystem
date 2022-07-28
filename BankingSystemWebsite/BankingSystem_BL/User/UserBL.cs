@@ -56,6 +56,10 @@ namespace BankingSystem_BL.User
             return UserDA.searchUserTypeWithUserID(loginUserID);
         }
 
+        public static string searchUserIDWithUserAccountName(string username)
+        {
+            return UserDA.searchUserIDWithUserAccountName(username);
+        }
 
         public static string searchUserSaleAssignIDForToday(string LoginUserID)
         {

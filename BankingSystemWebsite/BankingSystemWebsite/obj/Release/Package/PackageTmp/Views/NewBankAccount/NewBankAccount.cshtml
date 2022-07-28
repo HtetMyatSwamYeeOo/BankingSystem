@@ -62,6 +62,27 @@
 
         }
 
+        function ChangeValue() {
+
+            var val = "aa";
+
+            Val = document.getElementById("dropdown_select").value;
+            document.getElementById("Itemtype").value = Val;
+
+
+        }
+
+
+        function GenderTypeChangeValue() {
+
+            var val = "aa";
+
+            Val = document.getElementById("dropdown_select_gendertype").value;
+            document.getElementById("gendertype").value = Val;
+
+
+        }
+
               //get Way Name
     $(document).on('input', '.clickwayname', function () {
 
@@ -132,48 +153,55 @@
 
         //---------------------------------------------------------------
         //knob
-        $(function () {
-            $(".knob").knob({
-                'draw': function () {
-                    $(this.i).val(this.cv + '%')
-                }
-            })
-        });
+        //$(function () {
+        //    $(".knob").knob({
+        //        'draw': function () {
+        //            $(this.i).val(this.cv + '%')
+        //        }
+        //    })
+        //});
 
         //carousel
         $(document).ready(function () {
-            $("#owl-slider").owlCarousel({
-                navigation: true,
-                slideSpeed: 300,
-                paginationSpeed: 400,
-                singleItem: true
+            //$("#owl-slider").owlCarousel({
+            //    navigation: true,
+            //    slideSpeed: 300,
+            //    paginationSpeed: 400,
+            //    singleItem: true
 
-            });
+            //});
+
+            document.getElementById("gendertype").value = "Male";
+            document.getElementById("Itemtype").value = "Personal";
+
+
+            var currentdate = new Date();
+            document.getElementById("DateOfBirth").value = currentdate.getDate();
         });
 
         //custom select box
 
-        $(function () {
-            $('select.styled').customSelect();
-        });
+        //$(function () {
+        //    $('select.styled').customSelect();
+        //});
 
         /* ---------- Map ---------- */
-        $(function () {
-            $('#map').vectorMap({
-                map: 'world_mill_en',
-                series: {
-                    regions: [{
-                        values: gdpData,
-                        scale: ['#000', '#000'],
-                        normalizeFunction: 'polynomial'
-                    }]
-                },
-                backgroundColor: '#eef3f7',
-                onLabelShow: function (e, el, code) {
-                    el.html(el.html() + ' (GDP - ' + gdpData[code] + ')');
-                }
-            });
-        });
+        //$(function () {
+        //    $('#map').vectorMap({
+        //        map: 'world_mill_en',
+        //        series: {
+        //            regions: [{
+        //                values: gdpData,
+        //                scale: ['#000', '#000'],
+        //                normalizeFunction: 'polynomial'
+        //            }]
+        //        },
+        //        backgroundColor: '#eef3f7',
+        //        onLabelShow: function (e, el, code) {
+        //            el.html(el.html() + ' (GDP - ' + gdpData[code] + ')');
+        //        }
+        //    });
+        //});
 
     </script>
 

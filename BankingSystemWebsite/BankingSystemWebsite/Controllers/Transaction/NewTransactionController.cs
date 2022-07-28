@@ -30,24 +30,24 @@ namespace BankingSystemWebsite.Controllers.Transaction
                 return RedirectToAction("login", "Login");
             }
             usertype = Convert.ToString(Session["LoginUserType"]).Trim();
-            if (usertype == "Admin" || usertype == "staff")
-            {
-                return View();
-            }
-            else
-            {
-                ErrorObject eo = new ErrorObject();
-                eo.usertype = this.usertype;
-                eo.Error_Title = "Access Denied Warning";
-                eo.Error_Controller_name = "Transaction";
-                eo.Error_ActionResult_Method_name = "Transaction";
-                eo.Error_Detail = "Access Denied Warning";
-                eo.Error_Message = "You cannot Insert new Transaction because you do not have permission for that.";
-                eo.Fix_Error = "To fix this Warning  you need to change your admin account.";
-                Session["ErrorData"] = eo;
-                return RedirectToAction("DeleteDenied", "ErrorPage", new { ErrorObject = eo });
-            }
-
+            //if (usertype == "Admin" || usertype == "staff")
+            //{
+            //    return View();
+            //}
+            //else
+            //{
+            //    ErrorObject eo = new ErrorObject();
+            //    eo.usertype = this.usertype;
+            //    eo.Error_Title = "Access Denied Warning";
+            //    eo.Error_Controller_name = "Transaction";
+            //    eo.Error_ActionResult_Method_name = "Transaction";
+            //    eo.Error_Detail = "Access Denied Warning";
+            //    eo.Error_Message = "You cannot Insert new Transaction because you do not have permission for that.";
+            //    eo.Fix_Error = "To fix this Warning  you need to change your admin account.";
+            //    Session["ErrorData"] = eo;
+            //    return RedirectToAction("DeleteDenied", "ErrorPage", new { ErrorObject = eo });
+            //}
+            return View();
         }
 
         public ActionResult newWidthdrawTransaction()
@@ -60,24 +60,24 @@ namespace BankingSystemWebsite.Controllers.Transaction
                 return RedirectToAction("login", "Login");
             }
             usertype = Convert.ToString(Session["LoginUserType"]).Trim();
-            if (usertype == "Admin" || usertype == "staff")
-            {
-                return View();
-            }
-            else
-            {
-                ErrorObject eo = new ErrorObject();
-                eo.usertype = this.usertype;
-                eo.Error_Title = "Access Denied Warning";
-                eo.Error_Controller_name = "Transaction";
-                eo.Error_ActionResult_Method_name = "Transaction";
-                eo.Error_Detail = "Access Denied Warning";
-                eo.Error_Message = "You cannot Insert new Transaction because you do not have permission for that.";
-                eo.Fix_Error = "To fix this Warning  you need to change your admin account.";
-                Session["ErrorData"] = eo;
-                return RedirectToAction("DeleteDenied", "ErrorPage", new { ErrorObject = eo });
-            }
-
+            //if (usertype == "Admin" || usertype == "staff")
+            //{
+            //    return View();
+            //}
+            //else
+            //{
+            //    ErrorObject eo = new ErrorObject();
+            //    eo.usertype = this.usertype;
+            //    eo.Error_Title = "Access Denied Warning";
+            //    eo.Error_Controller_name = "Transaction";
+            //    eo.Error_ActionResult_Method_name = "Transaction";
+            //    eo.Error_Detail = "Access Denied Warning";
+            //    eo.Error_Message = "You cannot Insert new Transaction because you do not have permission for that.";
+            //    eo.Fix_Error = "To fix this Warning  you need to change your admin account.";
+            //    Session["ErrorData"] = eo;
+            //    return RedirectToAction("DeleteDenied", "ErrorPage", new { ErrorObject = eo });
+            //}
+            return View();
         }
 
         public ActionResult newInternalTransaction()
@@ -90,23 +90,24 @@ namespace BankingSystemWebsite.Controllers.Transaction
                 return RedirectToAction("login", "Login");
             }
             usertype = Convert.ToString(Session["LoginUserType"]).Trim();
-            if (usertype == "Admin" || usertype == "staff")
-            {
-                return View();
-            }
-            else
-            {
-                ErrorObject eo = new ErrorObject();
-                eo.usertype = this.usertype;
-                eo.Error_Title = "Access Denied Warning";
-                eo.Error_Controller_name = "Transaction";
-                eo.Error_ActionResult_Method_name = "Transaction";
-                eo.Error_Detail = "Access Denied Warning";
-                eo.Error_Message = "You cannot Insert new Internal Transaction Transfer because you do not have permission for that.";
-                eo.Fix_Error = "To fix this Warning  you need to change your admin account.";
-                Session["ErrorData"] = eo;
-                return RedirectToAction("DeleteDenied", "ErrorPage", new { ErrorObject = eo });
-            }
+            //if (usertype == "Admin" || usertype == "staff")
+            //{
+            //    return View();
+            //}
+            //else
+            //{
+            //    ErrorObject eo = new ErrorObject();
+            //    eo.usertype = this.usertype;
+            //    eo.Error_Title = "Access Denied Warning";
+            //    eo.Error_Controller_name = "Transaction";
+            //    eo.Error_ActionResult_Method_name = "Transaction";
+            //    eo.Error_Detail = "Access Denied Warning";
+            //    eo.Error_Message = "You cannot Insert new Internal Transaction Transfer because you do not have permission for that.";
+            //    eo.Fix_Error = "To fix this Warning  you need to change your admin account.";
+            //    Session["ErrorData"] = eo;
+            //    return RedirectToAction("DeleteDenied", "ErrorPage", new { ErrorObject = eo });
+            //}
+            return View();
 
         }
 

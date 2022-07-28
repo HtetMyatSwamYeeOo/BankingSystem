@@ -101,7 +101,7 @@
             <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
         </div>
         <!--logo start-->
-        @*<a href="@Url.Action("dashboard", "Dashboard")" class="logo link "><span class="lite"><b>Banking</b></span><b>System</b></a>*@
+        <a href="@Url.Action("dashboard", "Dashboard")" class="logo link "><span class="lite"><b>Banking</b></span><b>System</b></a>
         <!--logo end-->
 
         <div class="top-nav notification-row" style="margin-top:.1cm; margin-bottom:.1cm;">
@@ -120,14 +120,6 @@
                     </a>
                     <ul class="dropdown-menu">
                         @*extended logout*@
-                        <li>
-                            @*
-                                <a href="/Profile/profile">Profile </a>
-
-                            *@
-                            <a href="/Profile/profile">Profile </a>
-
-                        </li>
                         <li>
                             <a href="/Login/logout">LogOut</a>
                         </li>
@@ -156,12 +148,12 @@
                 </li>
                 <!--Contact-->
                 <!--<li class="">
-                    <a href="@Url.Action("Contact","Contact")" class="link">
-                        <img src="~/Image/contact.png" style="height:25px; ">
-                        &nbsp;&nbsp;&nbsp;
-                        <span> <b style="color:#ffffff;">Contacts</b></span>
-                    </a>
-                </li>-->
+        <a href="@Url.Action("Contact","Contact")" class="link">
+            <img src="~/Image/contact.png" style="height:25px; ">
+            &nbsp;&nbsp;&nbsp;
+            <span> <b style="color:#ffffff;">Contacts</b></span>
+        </a>
+    </li>-->
                 <!--Bank Account-->
                 <li class="sub-menu">
                     <a href="#" class="">
@@ -176,62 +168,38 @@
                     </ul>
                 </li>
 
-                <!--Item-->
-                <!--<li class="sub-menu">
+
+
+                <!--Transaction-->
+                <li class="sub-menu">
                     <a href="#" class="">
-                        <img src="~/Image/item.png" style="height:25px; ">
+                        <img src="~/Image/bank.png" style="height:25px; ">
                         &nbsp;&nbsp;&nbsp;
-                        <span> <b style="color:#ffffff;"> Items</b></span>
+                        <span> <b style="color:#ffffff;">Transaction</b></span>
                         <span class="menu-arrow arrow_carrot-right"></span>
                     </a>
                     <ul class="sub" style="display:none;">
-                        <li><a class="link" href="@Url.Action("item","Item")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; "> &nbsp;ItemList</a></li>
-                        <li><a class="link" href="@Url.Action("newItem","NewItem")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; "> &nbsp;NewItem</a></li>
-                        <li><a class="link" href="@Url.Action("itemAdjustment","ItemAdjustment")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; "> &nbsp;ItemAdjustment</a></li>
+                        <li><a class="link" href="@Url.Action("Transaction","Transaction")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; "> &nbsp;Transaction List</a></li>
+                        <li><a class="link" href="@Url.Action("newDepositTransaction","NewTransaction")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; "> &nbsp; Deposit</a></li>
+                        <li><a class="link" href="@Url.Action("newWidthdrawTransaction","NewTransaction")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; "> &nbsp; Withdrawal</a></li>
                     </ul>
-                </li>-->
+                </li>
 
-                <!--Sale-->
-                <!--<li class="sub-menu">
+                <!--Internal Transfer-->
+                <li class="sub-menu">
                     <a href="#" class="">
-                        <img src="~/Image/sale.png" style="height:25px; ">
+                        <img src="~/Image/bank.png" style="height:25px; ">
                         &nbsp;&nbsp;&nbsp;
-                        <span> <b style="color:#ffffff;">Sales</b></span>
+                        <span> <b style="color:#ffffff;"> Bank Transfer</b></span>
                         <span class="menu-arrow arrow_carrot-right"></span>
                     </a>
                     <ul class="sub" style="display:none;">
-                        <li><a class="link" href="@Url.Action("sale","Sale")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; "> &nbsp;SaleList</a></li>
-                        <li><a class="link" href="@Url.Action("newSale","NewSale")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; ">&nbsp;NewSale</a></li>
-
-                        <li><a class="link" href="@Url.Action("SaleReturnList","SaleReturnList")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; ">&nbsp;SaleReturnList</a></li>
-                        <li><a class="link" href="@Url.Action("newSaleReturn","NewSaleReturn")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; ">&nbsp;NewSaleReturn</a></li>
-                        <li><a class="link" href="@Url.Action("AssignSaleList","AssignSaleList")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; ">&nbsp;AssignSaleList</a></li>
-                        <li><a class="link" href="@Url.Action("newAssignSale","NewAssignSale")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; "> &nbsp;NewAssignSale</a></li>
-
-
-                        <li><a class="link" href="@Url.Action("invoice","Invoice")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; "> &nbsp;Invoices</a></li>
-
+                        <li><a class="link" href="@Url.Action("Transaction","Transaction")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; "> &nbsp;Transaction List</a></li>
+                        <li><a class="link" href="@Url.Action("newInternalTransaction","NewTransaction")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; "> &nbsp; Internal Bank Transfer</a></li>
                     </ul>
-                </li>-->
-                <!--Issue Item-->
-                <!--<li class="sub-menu">
-                    <a href="#" class="">
-                        <img src="~/Image/Truck.png" style="height:25px; ">
-                        &nbsp;&nbsp;&nbsp;
-                        <span> <b style="color:#ffffff;">IssueItem</b></span>
-                        <span class="menu-arrow arrow_carrot-right"></span>
-                    </a>
+                </li>
 
-                    <ul class="sub" style="display:none;">
-                        <li><a class="link" href="@Url.Action("IssueItem","IssueItem")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; "> &nbsp;IssueItemList</a></li>
-                        <li><a class="link" href="@Url.Action("newIssueItem","NewIssueItem")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; "> &nbsp;NewIssueItem</a></li>
-
-                    </ul>
-
-
-                </li>-->
-
-                <!--Reports-->
+             
             </ul>
             <!-- sidebar menu end-->
         </div>

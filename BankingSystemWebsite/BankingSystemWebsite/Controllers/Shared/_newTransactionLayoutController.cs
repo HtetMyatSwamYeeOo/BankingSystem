@@ -62,6 +62,7 @@ namespace BankingSystemWebsite.Controllers.Shared
                 TempData["TrxType"] = temp[2];
                 TempData["TrxTypeDesc"] = temp[3];
                 TempData["AccountCode"] = temp[4];
+                TempData["Header"] = temp[5];
                 TempData["TransactionPageCancel"] = "Transaction";
                 TempData["TransactionControllerCancel"] = "Transaction";
 

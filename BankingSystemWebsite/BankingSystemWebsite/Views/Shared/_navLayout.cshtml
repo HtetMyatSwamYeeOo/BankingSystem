@@ -115,7 +115,7 @@
                             <img alt="" src="~/Image/loginuser1.png">
                         </span>
 
-                        <span class="username" id="username"> @Session["UserName123"]</span>
+                        <span class="username" id="username"><strong style="color:#ffffff">@Session["UserName123"]</strong></span>
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
@@ -148,37 +148,47 @@
                 </li>
                 <!--Contact-->
                 <!--<li class="">
-        <a href="@Url.Action("Contact","Contact")" class="link">
+        <a href="@Url.Action("Contact", "Contact")" class="link">
             <img src="~/Image/contact.png" style="height:25px; ">
             &nbsp;&nbsp;&nbsp;
             <span> <b style="color:#ffffff;">Contacts</b></span>
         </a>
     </li>-->
-                <!--Bank Account-->
-                <li class="sub-menu">
-                    <a href="#" class="">
-                        <img src="~/Image/bank.png" style="height:25px; ">
-                        &nbsp;&nbsp;&nbsp;
-                        <span> <b style="color:#ffffff;">Bank Account</b></span>
-                        <span class="menu-arrow arrow_carrot-right"></span>
-                    </a>
-                    <ul class="sub" style="display:none;">
-                        <li><a class="link" href="@Url.Action("BankAccount","BankAccount")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; "> &nbsp;Bank Account List</a></li>
-                        <li><a class="link" href="@Url.Action("newBankAccount","NewBankAccount")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; "> &nbsp;New Bank Account</a></li>
-                    </ul>
-                </li>
+
+                @{
+                    string usertype = Convert.ToString(Session["LoginUserType"]).Trim();
+
+                    if (usertype == "Admin")
+                    {
+                        <!--Bank Account-->
+                        <li class="sub-menu">
+                            <a href="#" class="">
+                                <img src="~/Image/BankAccount.png" style="height:25px; ">
+                                &nbsp;&nbsp;&nbsp;
+                                <span> <b style="color:#ffffff;">Bank Account</b></span>
+                                <span class="menu-arrow arrow_carrot-right"></span>
+                            </a>
+                            <ul class="sub">
+                                <li><a class="link" href="@Url.Action("BankAccount","BankAccount")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; "> &nbsp;Bank Account List</a></li>
+                                <li><a class="link" href="@Url.Action("newBankAccount","NewBankAccount")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; "> &nbsp;New Bank Account</a></li>
+                            </ul>
+                        </li>
+
+                    }
+                }
+
 
 
 
                 <!--Transaction-->
                 <li class="sub-menu">
                     <a href="#" class="">
-                        <img src="~/Image/bank.png" style="height:25px; ">
+                        <img src="~/Image/BankTransfer.png" style="height:25px; ">
                         &nbsp;&nbsp;&nbsp;
                         <span> <b style="color:#ffffff;">Transaction</b></span>
                         <span class="menu-arrow arrow_carrot-right"></span>
                     </a>
-                    <ul class="sub" style="display:none;">
+                    <ul class="sub">
                         <li><a class="link" href="@Url.Action("Transaction","Transaction")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; "> &nbsp;Transaction List</a></li>
                         <li><a class="link" href="@Url.Action("newDepositTransaction","NewTransaction")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; "> &nbsp; Deposit</a></li>
                         <li><a class="link" href="@Url.Action("newWidthdrawTransaction","NewTransaction")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; "> &nbsp; Withdrawal</a></li>
@@ -193,13 +203,27 @@
                         <span> <b style="color:#ffffff;"> Bank Transfer</b></span>
                         <span class="menu-arrow arrow_carrot-right"></span>
                     </a>
-                    <ul class="sub" style="display:none;">
+                    <ul class="sub">
                         <li><a class="link" href="@Url.Action("Transaction","Transaction")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; "> &nbsp;Transaction List</a></li>
                         <li><a class="link" href="@Url.Action("newInternalTransaction","NewTransaction")" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; "> &nbsp; Internal Bank Transfer</a></li>
                     </ul>
                 </li>
 
-             
+
+                <!--Internal Transfer-->
+                <li class="sub-menu">
+                    <a href="#" class="">
+                        <img src="~/Image/Profile.png" style="height:25px; ">
+                        &nbsp;&nbsp;&nbsp;
+                        <span> <b style="color:#ffffff;"> Profile</b></span>
+                        <span class="menu-arrow arrow_carrot-right"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a id="cvform" class="link" href="https://drive.google.com/file/d/1AjcKCDXvEFCfpEGnQxVwDeIyLNN8fjwf/view?usp=sharing" target="_blank" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; "> &nbsp;View My CV Form</a></li>
+                        <li><a class="link" href="/Login/logout" style="color:#ffffff;"><img src="~/Image/arrow white.png" style="height:20px; "> &nbsp; Logout</a></li>
+                    </ul>
+                </li>
+
             </ul>
             <!-- sidebar menu end-->
         </div>
@@ -215,6 +239,11 @@
     <script>
         $('.link').click(function () {
             $("#loading").show();
+        });
+
+
+        $('#cvform').click(function () {
+            $("#loading").hide();
         });
     </script>
 </body>

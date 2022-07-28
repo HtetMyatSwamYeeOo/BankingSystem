@@ -48,80 +48,89 @@
             <section class="wrapper">
                 <!--overview start-->
                 <div class="row">
+ 
                     <div class="col-lg-12">
-
-                        <div class="col-lg-4">
-                            <h3 class="page-header"><img src="~/Image/bank.png" style="height:40px; margin: 0 0 20px;" />&nbsp;&nbsp; Transaction List</h3>
-                        </div>
-                        <div class="col-lg-2"></div>
-                        <div class="col-lg-2"></div>
-                        @*<div class="col-lg-4" style="margin-top :25px;">
-
-
-            <i class="icon-search"></i>
-            <input id="searchbar" type="text" list="list" placeholder="Search..." />
-            @{
-
-                List<BankingSystemWebsite.Models.BankAccount.BankAccountObject> mylist = new List<BankingSystemWebsite.Models.BankAccount.BankAccountObject>();
-                mylist = (List<BankingSystemWebsite.Models.BankAccount.BankAccountObject>)TempData["BankAccountName"];
-
-
-                <datalist id="list">
-                    @foreach (var item in mylist)
-                    {
-                        <option id="optionid" hidden="" value="@item.Name" name="@item.Name">@item.Name</option>
-                    }
-
-                </datalist>
-
-
-            }
-        </div>*@
 
                         @{
                             DataTable dt = new DataTable();
                             dt = (DataTable)Session["DashBoadData"];
                             string usertype = Convert.ToString(Session["LoginUserType"]).Trim();
-                            string userid = Convert.ToString(Session["LoginUserType"]).Trim();
+                            string userid = Convert.ToString(Session["UserName"]).Trim();
+                            string useraccname = Convert.ToString(Session["UserNameAccountName"]).Trim();
+                            string ava = dt.Rows[0]["AvailableBalance"].ToString();
+                            string income = dt.Rows[0]["TotalIncome"].ToString();
+                            string expense = dt.Rows[0]["TotalExpense"].ToString();
 
                             if (usertype != "Admin")
                             {
-                                <strong> IBAN : @userid.</strong>
-                                <strong> Available Balance : @{dt.Rows[0]["AvailableBalance"].ToString() + " Baht "}</strong>
-                                <strong> Total Income : @{dt.Rows[0]["TotalIncome"].ToString() + " Baht "}</strong>
-                                <strong> Total Expense : @{dt.Rows[0]["TotalExpense"].ToString() + " Baht "}</strong>
-                                        
+                                <div class="col-lg-4">
+                                    <div class="table">
+                                        <table class="">
+                                            <tr>
+                                                <td align="left"><label>IBAN</label></td>
+                                                <td>@Html.TextBoxFor(m => @userid, new { @id = "acccode", @class = "form-control", placeholder = "acccode", @Value = @userid, required = "required", @readonly = true })</td>
+                                            </tr>
+                                            <tr>
+                                                <td align="left"><label>Name</label></td>
+                                                <td>@Html.TextBoxFor(m => @useraccname, new { @id = "acccode", @class = "form-control", placeholder = "acccode", @Value = @useraccname, required = "required", @readonly = true })</td>
+                                            </tr>
+                                            <tr>
+                                                <td align="left"><label>Available Balance</label></td>
+                                                <td>@Html.TextBoxFor(m => @ava, new { @id = "acccode", @class = "form-control", placeholder = "acccode", @Value = @ava, required = "required", @readonly = true })</td>
+                                            </tr>
+                                            <tr>
+                                                <td align="left"><label>Total Income</label></td>
+                                                <td>@Html.TextBoxFor(m => @income, new { @id = "acccode", @class = "form-control", placeholder = "acccode", @Value = @income, required = "required", @readonly = true })</td>
+                                            </tr>
+                                            <tr>
+                                                <td align="left"><label>Total Expense</label></td>
+                                                <td>@Html.TextBoxFor(m => @expense, new { @id = "acccode", @class = "form-control", placeholder = "acccode", @Value = @expense, required = "required", @readonly = true })</td>
 
-                              }
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+
+
+
+
+                            }
 
 
                         }
 
-
                     </div>
                 </div>
                 <!-- project team & activity end -->
-                <ul class="row">
-                    <li class="col-lg-2">
-                        <a href="@Url.Action("newDepositTransaction", "NewTransaction")" class="btn1 btn-primary1 link" role="button" style="background-color:#2979FF">
-                            New Deposit
-                        </a>
-                    </li>
-                    <li class="col-lg-2">
-                        <a href="@Url.Action("newWidthdrawTransaction", "NewTransaction")" class="btn1 btn-primary1 link" role="button" style="background-color:#2979FF">
-                            New Withdraw
-                        </a>
-                    </li>
-                    <li class="col-lg-2">
-                        <a href="@Url.Action("newInternalTransaction", "NewTransaction")" class="btn1 btn-primary1 link" role="button" style="background-color:#2979FF">
-                            Internal Bank Transfer
-                        </a>
-                    </li>
-                </ul>
-                <br />
+
+
                 <div class="row">
                     <div class="table-responsive">
                         <div class="col-sm-12">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <a href="@Url.Action("newDepositTransaction", "NewTransaction")" class="btn1 btn-primary1 link" role="button" style="background-color:#2979FF">
+                                            New Deposit
+                                        </a>
+                                    </td>
+                                    <td>&nbsp;&nbsp;</td>
+                                    <td>
+                                        <a href="@Url.Action("newWidthdrawTransaction", "NewTransaction")" class="btn1 btn-primary1 link" role="button" style="background-color:#2979FF">
+                                            New Withdraw
+                                        </a>
+                                    </td>
+                                    <td>&nbsp;&nbsp;</td>
+                                    <td>
+                                        <a href="@Url.Action("newInternalTransaction", "NewTransaction")" class="btn1 btn-primary1 link" role="button" style="background-color:#2979FF">
+                                            New Internal Bank Transfer
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+
+                            <header class="panel-heading" style="background-color:#394a59"><strong style="color:#ffffff">Transaction List</strong></header>
 
                             <div id="divid">
 

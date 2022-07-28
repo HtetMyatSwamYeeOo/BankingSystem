@@ -2,17 +2,30 @@
 
 <link href='@Url.Content("~/CSS/button.css")' rel="stylesheet" type="text/css"> </link>
 @{
-    string fun, con;
+    string fun, con, headersss;
 }
 @if (TempData["BankAccountPage"].ToString() == "" || TempData["BankAccountController"].ToString() == "")
 {
     fun = "InsertNewBankAccount";
     con = "newBankAccount";
+    headersss = "New Bank Account";
+
 }
 else
 {
     fun = TempData["BankAccountPage"].ToString();
     con = TempData["BankAccountController"].ToString();
+
+    if (fun == "InsertNewBankAccount")
+    {
+        headersss = "New Bank Account";
+    }
+    else
+    {
+        headersss = "Edit Bank Account";
+
+    }
+
 }
 
 @using (Html.BeginForm(fun, con, FormMethod.Post, new { @id = "BankAccount" }))
@@ -22,7 +35,10 @@ else
     <div class="row">
         <div class="col-lg-12">
             <section class="panel">
-                <header class="panel-heading"></header>
+                <header class="panel-heading" style="background-color:#4CAF50">
+                    <h5>-</h5>
+                    <h5 style="font-size:16px; font-weight:500;color:#ffffff"><img src="~/Image/bank.png" style="height:30px;" />  &nbsp;&nbsp;<strong>@headersss</strong></h5>
+                </header>
                 <div class="panel-body">
 
                     <div class="panel-body">
@@ -84,21 +100,21 @@ else
                                     <tr>
                                         <td align="left"><label>Phone Number *</label></td>
                                         <td>
-                                            @Html.TextBoxFor(m => m.BankAccountPhone, new { @id = "BankAccountPhone", @class = "form-control", @onkeypress = "return isNumber(event)", placeholder = "Phone", required = "required" }) 
+                                            @Html.TextBoxFor(m => m.BankAccountPhone, new { @id = "BankAccountPhone", @class = "form-control", @onkeypress = "return isNumber(event)", placeholder = "Phone", required = "required" })
                                         </td>
                                     </tr>
 
                                     <tr>
                                         <td align="left"><label>Address *</label></td>
                                         <td>
-                                            @Html.TextAreaFor(m => m.Address, new { @id = "Address", @class = "form-control", placeholder = "Street", required = "required" })  
+                                            @Html.TextAreaFor(m => m.Address, new { @id = "Address", @class = "form-control", placeholder = "Street", required = "required" })
                                         </td>
                                     </tr>
 
                                     <tr>
                                         <td align="left"><label>City *</label></td>
                                         <td>
-                                            @Html.TextBoxFor(m => m.City, new { @id = "City", @class = "form-control", placeholder = "City", required = "required" })   
+                                            @Html.TextBoxFor(m => m.City, new { @id = "City", @class = "form-control", placeholder = "City", required = "required" })
                                         </td>
                                     </tr>
 
@@ -131,30 +147,8 @@ else
 
                                     <tr>
                                         <td></td>
-                                        <td align="center">
-                                            <div class="col-lg-8">
-                                                <div id="newBankAccountConfirmBox" class="modal fade" role="dialog">
-                                                    <div class="modal-dialog">
-                                                        <!-- Modal content-->
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                <h4 class="modal-title"></h4>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <p> AreyouSure</p>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <input class="btn-primary2 link" type="submit" value="Save" />
-                                                                &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-                                                                <button type="button" class="btn-cancel " data-dismiss="modal" style="width:120px;height:40px"> Cancel</button>
-                                                            </div>
-                                                        </div>
+                                        <td align="left">
 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4"></div>
                                             @*<button type="button" class="btn-primary2 " id="BankAccountSubmit" data-toggle="modal" data-target="#newBankAccountConfirmBox"> Save </button>*@
                                             <button type="submit" class="btn-primary2 " id="submit"> Save Data </button>
 

@@ -10,8 +10,14 @@ namespace BankingSystem_Common
     {
         public static string createTimeStamp(string prefix)
         {
+            Random rnd = new Random();
+            string randomnumber = rnd.Next().ToString();
+            string tworn = randomnumber.Substring(randomnumber.Length - 2);
 
-            string str = prefix + "_" + DateTime.Now.ToString("ddMMyyyyHHmmss");
+            randomnumber = rnd.Next().ToString();
+
+
+            string str = prefix  + tworn + "ABNA"+ randomnumber;
 
 
             return str;

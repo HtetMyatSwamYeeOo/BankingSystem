@@ -15,6 +15,8 @@ namespace BankingSystemWebsite.Controllers.UserAccount
         // GET: Login
         public ActionResult login()
         {
+            user.username = "";
+            user.password = "";
             return View(user);
         }
 
@@ -30,7 +32,8 @@ namespace BankingSystemWebsite.Controllers.UserAccount
                     return View("login");
                 }
 
-                string encrypt_str = base64Encode(u.password);
+                //string encrypt_str = base64Encode(u.password);
+                string encrypt_str = u.password;
                 string pre_decrypt = u.password;
                 u.password = encrypt_str;
 
@@ -44,6 +47,9 @@ namespace BankingSystemWebsite.Controllers.UserAccount
 
 
                     Session["UserName"] = UserBL.searchUserIDWithUserName(u.username);
+                    string useracccname = UserBL.searchUserIDWithUserAccountName(u.username);
+                    Session["UserNameAccountName"] = useracccname;
+
                     Session["Password"] = u.password;
                     Session["UserType"] = UserBL.searchUserWithUserName(u.username);
                     Session["UserIDS"] = UserBL.searchUserIDWithUserName(u.username);

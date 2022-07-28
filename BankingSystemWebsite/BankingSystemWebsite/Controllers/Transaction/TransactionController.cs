@@ -1,4 +1,5 @@
-﻿using BankingSystem_BL.Transaction;
+﻿using BankingSystem_BL.Dashboard;
+using BankingSystem_BL.Transaction;
 using BankingSystem_Common.Constants;
 using BankingSystem_Common.Model;
 using BankingSystemWebsite.Models.Error;
@@ -42,7 +43,14 @@ namespace BankingSystemWebsite.Controllers.Transaction
                    //checkobj(obj);
                 AddToObj(TransactionBL.SelectAllTransaction(name, usertype));
 
-                ViewModelobj = getModel(1);
+            DataTable dt = new DataTable();
+
+            dt = DashboardBL.GetDashBoarddataDT(name, usertype);
+
+
+            Session["DashBoadData"] = dt;
+
+            ViewModelobj = getModel(1);
                 return View(ViewModelobj);
             }
 

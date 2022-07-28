@@ -31,7 +31,7 @@ namespace BankingSystem_Common.Constants
             #endregion
 
 
-            public static string BankAccountPrefix = "C";
+            public static string BankAccountPrefix = "NL";
             public static string CategoryPrefix = "CA";
             public static string AS_id_Prefix = "AS_";
             public static string SR_id_Prefix = "SR_";
