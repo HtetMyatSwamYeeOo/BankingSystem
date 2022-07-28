@@ -14,10 +14,7 @@ namespace BankingSystem_Common
             string randomnumber = rnd.Next().ToString();
             string tworn = randomnumber.Substring(randomnumber.Length - 2);
 
-            randomnumber = rnd.Next().ToString();
-
-
-            string str = prefix  + tworn + "ABNA"+ randomnumber;
+            string str = prefix  + tworn + "ABNA" + DateTime.Now.ToString("ddMMyymmss");
 
 
             return str;

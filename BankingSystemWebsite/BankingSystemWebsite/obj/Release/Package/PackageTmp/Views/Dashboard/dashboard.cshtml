@@ -14,7 +14,7 @@
 
     <style>
         .dashFont {
-            color: #282425;
+            color: #ffffff;
             font-weight: 500;
             font-size: 23px;
         }
@@ -25,7 +25,7 @@
         }
 
         .dashFont1 {
-            color: #282425;
+            color: #ffffff;
             font-weight: 600;
             font-size: 13px;
             float: right;
@@ -46,11 +46,11 @@
         <section id="main-content">
             <section class="wrapper">
                 <!--overview start-->
-                <div class="row">
-                    <div class="col-lg-12">
+                <div class="row" >
+                    <div class="col-lg-12" >
                         @*<h3 class="page-header"><img src="~/Image/home.png" style="height:45px;margin: 10px 0 20px;" />&nbsp;&nbsp; Dashboard</h3>*@
-                        <ol class="breadcrumb">
-                                <li style="font-size:16px; font-weight:500;"><i class="fa fa-laptop"></i>Dashboard</li>
+                        <ol class="breadcrumb" style="background-color:#4CAF50">
+                                <li style="font-size:16px; font-weight:500;color:#ffffff"><i class="fa fa-laptop"></i><strong>Dashboard</strong></li>
                             </ol>
                     </div>
                 </div><br />
@@ -75,9 +75,9 @@
                             Tab2 = "Total Deposit Amount";
                             Tab3 = "Total Withdrawal Amount";
                             Tab4 = "Total Bank User";
-                            valuetab1 = dt.Rows[0]["AvailableBalance"].ToString() + " Baht";
-                            valuetab2 = dt.Rows[0]["TotalIncome"].ToString() + " Baht";
-                            valuetab3 = dt.Rows[0]["TotalExpense"].ToString() + " Baht";
+                            valuetab1 = dt.Rows[0]["AvailableBalance"].ToString() + " B";
+                            valuetab2 = dt.Rows[0]["TotalIncome"].ToString() + " B";
+                            valuetab3 = dt.Rows[0]["TotalExpense"].ToString() + " B";
                             valuetab4 = dt.Rows[0]["TotalNumberofUser"].ToString() + " User";
                         }
                         else
@@ -86,9 +86,9 @@
                             Tab2 = "Total Income";
                             Tab3 = "Total Withdrawal";
                             Tab4 = "Your IABN";
-                            valuetab1 = dt.Rows[0]["AvailableBalance"].ToString() + " Baht";
-                            valuetab2 = dt.Rows[0]["TotalIncome"].ToString() + " Baht";
-                            valuetab3 = dt.Rows[0]["TotalExpense"].ToString() + " Baht";
+                            valuetab1 = dt.Rows[0]["AvailableBalance"].ToString() + " B";
+                            valuetab2 = dt.Rows[0]["TotalIncome"].ToString() + " B";
+                            valuetab3 = dt.Rows[0]["TotalExpense"].ToString() + " B";
                             valuetab4 = dt.Rows[0]["CurrentIBAN"].ToString();
 
                         }
@@ -99,9 +99,9 @@
 
                 <div class="row">
                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                        <div class="info-box blue-bg" style="background-color:#4093ad">
+                        <div class="info-box blue-bg" style="background-color:#4CAF50">
                             <div class="count">
-                                <img src="~/Image/sale.png" style="height:50px;">
+                                <img src="~/Image/availablebalance.png" style="height:50px;">
                                 &nbsp;&nbsp;&nbsp;
                                 <label class="control-label dashFont" id="todaysale">@valuetab1</label>
                             </div>
@@ -110,9 +110,9 @@
                     </div><!--/.col-->
 
                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                        <div class="info-box brown-bg" style="background-color:#e1b16a">
+                        <div class="info-box brown-bg" style="background-color:#ff9100">
                             <div class="count">
-                                <img src="~/Image/bill.png" style="height:50px; ">
+                                <img src="~/Image/deposit.png" style="height:50px; ">
                                 &nbsp;&nbsp;&nbsp;
                                 <label class="control-label dashFont" id="todaypurchase">@valuetab2</label>
                             </div>
@@ -122,9 +122,9 @@
                     </div><!--/.col-->
 
                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                        <div class="info-box dark-bg " style="background-color:#63b2a2">
+                        <div class="info-box dark-bg " style="background-color:#dc3545">
                             <div class="count">
-                                <img src="~/Image/today summary .png" style="height:50px; ">
+                                <img src="~/Image/withdraw.png" style="height:50px; ">
                                 &nbsp;&nbsp;&nbsp;
                                 <label class="control-label dashFont" id="todaygeneralexp">@valuetab3</label>
                             </div>
@@ -133,11 +133,11 @@
                     </div><!--/.col-->
 
                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                        <div class="info-box dark-bg " style="background-color:#ce5a57">
+                        <div class="info-box dark-bg " style="background-color:#0067d6">
                             <div class="count">
-                                <img src="~/Image/item.png" style="height:50px; ">
+                                <img src="~/Image/users.png" style="height:50px; ">
                                 &nbsp;&nbsp;&nbsp;
-                                <label class="control-label forItemfont" id="todaybestselling">@valuetab4</label>
+                                <label class="control-label dashFont" id="todaybestselling">@valuetab4</label>
                             </div>
                             <div class="dashFont1" style="float:right;">@Tab4</div>
                         </div><!--/.info-box-->
@@ -156,7 +156,7 @@
                             @*<h2><strong>Transaction List</strong></h2>*@
                         <!--</div>-->
 
-                        <header class="panel-heading" style="background-color:#004466"><strong>Transaction List</strong></header>
+                        <header class="panel-heading" style="background-color:#394a59"><strong style="color:#ffffff">Transaction List</strong></header>
                         <div class="table table-responsive">
                             @{Html.RenderAction("DisplayPartialResult", "_TableLayout", (BankingSystem_Common.Constants.IndexViewModel)TempData["Dataset"]);}
                         </div>

@@ -3,15 +3,31 @@
 <link href='@Url.Content("~/CSS/button.css")' rel="stylesheet" type="text/css"> </link>
 @{
     string fun, con;
-    string trxtype, trxtypedesc, acccode;
+    string trxtype, trxtypedesc, acccode, header, src;
 }
 @if (TempData["TransactionPage"].ToString() == "" || TempData["TransactionController"].ToString() == "")
 {
     fun = "InsertNewInternalTransaction";
     con = "newTransaction";
     trxtype = "1";
-    trxtypedesc = "Deposite";
+    trxtypedesc = "Deposit";
     acccode = "10001";
+    header = "New Deposit";
+    if (header == "New Deposit")
+    {
+        src = "~/Image/deposit.png";
+    }
+    else if (header == "Internal Bank Transfer")
+    {
+        src = "~/Image/BankTransfer.png";
+
+    }
+    else
+    {
+        src = "~/Image/withdraw.png";
+
+    }
+
 }
 else
 {
@@ -20,6 +36,22 @@ else
     trxtype = TempData["TrxType"].ToString();
     trxtypedesc = TempData["TrxTypeDesc"].ToString();
     acccode = TempData["AccountCode"].ToString();
+    header = TempData["Header"].ToString();
+
+    if (header == "New Deposit")
+    {
+        src = "/Image/deposit.png";
+    }
+    else if (header == "Internal Bank Transfer")
+    {
+        src = "/Image/BankTransfer.png";
+
+    }
+    else
+    {
+        src = "/Image/withdraw.png";
+
+    }
 }
 
 @using (Html.BeginForm(fun, con, FormMethod.Post, new { @id = "Transaction" }))
@@ -29,7 +61,10 @@ else
     <div class="row">
         <div class="col-lg-12">
             <section class="panel">
-                <header class="panel-heading"></header>
+                <header class="panel-heading" style="background-color:#4CAF50">
+                    <h5>-</h5>
+                    <h5 style="font-size:16px; font-weight:500;color:#ffffff"><img src=@src style="height:30px;" />  &nbsp;&nbsp;<strong>@header</strong></h5>
+                </header>
                 <div class="panel-body">
 
                     <div class="panel-body">
@@ -76,12 +111,12 @@ else
 
 
                                                     <panel style="height:10px;overflow:scroll;">
-                                                       <datalist id="listfrom">
-                                                           @foreach (var item in mylists)
-                                                           {
-                                                               <option id='@item.Name' value='@item.BankAccountId' hidden="@item.IDNumber" ids="@item.IDNumber" label="@item.Name" name="@item.BalanceAmount">@item.Name</option>
-                                                           }
-                                                       </datalist>
+                                                        <datalist id="listfrom">
+                                                            @foreach (var item in mylists)
+                                                            {
+                                                                <option id='@item.Name' value='@item.BankAccountId' hidden="@item.IDNumber" ids="@item.IDNumber" label="@item.Name" name="@item.BalanceAmount">@item.Name</option>
+                                                            }
+                                                        </datalist>
 
                                                     </panel>
                                                 }
@@ -98,10 +133,10 @@ else
                                             </tr>
 
 
-                                                <tr>
-                                                    <td align="left"><label>Available Balance</label></td>
-                                                    <td>@Html.TextBoxFor(m => m.bankname, new { @id = "transferavaliablebalance", @class = "form-control", placeholder = "Available Balance", required = "required", @readonly = true })</td>
-                                                </tr>
+                                            <tr>
+                                                <td align="left"><label>Available Balance</label></td>
+                                                <td>@Html.TextBoxFor(m => m.bankname, new { @id = "transferavaliablebalance", @class = "form-control", placeholder = "Available Balance", required = "required", @readonly = true })</td>
+                                            </tr>
 
                                         }
 
@@ -160,8 +195,9 @@ else
 
                                     <tr>
                                         <td align="left"><label>Amount</label></td>
-                                        <td>@Html.TextBoxFor(m => m.amount, new { @id = "txtbankAmount", @class = "form-control", @onkeypress = "return isNumber(event)", @onchange = "ChangeValueAmount();", placeholder = trxtypedesc + " Amount", required = "required", @style = "text-align:right" })
-                                            <strong id="shownotenoughbalance" style = " display:none;color:red" > Not Enough Balance !</strong>
+                                        <td>
+                                            @Html.TextBoxFor(m => m.amount, new { @id = "txtbankAmount", @class = "form-control", @onkeypress = "return isNumber(event)", @onchange = "ChangeValueAmount();", placeholder = trxtypedesc + " Amount", required = "required", @style = "text-align:right" })
+                                            <strong id="shownotenoughbalance" style=" display:none;color:red"> Not Enough Balance !</strong>
                                         </td>
 
                                     </tr>
@@ -181,12 +217,12 @@ else
 
                                     <tr>
                                         <td></td>
-                                        <td align="center">
-                                            <div class="col-lg-8">
+                                        <td align="left">
+                                            <!--<div class="col-lg-8">
                                                 <div id="newTransactionConfirmBox" class="modal fade" role="dialog">
-                                                    <div class="modal-dialog">
+                                                    <div class="modal-dialog">-->
                                                         <!-- Modal content-->
-                                                        <div class="modal-content">
+                                                        <!--<div class="modal-content">
                                                             <div class="modal-header">
                                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                                 <h4 class="modal-title"></h4>
@@ -203,8 +239,8 @@ else
 
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-4"></div>
+                                            </div>-->
+                                            @*<div class="col-lg-4"></div>*@
                                             <button type="submit" class="btn-primary2 " id="submit"> Save Data </button>
 
                                             &nbsp;&nbsp;&nbsp;&nbsp;
